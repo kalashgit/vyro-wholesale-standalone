@@ -1,47 +1,65 @@
+'use client'
+
+import { FormEvent, useMemo, useState } from 'react'
+import { ArrowRight, Check, ChevronDown, Globe2, Menu, MessageCircle, Package, ShieldCheck, Sparkles, X } from 'lucide-react'
+
+const stripeLinks = {
+  pro: 'https://buy.stripe.com/eVqeV63eU53g7NJ1eHcQU01',
+  digital: 'https://buy.stripe.com/28EaEQ02IfHU2tpaPhcQU03',
+  slimDisc: 'https://buy.stripe.com/aFabIU7va0N0d837D5cQU04',
+  slimDigital: 'https://buy.stripe.com/8x2eV69DicvIfgbaPhcQU05',
+}
+
+const products = [
+  { key: 'pro', name: 'PS5 Pro', greek: 'PS5 Pro', price: '€604.84', note: 'Performance flagship', greekNote: 'Ναυαρχίδα επιδόσεων', link: stripeLinks.pro, tone: 'pro' },
+  { key: 'digital', name: 'PS5 Digital Edition', greek: 'PS5 Digital Edition', price: '€395.15', note: 'All-digital next gen', greekNote: 'Ψηφιακή εμπειρία νέας γενιάς', link: stripeLinks.digital, tone: 'digital' },
+  { key: 'slimDisc', name: 'PS5 Slim Disc Edition', greek: 'PS5 Slim Disc Edition', price: '€442.74', note: 'Slimline with disc drive', greekNote: 'Λεπτή έκδοση με drive', link: stripeLinks.slimDisc, tone: 'disc' },
+  { key: 'slimDigital', name: 'PS5 Slim Digital', greek: 'PS5 Slim Digital', price: '€395.16', note: 'Slimline digital', greekNote: 'Λεπτή ψηφιακή έκδοση', link: stripeLinks.slimDigital, tone: 'slim' },
+]
+
+const tiers = [
+  { name: 'Starter', range: '5+', desc: 'A focused start for new retail partners', greek: 'Μια δυναμική αρχή για νέους συνεργάτες λιανικής' },
+  { name: 'Retailer', range: '10+', desc: 'Reliable stock for your retail operation', greek: 'Σταθερό απόθεμα για τη λιανική σας' },
+  { name: 'Bulk', range: '20+', desc: 'Better flow and stronger commercial terms', greek: 'Καλύτερη ροή και ισχυρότεροι εμπορικοί όροι' },
+  { name: 'Distribution', range: '50+', desc: 'Built for regional distribution networks', greek: 'Για δίκτυα περιφερειακής διανομής' },
+]
+
+type Language = 'en' | 'el'
+
 export default function Page() {
-  return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
-    </main>
-  )
+  const [language, setLanguage] = useState<Language>('en')
+  const [selectedTier, setSelectedTier] = useState('Retailer')
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+  const [form, setForm] = useState({ business: '', contact: '', email: '', phone: '', pro: '0', digital: '0', slimDisc: '0', slimDigital: '0', message: '' })
+
+  const isGreek = language === 'el'
+  const total = useMemo(() => ['pro', 'digital', 'slimDisc', 'slimDigital'].reduce((sum, key) => sum + Number(form[key as keyof typeof form] || 0), 0), [form])
+
+  const copy = isGreek ? {
+    navCatalog: 'Κατάλογος', navWholesale: 'Χονδρική', navContact: 'Επικοινωνία', eyebrow: 'B2B διανομή τεχνολογίας', title: 'Η νέα γενιά της χονδρικής.', titleAccent: 'Τώρα στην Ελλάδα.', intro: 'Αυθεντικό PlayStation stock για retailers και distributors που κινούνται γρήγορα.', explore: 'Δείτε τον κατάλογο', partner: 'Γίνετε συνεργάτης', trust: 'Αποστολές σε όλη την Ελλάδα · B2B τιμολόγηση · Γνήσιο stock', catalogEyebrow: 'Άμεση διαθεσιμότητα', catalogTitle: 'Stock που κινείται.', catalogText: 'Επιλεγμένα PS5 μοντέλα με καθαρές ex-VAT τιμές και άμεση αγορά.', exVat: 'Ex-VAT', buy: 'Αγορά μέσω Stripe', wholesale: 'Ζητήστε τιμή χονδρικής', wholesaleEyebrow: 'Για συνεργάτες', wholesaleTitle: 'Οι ποσότητες σας ανοίγουν καλύτερους όρους.', wholesaleText: 'Επιλέξτε το επίπεδο που σας ταιριάζει. Θα σας απαντήσουμε με διαθεσιμότητα και εξατομικευμένη προσφορά.', selected: 'Επιλεγμένο', ask: 'Ρωτήστε για αυτό το επίπεδο', inquiryEyebrow: 'Ας μιλήσουμε', inquiryTitle: 'Χτίστε το επόμενο απόθεμά σας.', inquiryText: 'Στείλτε μας τις ανάγκες σας και η ομάδα VYRO θα επιστρέψει με την καλύτερη δυνατή πρόταση.', business: 'Επωνυμία επιχείρησης', contact: 'Όνομα υπευθύνου', email: 'Email', phone: 'Τηλέφωνο', quantities: 'Ποσότητες ανά μοντέλο', message: 'Μήνυμα', messagePlaceholder: 'Πείτε μας περισσότερα για τις ανάγκες σας...', submit: 'Αποστολή ερωτήματος', min: 'Ελάχιστη ποσότητα: 5 τεμάχια συνολικά', total: 'Σύνολο', success: 'Το ερώτημά σας είναι έτοιμο. Ανοίξαμε το WhatsApp για να ολοκληρώσετε την επικοινωνία.', error: 'Παρακαλούμε συμπληρώστε τα υποχρεωτικά πεδία και τουλάχιστον 5 τεμάχια συνολικά.', footer: 'Η υποδομή πίσω από το επόμενο sell-through.', rights: '© 2025 VYRO. Wholesale distribution, built for momentum.'
+  } : {
+    navCatalog: 'Catalogue', navWholesale: 'Wholesale', navContact: 'Contact', eyebrow: 'B2B technology distribution', title: 'The next generation of wholesale.', titleAccent: 'Now in Greece.', intro: 'Authentic PlayStation stock for retailers and distributors who move fast.', explore: 'Explore catalogue', partner: 'Become a partner', trust: 'Nationwide shipping · B2B invoicing · Authentic stock', catalogEyebrow: 'Ready to ship', catalogTitle: 'Stock that moves.', catalogText: 'Selected PS5 models with clear ex-VAT pricing and direct purchase.', exVat: 'Ex-VAT', buy: 'Buy via Stripe', wholesale: 'Ask for wholesale pricing', wholesaleEyebrow: 'For trade partners', wholesaleTitle: 'Your volume unlocks better terms.', wholesaleText: 'Choose the level that fits your operation. We will come back with availability and a tailored offer.', selected: 'Selected', ask: 'Ask about this tier', inquiryEyebrow: 'Let’s talk', inquiryTitle: 'Build your next inventory run.', inquiryText: 'Tell us what you need and the VYRO team will come back with the strongest possible offer.', business: 'Business name', contact: 'Contact name', email: 'Email', phone: 'Phone', quantities: 'Quantities by model', message: 'Message', messagePlaceholder: 'Tell us more about your requirements...', submit: 'Send wholesale inquiry', min: 'Minimum quantity: 5 units total', total: 'Total', success: 'Your inquiry is ready. We opened WhatsApp to complete the conversation.', error: 'Please complete the required fields and add at least 5 units total.', footer: 'The infrastructure behind your next sell-through.', rights: '© 2025 VYRO. Wholesale distribution, built for momentum.'
+  }
+
+  function scrollTo(id: string) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); setMobileOpen(false) }
+  function updateField(key: keyof typeof form, value: string) { setForm((current) => ({ ...current, [key]: value })); setError('') }
+  function submitInquiry(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!form.business || !form.contact || !form.email || total < 5) { setError(copy.error); return }
+    const lines = [`VYRO Wholesale Inquiry`, `Business: ${form.business}`, `Contact: ${form.contact}`, `Email: ${form.email}`, `Phone: ${form.phone || '-'}`, `Tier: ${selectedTier} (${tiers.find((tier) => tier.name === selectedTier)?.range})`, `Quantities:`, `PS5 Pro: ${form.pro}`, `PS5 Digital Edition: ${form.digital}`, `PS5 Slim Disc Edition: ${form.slimDisc}`, `PS5 Slim Digital: ${form.slimDigital}`, `Message: ${form.message || '-'}`]
+    window.open(`https://wa.me/306978255016?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer')
+    setSubmitted(true); setError('')
+  }
+
+  return <main className="site-shell">
+    <header className="site-header"><a className="brand" href="#top" aria-label="VYRO home"><span className="brand-dot" />VYRO</a><nav className={mobileOpen ? 'main-nav is-open' : 'main-nav'}><button onClick={() => scrollTo('catalog')}>{copy.navCatalog}</button><button onClick={() => scrollTo('wholesale')}>{copy.navWholesale}</button><button onClick={() => scrollTo('inquiry')}>{copy.navContact}</button></nav><div className="header-actions"><button className="language-toggle" onClick={() => setLanguage(isGreek ? 'en' : 'el')} aria-label="Switch language"><Globe2 size={15} /> <span>{isGreek ? 'EN' : 'ΕΛ'}</span></button><button className="menu-toggle" onClick={() => setMobileOpen(!mobileOpen)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>{mobileOpen ? <X size={22} /> : <Menu size={22} />}</button></div></header>
+    <section className="hero" id="top"><div className="hero-copy"><div className="eyebrow"><span className="eyebrow-line" />{copy.eyebrow}</div><h1>{copy.title}<br /><span>{copy.titleAccent}</span></h1><p>{copy.intro}</p><div className="hero-actions"><button className="button button-primary" onClick={() => scrollTo('catalog')}>{copy.explore}<ArrowRight size={17} /></button><button className="button button-ghost" onClick={() => scrollTo('inquiry')}>{copy.partner}</button></div><div className="trust-row"><ShieldCheck size={15} />{copy.trust}</div></div><div className="hero-orb" aria-hidden="true"><div className="orb-ring ring-one" /><div className="orb-ring ring-two" /><div className="orb-core"><span>PS5</span><small>READY</small></div><div className="orb-tag tag-top">01 / STOCK</div><div className="orb-tag tag-bottom">GR · EU</div></div></section>
+    <section className="signal-strip"><div><span>VYRO / 01</span><b><Sparkles size={14} /> Curated next-gen inventory</b></div><div><span>VYRO / 02</span><b><Package size={14} /> Trade-ready fulfilment</b></div><div><span>VYRO / 03</span><b><MessageCircle size={14} /> Human support, fast</b></div></section>
+    <section className="section catalog-section" id="catalog"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" />{copy.catalogEyebrow}</div><h2>{copy.catalogTitle}</h2></div><p>{copy.catalogText}</p></div><div className="product-grid">{products.map((product, index) => <article className={`product-card product-${product.tone}`} key={product.key}><div className="product-visual"><div className="console-shape"><div className="console-light" /></div><span className="product-index">0{index + 1}</span></div><div className="product-info"><div><h3>{isGreek ? product.greek : product.name}</h3><p>{isGreek ? product.greekNote : product.note}</p></div><div className="price"><small>{copy.exVat}</small><strong>{product.price}</strong></div></div><a className="product-link" href={product.link} target="_blank" rel="noreferrer">{copy.buy}<ArrowRight size={15} /></a></article>)}</div></section>
+    <section className="section wholesale-section" id="wholesale"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" />{copy.wholesaleEyebrow}</div><h2>{copy.wholesaleTitle}</h2></div><p>{copy.wholesaleText}</p></div><div className="tier-grid">{tiers.map((tier) => <button key={tier.name} className={`tier-card ${selectedTier === tier.name ? 'is-selected' : ''}`} onClick={() => setSelectedTier(tier.name)}><span className="tier-check">{selectedTier === tier.name ? <Check size={15} /> : tier.name.slice(0, 1)}</span><span className="tier-name">{tier.name}</span><strong>{tier.range}</strong><span className="tier-description">{isGreek ? tier.greek : tier.desc}</span>{selectedTier === tier.name && <span className="selected-label">{copy.selected}</span>}</button>)}</div><button className="button button-primary tier-cta" onClick={() => scrollTo('inquiry')}>{copy.ask}<ArrowRight size={17} /></button></section>
+    <section className="section inquiry-section" id="inquiry"><div className="inquiry-intro"><div className="eyebrow"><span className="eyebrow-line" />{copy.inquiryEyebrow}</div><h2>{copy.inquiryTitle}</h2><p>{copy.inquiryText}</p><div className="contact-card"><span className="contact-pulse" /><div><small>WhatsApp</small><strong>+30 697 825 5016</strong></div></div></div><form className="inquiry-form" onSubmit={submitInquiry}><div className="form-grid"><label>{copy.business}<input required value={form.business} onChange={(event) => updateField('business', event.target.value)} placeholder="VYRO Partners Ltd." /></label><label>{copy.contact}<input required value={form.contact} onChange={(event) => updateField('contact', event.target.value)} placeholder="Alex Morgan" /></label><label>{copy.email}<input required type="email" value={form.email} onChange={(event) => updateField('email', event.target.value)} placeholder="alex@company.com" /></label><label>{copy.phone}<input value={form.phone} onChange={(event) => updateField('phone', event.target.value)} placeholder="+30 210 000 0000" /></label></div><fieldset><legend>{copy.quantities}</legend><div className="quantity-grid">{products.map((product) => <label key={product.key}><span>{product.name.replace(' Edition', '')}</span><input type="number" min="0" inputMode="numeric" value={form[product.key as keyof typeof form]} onChange={(event) => updateField(product.key as keyof typeof form, event.target.value)} /></label>)}</div><div className="quantity-total"><span>{copy.min}</span><strong>{copy.total}: {total}</strong></div></fieldset><label>{copy.message}<textarea value={form.message} onChange={(event) => updateField('message', event.target.value)} placeholder={copy.messagePlaceholder} rows={4} /></label>{error && <p className="form-error" role="alert">{error}</p>}{submitted && <p className="form-success" role="status"><Check size={16} />{copy.success}</p>}<button className="button button-primary form-submit" type="submit">{copy.submit}<ArrowRight size={17} /></button></form></section>
+    <footer className="site-footer"><a className="brand" href="#top"><span className="brand-dot" />VYRO</a><p>{copy.footer}</p><span>{copy.rights}</span></footer>
+  </main>
 }
