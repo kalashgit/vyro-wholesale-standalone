@@ -194,7 +194,7 @@ export default function Page() {
         trust:
           'Αποστολές σε όλη την Ελλάδα · B2B τιμολόγηση · Γνήσιο stock',
 
-        catalogEyebrow: 'Άμεση διαθεσιμότητα',
+        catalogEyebrow: 'Διαθέσιμο για παραγγελία',
         catalogTitle: 'Stock που κινείται.',
         catalogText:
           'Επιλεγμένα PS5 μοντέλα με καθαρές τιμές συμπεριλαμβανόμενου ΦΠΑ και άμεση αγορά.',
@@ -202,6 +202,29 @@ export default function Page() {
         buy: 'Αγορά Τώρα',
         retailNote: 'Άμεση αγορά',
         wholesaleNote: 'Για 5+ τεμάχια · Ζητήστε εμπορικούς όρους',
+
+        urgency:
+          'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ ΓΙΑ ΠΕΡΙΟΡΙΣΜΕΝΟ ΧΡΟΝΟ · ΛΗΓΕΙ 18 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
+
+        urgencyEnded:
+          'Η ΠΡΟΣΦΟΡΑ ΠΕΡΙΟΡΙΣΜΕΝΟΥ ΧΡΟΝΟΥ ΕΧΕΙ ΟΛΟΚΛΗΡΩΘΕΙ.',
+
+        serviceEyebrow: 'Το πρότυπο εξυπηρέτησης VYRO',
+        serviceTitle:
+          'Καθαρά, από την παραγγελία έως την παράδοση.',
+        serviceText:
+          'Κάθε παραγγελία VYRO συνοδεύεται από σαφή ενημέρωση, παρακολούθηση αποστολής και άμεση υποστήριξη.',
+        sealedTitle: 'Εργοστασιακά σφραγισμένο',
+        sealedText: 'Νέα προϊόντα, εργοστασιακά σφραγισμένα.',
+        deliveryTitle: '5–7 εργάσιμες ημέρες',
+        deliveryText:
+          'Εκτιμώμενος χρόνος παράδοσης για standard παραγγελίες.',
+        trackingTitle: 'Παρακολούθηση αποστολής',
+        trackingText:
+          'Παρέχεται tracking μόλις αποσταλεί η παραγγελία.',
+        supportTitle: 'Άμεση υποστήριξη',
+        supportText:
+          'Ένα άμεσο σημείο επικοινωνίας πριν και μετά την παραγγελία.',
 
         wholesaleEyebrow: 'Για συνεργάτες',
         wholesaleTitle:
@@ -212,12 +235,6 @@ export default function Page() {
         ask: 'Ρωτήστε για αυτό το επίπεδο',
         tierHelp:
           'Δεν είστε σίγουροι για το επίπεδό σας; Στείλτε απλώς τις ποσότητες και θα σας προτείνουμε το κατάλληλο tier.',
-
-        urgency:
-          'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ ΓΙΑ ΠΕΡΙΟΡΙΣΜΕΝΟ ΧΡΟΝΟ · ΛΗΓΕΙ 18 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
-
-        urgencyEnded:
-          'Η ΠΡΟΣΦΟΡΑ ΠΕΡΙΟΡΙΣΜΕΝΟΥ ΧΡΟΝΟΥ ΕΧΕΙ ΟΛΟΚΛΗΡΩΘΕΙ.',
 
         inquiryEyebrow: 'Ας μιλήσουμε',
         inquiryTitle: 'Χτίστε το επόμενο απόθεμά σας.',
@@ -270,7 +287,7 @@ export default function Page() {
         trust:
           'Nationwide shipping · B2B invoicing · Authentic stock',
 
-        catalogEyebrow: 'Ready to ship',
+        catalogEyebrow: 'Available to order',
         catalogTitle: 'Stock that moves.',
         catalogText:
           'Selected PS5 models with clear VAT-included pricing and direct purchase.',
@@ -278,6 +295,28 @@ export default function Page() {
         buy: 'Buy Now',
         retailNote: 'Direct purchase',
         wholesaleNote: 'For 5+ units · Ask for trade terms',
+
+        urgency:
+          'LIMITED-TIME WHOLESALE PRICING · ENDS 18 SEPTEMBER, 23:59',
+
+        urgencyEnded:
+          'LIMITED-TIME WHOLESALE PRICING HAS ENDED.',
+
+        serviceEyebrow: 'VYRO service standard',
+        serviceTitle: 'Clear from order to delivery.',
+        serviceText:
+          'Every VYRO order is handled with clear communication, tracked fulfilment and direct support.',
+        sealedTitle: 'Factory sealed',
+        sealedText: 'New products supplied factory sealed.',
+        deliveryTitle: '5–7 business days',
+        deliveryText:
+          'Estimated delivery for standard orders.',
+        trackingTitle: 'Tracked delivery',
+        trackingText:
+          'Tracking provided once your order is dispatched.',
+        supportTitle: 'Direct support',
+        supportText:
+          'One direct point of contact before and after your order.',
 
         wholesaleEyebrow: 'For trade partners',
         wholesaleTitle: 'Your volume unlocks better terms.',
@@ -287,12 +326,6 @@ export default function Page() {
         ask: 'Ask about this tier',
         tierHelp:
           "Not sure which tier fits? Just submit your quantities and we'll recommend the appropriate level.",
-
-        urgency:
-          'LIMITED-TIME WHOLESALE PRICING · ENDS 18 SEPTEMBER, 23:59',
-
-        urgencyEnded:
-          'LIMITED-TIME WHOLESALE PRICING HAS ENDED.',
 
         inquiryEyebrow: "Let's talk",
         inquiryTitle: 'Build your next inventory run.',
@@ -667,6 +700,59 @@ export default function Page() {
               </small>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="section service-section">
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.serviceEyebrow}
+            </div>
+
+            <h2>{copy.serviceTitle}</h2>
+          </div>
+
+          <p>{copy.serviceText}</p>
+        </div>
+
+        <div className="service-grid">
+          <article className="service-card">
+            <ShieldCheck size={18} />
+
+            <div>
+              <h3>{copy.sealedTitle}</h3>
+              <p>{copy.sealedText}</p>
+            </div>
+          </article>
+
+          <article className="service-card">
+            <Package size={18} />
+
+            <div>
+              <h3>{copy.deliveryTitle}</h3>
+              <p>{copy.deliveryText}</p>
+            </div>
+          </article>
+
+          <article className="service-card">
+            <ArrowRight size={18} />
+
+            <div>
+              <h3>{copy.trackingTitle}</h3>
+              <p>{copy.trackingText}</p>
+            </div>
+          </article>
+
+          <article className="service-card">
+            <MessageCircle size={18} />
+
+            <div>
+              <h3>{copy.supportTitle}</h3>
+              <p>{copy.supportText}</p>
+            </div>
+          </article>
         </div>
       </section>
 
