@@ -155,8 +155,6 @@ export default function Page() {
     const minutes = Math.floor((totalSeconds % 3600) / 60)
     const seconds = totalSeconds % 60
 
-    const pad = (value: number) => String(value).padStart(2, '0')
-
     return {
       days,
       hours,
@@ -166,7 +164,6 @@ export default function Page() {
   }, [timeLeft])
 
   const deadlineHasPassed = timeLeft <= 0
-
   const isGreek = language === 'el'
 
   const total = useMemo(
@@ -203,6 +200,8 @@ export default function Page() {
           'Επιλεγμένα PS5 μοντέλα με καθαρές τιμές συμπεριλαμβανόμενου ΦΠΑ και άμεση αγορά.',
         exVat: 'Τιμή με ΦΠΑ',
         buy: 'Αγορά Τώρα',
+        retailNote: 'Άμεση αγορά',
+        wholesaleNote: 'Για 5+ τεμάχια · Ζητήστε εμπορικούς όρους',
 
         wholesaleEyebrow: 'Για συνεργάτες',
         wholesaleTitle:
@@ -211,22 +210,26 @@ export default function Page() {
           'Επιλέξτε το επίπεδο που σας ταιριάζει. Θα σας απαντήσουμε με διαθεσιμότητα και εξατομικευμένη προσφορά.',
         selected: 'Επιλεγμένο',
         ask: 'Ρωτήστε για αυτό το επίπεδο',
+        tierHelp:
+          'Δεν είστε σίγουροι για το επίπεδό σας; Στείλτε απλώς τις ποσότητες και θα σας προτείνουμε το κατάλληλο tier.',
 
         urgency:
-          'ΠΕΡΙΟΡΙΣΜΕΝΗ ΧΡΟΝΟΥ ΧΟΝΔΡΙΚΗ ΤΙΜΟΛΟΓΗΣΗ · ΛΗΓΕΙ 18 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
+          'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ ΓΙΑ ΠΕΡΙΟΡΙΣΜΕΝΟ ΧΡΟΝΟ · ΛΗΓΕΙ 18 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
 
         urgencyEnded:
-          'Η ΠΕΡΙΟΡΙΣΜΕΝΗ ΠΡΟΣΦΟΡΑ ΕΧΕΙ ΟΛΟΚΛΗΡΩΘΕΙ.',
+          'Η ΠΡΟΣΦΟΡΑ ΠΕΡΙΟΡΙΣΜΕΝΟΥ ΧΡΟΝΟΥ ΕΧΕΙ ΟΛΟΚΛΗΡΩΘΕΙ.',
 
         inquiryEyebrow: 'Ας μιλήσουμε',
         inquiryTitle: 'Χτίστε το επόμενο απόθεμά σας.',
         inquiryText:
-          'Στείλτε μας τις ανάγκες σας και η ομάδα VYRO θα επιστρέψει με την καλύτερη δυνατή πρόταση.',
+          'Στείλτε μας τις ανάγκες σας και η ομάδα VYRO θα επιστρέψει με διαθεσιμότητα και εξατομικευμένη προσφορά.',
 
         business: 'Επωνυμία επιχείρησης',
+        businessOptional: 'προαιρετικό',
         contact: 'Όνομα υπευθύνου',
         email: 'Email',
         phone: 'Τηλέφωνο',
+        required: 'υποχρεωτικό',
 
         quantities: 'Ποσότητες ανά μοντέλο',
         message: 'Μήνυμα',
@@ -248,7 +251,7 @@ export default function Page() {
           'Η υποδομή πίσω από το επόμενο sell-through.',
 
         rights:
-          '© 2025 VYRO. Wholesale distribution, built for momentum.',
+          '© 2026 VYRO. Wholesale distribution, built for momentum.',
       }
     : {
         navCatalog: 'Catalogue',
@@ -273,6 +276,8 @@ export default function Page() {
           'Selected PS5 models with clear VAT-included pricing and direct purchase.',
         exVat: 'VAT included',
         buy: 'Buy Now',
+        retailNote: 'Direct purchase',
+        wholesaleNote: 'For 5+ units · Ask for trade terms',
 
         wholesaleEyebrow: 'For trade partners',
         wholesaleTitle: 'Your volume unlocks better terms.',
@@ -280,6 +285,8 @@ export default function Page() {
           'Choose the level that fits your operation. We will come back with availability and a tailored offer.',
         selected: 'Selected',
         ask: 'Ask about this tier',
+        tierHelp:
+          "Not sure which tier fits? Just submit your quantities and we'll recommend the appropriate level.",
 
         urgency:
           'LIMITED-TIME WHOLESALE PRICING · ENDS 18 SEPTEMBER, 23:59',
@@ -290,12 +297,14 @@ export default function Page() {
         inquiryEyebrow: "Let's talk",
         inquiryTitle: 'Build your next inventory run.',
         inquiryText:
-          'Tell us what you need and the VYRO team will come back with the strongest possible offer.',
+          'Tell us what you need and the VYRO team will come back with availability and a tailored offer.',
 
         business: 'Business name',
+        businessOptional: 'optional',
         contact: 'Contact name',
         email: 'Email',
         phone: 'Phone',
+        required: 'required',
 
         quantities: 'Quantities by model',
         message: 'Message',
@@ -317,16 +326,14 @@ export default function Page() {
           'The infrastructure behind your next sell-through.',
 
         rights:
-          '© 2025 VYRO. Wholesale distribution, built for momentum.',
+          '© 2026 VYRO. Wholesale distribution, built for momentum.',
       }
 
   function scrollTo(id: string) {
-    document
-      .getElementById(id)
-      ?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
 
     setMobileOpen(false)
   }
@@ -345,32 +352,51 @@ export default function Page() {
     event.preventDefault()
 
     if (
-      !form.business ||
       !form.contact ||
       !form.email ||
+      !form.phone ||
       total < 5
     ) {
       setError(copy.error)
       return
     }
 
+    const selectedTierData = tiers.find(
+      (tier) => tier.name === selectedTier
+    )
+
+    const quantityLines = [
+      ['PS5 Pro', form.pro],
+      ['PS5 Digital Edition', form.digital],
+      ['PS5 Slim Disc Edition', form.slimDisc],
+      ['PS5 Slim Digital', form.slimDigital],
+    ]
+      .filter(([, quantity]) => Number(quantity) > 0)
+      .map(([name, quantity]) => `• ${name}: ${quantity}`)
+
     const lines = [
-      'VYRO Wholesale Inquiry',
-      `Business: ${form.business}`,
-      `Contact: ${form.contact}`,
-      `Email: ${form.email}`,
-      `Phone: ${form.phone || '-'}`,
-      `Tier: ${selectedTier} (${
-        tiers.find((tier) => tier.name === selectedTier)?.range
-      })`,
+      'VYRO WHOLESALE INQUIRY',
+      '────────────────────',
       '',
-      'Quantities:',
-      `PS5 Pro: ${form.pro}`,
-      `PS5 Digital Edition: ${form.digital}`,
-      `PS5 Slim Disc Edition: ${form.slimDisc}`,
-      `PS5 Slim Digital: ${form.slimDigital}`,
+      `CONTACT: ${form.contact}`,
+      `EMAIL: ${form.email}`,
+      `PHONE: ${form.phone}`,
+      ...(form.business
+        ? [`BUSINESS: ${form.business}`]
+        : []),
       '',
-      `Message: ${form.message || '-'}`,
+      `SELECTED TIER: ${selectedTier.toUpperCase()}`,
+      `TIER RANGE: ${selectedTierData?.range ?? '-'}`,
+      '',
+      'QUANTITIES',
+      '──────────',
+      ...quantityLines,
+      '',
+      `TOTAL UNITS: ${total}`,
+      '',
+      `MESSAGE: ${form.message || 'No additional message.'}`,
+      '',
+      'Please confirm availability and commercial terms.',
     ]
 
     window.open(
@@ -635,6 +661,10 @@ export default function Page() {
                 {copy.buy}
                 <ArrowRight size={15} />
               </a>
+
+              <small className="product-trade-note">
+                {copy.wholesaleNote}
+              </small>
             </article>
           ))}
         </div>
@@ -699,6 +729,10 @@ export default function Page() {
           ))}
         </div>
 
+        <p className="tier-help">
+          {copy.tierHelp}
+        </p>
+
         <button
           className="button button-primary tier-cta"
           onClick={() => scrollTo('inquiry')}
@@ -739,9 +773,9 @@ export default function Page() {
           <div className="form-grid">
             <label>
               {copy.business}
+              <small> · {copy.businessOptional}</small>
 
               <input
-                required
                 value={form.business}
                 onChange={(event) =>
                   updateField(
@@ -755,6 +789,7 @@ export default function Page() {
 
             <label>
               {copy.contact}
+              <small> · {copy.required}</small>
 
               <input
                 required
@@ -771,6 +806,7 @@ export default function Page() {
 
             <label>
               {copy.email}
+              <small> · {copy.required}</small>
 
               <input
                 required
@@ -788,8 +824,11 @@ export default function Page() {
 
             <label>
               {copy.phone}
+              <small> · {copy.required}</small>
 
               <input
+                required
+                type="tel"
                 value={form.phone}
                 onChange={(event) =>
                   updateField(
