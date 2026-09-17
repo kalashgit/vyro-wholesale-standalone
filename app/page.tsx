@@ -182,11 +182,11 @@ export default function Page() {
         navWholesale: 'Χονδρική',
         navContact: 'Επικοινωνία',
 
-        eyebrow: 'B2B διανομή τεχνολογίας',
-        title: 'Η νέα γενιά της χονδρικής.',
+        eyebrow: 'PlayStation λιανική & χονδρική',
+        title: 'Η νέα γενιά του PlayStation.',
         titleAccent: 'Τώρα στην Ελλάδα.',
         intro:
-          'Αυθεντικό PlayStation stock για retailers και distributors που κινούνται γρήγορα.',
+          'Αυθεντικό PlayStation stock για ιδιώτες, retailers και distributors.',
 
         explore: 'Δείτε τον κατάλογο',
         partner: 'Γίνετε συνεργάτης',
@@ -201,7 +201,6 @@ export default function Page() {
         exVat: 'Τιμή με ΦΠΑ',
         buy: 'Αγορά Τώρα',
         retailNote: 'Άμεση αγορά',
-        wholesaleNote: 'Για 5+ τεμάχια · Ζητήστε εμπορικούς όρους',
 
         urgency:
           'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ ΓΙΑ ΠΕΡΙΟΡΙΣΜΕΝΟ ΧΡΟΝΟ · ΛΗΓΕΙ 18 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
@@ -275,11 +274,11 @@ export default function Page() {
         navWholesale: 'Wholesale',
         navContact: 'Contact',
 
-        eyebrow: 'B2B technology distribution',
-        title: 'The next generation of wholesale.',
+        eyebrow: 'PlayStation retail & wholesale',
+        title: 'The next generation of PlayStation.',
         titleAccent: 'Now in Greece.',
         intro:
-          'Authentic PlayStation stock for retailers and distributors who move fast.',
+          'Authentic PlayStation stock for individuals, retailers and distributors.',
 
         explore: 'Explore catalogue',
         partner: 'Become a partner',
@@ -294,7 +293,6 @@ export default function Page() {
         exVat: 'VAT included',
         buy: 'Buy Now',
         retailNote: 'Direct purchase',
-        wholesaleNote: 'For 5+ units · Ask for trade terms',
 
         urgency:
           'LIMITED-TIME WHOLESALE PRICING · ENDS 18 SEPTEMBER, 23:59',
@@ -694,10 +692,6 @@ export default function Page() {
                 {copy.buy}
                 <ArrowRight size={15} />
               </a>
-
-              <small className="product-trade-note">
-                {copy.wholesaleNote}
-              </small>
             </article>
           ))}
         </div>
