@@ -275,7 +275,7 @@ export default function Page() {
         navContact: 'Contact',
 
         eyebrow: 'PlayStation retail & wholesale',
-        title: 'The next generation of PlayStation.',
+        title: 'PlayStation, refined.',
         titleAccent: 'Now in Greece.',
         intro:
           'Authentic PlayStation stock for individuals, retailers and distributors.',
