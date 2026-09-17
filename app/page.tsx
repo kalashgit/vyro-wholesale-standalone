@@ -515,7 +515,7 @@ export default function Page() {
 
           <h1>
             {copy.title}
-            <br />
+            
             <span>{copy.titleAccent}</span>
           </h1>
 
