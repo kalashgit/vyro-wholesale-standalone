@@ -112,7 +112,7 @@ type FormState = {
  * CHANGE THIS DATE WHEN YOU WANT TO RESTART THE PROMOTION.
  * Greece is UTC+3 during September.
  */
-const OFFER_END = '2026-09-18T23:59:59+03:00'
+const OFFER_END = '2026-09-27T23:59:59+03:00'
 
 export default function Page() {
   const [language, setLanguage] = useState<Language>('en')
