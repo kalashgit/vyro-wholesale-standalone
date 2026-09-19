@@ -180,6 +180,7 @@ export default function Page() {
     ? {
         navCatalog: 'Κατάλογος',
         navWholesale: 'Χονδρική',
+        navCreators: 'Creators',
         navContact: 'Επικοινωνία',
 
         eyebrow: 'PlayStation λιανική & χονδρική',
@@ -203,7 +204,7 @@ export default function Page() {
         retailNote: 'Άμεση αγορά',
 
         urgency:
-          'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ ΓΙΑ ΠΕΡΙΟΡΙΣΜΕΝΟ ΧΡΟΝΟ · ΛΗΓΕΙ 18 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
+          'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ ΓΙΑ ΠΕΡΙΟΡΙΣΜΕΝΟ ΧΡΟΝΟ · ΛΗΓΕΙ 27 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
 
         urgencyEnded:
           'Η ΠΡΟΣΦΟΡΑ ΠΕΡΙΟΡΙΣΜΕΝΟΥ ΧΡΟΝΟΥ ΕΧΕΙ ΟΛΟΚΛΗΡΩΘΕΙ.',
@@ -267,14 +268,15 @@ export default function Page() {
           'Η υποδομή πίσω από το επόμενο sell-through.',
 
         rights:
-          '© 2026 VYRO. Wholesale distribution, built for momentum.',
+          '© 2026 VYRO. Distribution, built for momentum.',
       }
     : {
         navCatalog: 'Catalogue',
         navWholesale: 'Wholesale',
+        navCreators: 'Creators',
         navContact: 'Contact',
 
-        eyebrow: 'PlayStation retail & wholesale',
+        eyebrow: 'PlayStation retail & distribution',
         title: 'PlayStation, refined.',
         titleAccent: 'Now in Greece.',
         intro:
@@ -295,10 +297,10 @@ export default function Page() {
         retailNote: 'Direct purchase',
 
         urgency:
-          'LIMITED-TIME WHOLESALE PRICING · ENDS 18 SEPTEMBER, 23:59',
+          'LIMITED-TIME PRICING · ENDS 27 SEPTEMBER, 23:59',
 
         urgencyEnded:
-          'LIMITED-TIME WHOLESALE PRICING HAS ENDED.',
+          'LIMITED-TIME PRICING HAS ENDED.',
 
         serviceEyebrow: 'VYRO service standard',
         serviceTitle: 'Clear from order to delivery.',
@@ -342,7 +344,7 @@ export default function Page() {
         messagePlaceholder:
           'Tell us more about your requirements...',
 
-        submit: 'Send wholesale inquiry',
+        submit: 'Send distribution inquiry',
 
         min: 'Minimum quantity: 5 units total',
         total: 'Total',
@@ -357,7 +359,7 @@ export default function Page() {
           'The infrastructure behind your next sell-through.',
 
         rights:
-          '© 2026 VYRO. Wholesale distribution, built for momentum.',
+          '© 2026 VYRO. Distribution, built for momentum.',
       }
 
   function scrollTo(id: string) {
@@ -406,7 +408,7 @@ export default function Page() {
       .map(([name, quantity]) => `• ${name}: ${quantity}`)
 
     const lines = [
-      'VYRO WHOLESALE INQUIRY',
+      'VYRO DISTRIBUTION INQUIRY',
       '────────────────────',
       '',
       `CONTACT: ${form.contact}`,
@@ -468,6 +470,13 @@ export default function Page() {
           <button onClick={() => scrollTo('wholesale')}>
             {copy.navWholesale}
           </button>
+
+          <a
+            href="/creators"
+            onClick={() => setMobileOpen(false)}
+          >
+            {copy.navCreators}
+          </a>
 
           <button onClick={() => scrollTo('inquiry')}>
             {copy.navContact}
