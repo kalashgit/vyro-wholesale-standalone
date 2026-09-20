@@ -326,7 +326,7 @@ export default function Page() {
         selected: 'Selected',
         ask: 'Ask about this tier',
         tierHelp:
-          "Not sure which tier fits? Just submit your quantities and we'll recommend the appropriate level.",
+          "Not sure which tier fits? Just submit your quantities and we'll recommend the appropriate tier.",
 
         inquiryEyebrow: "Let's talk",
         inquiryTitle: 'Build your next inventory run.',
@@ -475,7 +475,7 @@ export default function Page() {
 
           <Link
             className="nav-creator-link"
-            href="/creators"
+            href="/Creators"
             onClick={() => setMobileOpen(false)}
           >
             {copy.navCreators}
