@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import {
   ArrowRight,
@@ -178,7 +179,6 @@ export default function Page() {
 
   const copy = isGreek
     ? {
-        navCurated: 'CURATED',
         navCatalog: 'Κατάλογος',
         navWholesale: 'Χονδρική',
         navCreators: 'Πρόσβαση Creators',
@@ -272,7 +272,6 @@ export default function Page() {
           '© 2026 VYRO. Distribution, built for momentum.',
       }
     : {
-        navCurated: 'CURATED',
         navCatalog: 'Catalogue',
         navWholesale: 'Wholesale',
         navCreators: 'Creator Access',
@@ -459,42 +458,32 @@ export default function Page() {
         </a>
 
         <nav
+          id="main-navigation"
           className={
             mobileOpen
               ? 'main-nav is-open'
               : 'main-nav'
           }
         >
-          <div className="nav-curated">
-            <span className="nav-curated-label">
-              {copy.navCurated}
-            </span>
+          <button onClick={() => scrollTo('catalog')}>
+            {copy.navCatalog}
+          </button>
 
-            <button
-              onClick={() => scrollTo('catalog')}
-            >
-              {copy.navCatalog}
-            </button>
+          <button onClick={() => scrollTo('wholesale')}>
+            {copy.navWholesale}
+          </button>
 
-            <button
-              onClick={() => scrollTo('wholesale')}
-            >
-              {copy.navWholesale}
-            </button>
+          <Link
+            className="nav-creator-link"
+            href="/creators"
+            onClick={() => setMobileOpen(false)}
+          >
+            {copy.navCreators}
+          </Link>
 
-            <a
-              href="/creators"
-              onClick={() => setMobileOpen(false)}
-            >
-              {copy.navCreators}
-            </a>
-
-            <button
-              onClick={() => scrollTo('inquiry')}
-            >
-              {copy.navContact}
-            </button>
-          </div>
+          <button onClick={() => scrollTo('inquiry')}>
+            {copy.navContact}
+          </button>
         </nav>
 
         <div className="header-actions">
@@ -519,6 +508,8 @@ export default function Page() {
                 ? 'Close menu'
                 : 'Open menu'
             }
+            aria-expanded={mobileOpen}
+            aria-controls="main-navigation"
           >
             {mobileOpen ? (
               <X size={22} />
