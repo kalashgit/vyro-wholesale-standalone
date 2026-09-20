@@ -180,7 +180,7 @@ export default function Page() {
     ? {
         navCatalog: 'Κατάλογος',
         navWholesale: 'Χονδρική',
-        navCreators: 'Creators',
+        navCreators: 'Πρόσβαση Creators',
         navContact: 'Επικοινωνία',
 
         eyebrow: 'PlayStation λιανική & χονδρική',
