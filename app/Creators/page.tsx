@@ -21,8 +21,8 @@ type CreatorAccess = {
 
 const creatorAccess: CreatorAccess[] = [
   {
-    creator: 'Creator Partner',
-    code: 'VYRO-CREATOR',
+    creator: 'VagosTech',
+    code: 'VYRO-VAGOSTECH',
   },
 ]
 
@@ -120,112 +120,116 @@ export default function CreatorsPage() {
     ? {
         navHome: 'Αρχική',
         navCatalogue: 'Κατάλογος',
-        navCreators: 'Creators',
+        navCreators: 'Creator Access',
         navContact: 'Επικοινωνία',
 
-        eyebrow: 'VYRO Creator Partners',
-        title: 'Πρόσβαση σε ειδικές τιμές.',
-        accent: 'Για επιλεγμένους creators.',
+        eyebrow: 'VYRO Creator Access',
+        title: 'Πρόσβαση σε ειδικούς όρους.',
+        accent: 'Χτισμένο για creators.',
         intro:
-          'Ειδική πρόσβαση σε PlayStation προϊόντα και αξεσουάρ μέσω του VYRO Creator Partner Program.',
+          'Ιδιωτική πρόσβαση σε επιλεγμένα PlayStation προϊόντα, ειδικές τιμές και ευκαιρίες συνεργασίας μέσω της VYRO.',
 
         codeLabel: 'Κωδικός συνεργάτη',
         codePlaceholder: 'Εισάγετε τον κωδικό σας',
-        unlock: 'Ξεκλείδωμα τιμών',
+        unlock: 'Ενεργοποίηση πρόσβασης',
         invalid:
           'Ο κωδικός δεν είναι έγκυρος. Ελέγξτε τον και δοκιμάστε ξανά.',
 
         privateAccess: 'Ιδιωτική πρόσβαση',
         welcome:
-          'Καλώς ήρθατε στο VYRO Creator Program.',
+          'Καλώς ήρθατε στο VYRO Creator Access.',
         partnerPricing:
-          'Οι τιμές συνεργάτη σας είναι ενεργές.',
+          'Η πρόσβασή σας στις ειδικές τιμές είναι ενεργή.',
 
-        catalogueEyebrow: 'Creator catalogue',
+        backToVYRO: 'Επιστροφή στο VYRO',
+
+        catalogueEyebrow: 'Private creator catalogue',
         catalogueTitle: 'Προϊόντα για το setup σας.',
         catalogueText:
-          'Περιηγηθείτε στα διαθέσιμα προϊόντα και επικοινωνήστε μαζί μας για την αγορά.',
+          'Δείτε τα διαθέσιμα προϊόντα και τους ειδικούς όρους σας. Για προϊόντα χωρίς εμφανή τιμή, επικοινωνήστε απευθείας με τη VYRO.',
 
         partnerPrice: 'Τιμή συνεργάτη',
         publicPrice: 'Κανονική τιμή',
         unavailable: 'Τιμή κατόπιν επικοινωνίας',
-        buy: 'Αγορά τώρα',
+        buy: 'Επικοινωνία',
 
-        benefitsEyebrow: 'VYRO Creator Program',
+        benefitsEyebrow: 'The VYRO Creator Opportunity',
         benefitsTitle: 'Περισσότερα από μια έκπτωση.',
         benefitsText:
-          'Το πρόγραμμα έχει σχεδιαστεί για creators που θέλουν πρόσβαση σε προϊόντα και μια πραγματική εμπορική σχέση με τη VYRO.',
+          'Το Creator Access δημιουργεί μια άμεση σχέση μεταξύ του creator και της VYRO — από ειδικές τιμές προϊόντων μέχρι referrals, launches και μελλοντικές εμπορικές ευκαιρίες.',
 
         benefitOne: 'Ειδικές τιμές συνεργάτη',
         benefitTwo:
-          'Πρόσβαση σε προϊόντα και αξεσουάρ',
-        benefitThree: 'Referral opportunities',
+          'Άμεση πρόσβαση σε προϊόντα VYRO',
+        benefitThree: 'Referral & εμπορικές ευκαιρίες',
         benefitFour:
-          'Μελλοντικές καμπάνιες & giveaways',
+          'Campaigns, launches & giveaways',
 
         contact: 'Θέλετε κάτι συγκεκριμένο;',
         contactText:
-          'Στείλτε μας μήνυμα και θα σας βοηθήσουμε με διαθεσιμότητα, τιμές και παραγγελίες.',
+          'Στείλτε μας μήνυμα για διαθεσιμότητα, ειδικές τιμές, προϊόντα ή την επόμενη ευκαιρία συνεργασίας.',
 
         whatsapp: 'Επικοινωνία μέσω WhatsApp',
 
         footer:
-          'VYRO Creator Partners · PlayStation retail & distribution.',
+          'VYRO Creator Access · PlayStation retail & distribution.',
       }
     : {
         navHome: 'Home',
         navCatalogue: 'Catalogue',
-        navCreators: 'Creators',
+        navCreators: 'Creator Access',
         navContact: 'Contact',
 
-        eyebrow: 'VYRO Creator Partners',
-        title: 'Access partner pricing.',
-        accent: 'Built for selected creators.',
+        eyebrow: 'VYRO Creator Access',
+        title: 'Access preferential terms.',
+        accent: 'Built for creators.',
         intro:
-          'Private access to PlayStation products and accessories through the VYRO Creator Partner Program.',
+          'Private access to selected PlayStation products, partner pricing and opportunities through VYRO.',
 
         codeLabel: 'Partner access code',
         codePlaceholder: 'Enter your access code',
-        unlock: 'Unlock pricing',
+        unlock: 'Activate access',
         invalid:
           'That access code is not valid. Check it and try again.',
 
         privateAccess: 'Private access',
         welcome:
-          'Welcome to the VYRO Creator Program.',
+          'Welcome to VYRO Creator Access.',
         partnerPricing:
-          'Your partner pricing is now active.',
+          'Your preferential pricing is now active.',
 
-        catalogueEyebrow: 'Creator catalogue',
+        backToVYRO: 'Back to VYRO',
+
+        catalogueEyebrow: 'Private creator catalogue',
         catalogueTitle: 'Products for your setup.',
         catalogueText:
-          'Browse available products and contact us when you are ready to purchase.',
+          'Explore your available products and partner terms. For products without displayed pricing, contact VYRO directly.',
 
         partnerPrice: 'Partner price',
         publicPrice: 'Public price',
         unavailable: 'Price on request',
-        buy: 'Buy Now',
+        buy: 'Contact VYRO',
 
-        benefitsEyebrow: 'VYRO Creator Program',
+        benefitsEyebrow: 'The VYRO Creator Opportunity',
         benefitsTitle: 'More than a discount.',
         benefitsText:
-          'The program is built for creators who want product access and a genuine commercial relationship with VYRO.',
+          'Creator Access creates a direct relationship between the creator and VYRO — from preferential product pricing to referrals, launches and future commercial opportunities.',
 
-        benefitOne: 'Special partner pricing',
+        benefitOne: 'Preferential creator pricing',
         benefitTwo:
-          'Access to products and accessories',
-        benefitThree: 'Referral opportunities',
+          'Direct access to VYRO products',
+        benefitThree: 'Referral & commercial opportunities',
         benefitFour:
-          'Future campaigns & giveaways',
+          'Campaigns, launches & giveaways',
 
         contact: 'Looking for something specific?',
         contactText:
-          'Message us for availability, pricing and order support.',
+          'Message us for availability, partner pricing, products or the next opportunity to work with VYRO.',
 
-        whatsapp: 'Contact via WhatsApp',
+        whatsapp: 'Contact VYRO via WhatsApp',
 
         footer:
-          'VYRO Creator Partners · PlayStation retail & distribution.',
+          'VYRO Creator Access · PlayStation retail & distribution.',
       }
 
   function unlockAccess() {
@@ -265,19 +269,31 @@ export default function CreatorsPage() {
               : 'main-nav'
           }
         >
-          <a href="/">
+          <a
+            href="/"
+            onClick={() => setMobileOpen(false)}
+          >
             {copy.navHome}
           </a>
 
-          <a href="/#catalog">
+          <a
+            href="/#catalog"
+            onClick={() => setMobileOpen(false)}
+          >
             {copy.navCatalogue}
           </a>
 
-          <a href="/creators">
+          <a
+            href="/creators"
+            onClick={() => setMobileOpen(false)}
+          >
             {copy.navCreators}
           </a>
 
-          <a href="/#inquiry">
+          <a
+            href="/#inquiry"
+            onClick={() => setMobileOpen(false)}
+          >
             {copy.navContact}
           </a>
         </nav>
@@ -377,6 +393,13 @@ export default function CreatorsPage() {
                 {copy.privateAccess}
               </div>
             </div>
+
+            <a
+              className="creator-back-link"
+              href="/"
+            >
+              ← {copy.backToVYRO}
+            </a>
           </div>
         </section>
       ) : (
