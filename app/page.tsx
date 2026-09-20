@@ -178,6 +178,7 @@ export default function Page() {
 
   const copy = isGreek
     ? {
+        navCurated: 'CURATED',
         navCatalog: 'Κατάλογος',
         navWholesale: 'Χονδρική',
         navCreators: 'Πρόσβαση Creators',
@@ -271,9 +272,10 @@ export default function Page() {
           '© 2026 VYRO. Distribution, built for momentum.',
       }
     : {
+        navCurated: 'CURATED',
         navCatalog: 'Catalogue',
         navWholesale: 'Wholesale',
-        navCreators: 'Creators',
+        navCreators: 'Creator Access',
         navContact: 'Contact',
 
         eyebrow: 'PlayStation retail & distribution',
@@ -463,24 +465,36 @@ export default function Page() {
               : 'main-nav'
           }
         >
-          <button onClick={() => scrollTo('catalog')}>
-            {copy.navCatalog}
-          </button>
+          <div className="nav-curated">
+            <span className="nav-curated-label">
+              {copy.navCurated}
+            </span>
 
-          <button onClick={() => scrollTo('wholesale')}>
-            {copy.navWholesale}
-          </button>
+            <button
+              onClick={() => scrollTo('catalog')}
+            >
+              {copy.navCatalog}
+            </button>
 
-          <a
-            href="/creators"
-            onClick={() => setMobileOpen(false)}
-          >
-            {copy.navCreators}
-          </a>
+            <button
+              onClick={() => scrollTo('wholesale')}
+            >
+              {copy.navWholesale}
+            </button>
 
-          <button onClick={() => scrollTo('inquiry')}>
-            {copy.navContact}
-          </button>
+            <a
+              href="/creators"
+              onClick={() => setMobileOpen(false)}
+            >
+              {copy.navCreators}
+            </a>
+
+            <button
+              onClick={() => scrollTo('inquiry')}
+            >
+              {copy.navContact}
+            </button>
+          </div>
         </nav>
 
         <div className="header-actions">
