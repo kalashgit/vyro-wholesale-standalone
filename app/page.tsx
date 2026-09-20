@@ -181,7 +181,6 @@ export default function Page() {
         navCatalog: 'Κατάλογος',
         navWholesale: 'Χονδρική',
         navContact: 'Επικοινωνία',
-        navCreators: 'Creators',
 
         eyebrow: 'PlayStation λιανική & χονδρική',
         title: 'Η νέα γενιά του PlayStation.',
@@ -274,7 +273,6 @@ export default function Page() {
         navCatalog: 'Catalogue',
         navWholesale: 'Wholesale',
         navContact: 'Contact',
-        navCreators: 'Creators',
 
         eyebrow: 'PlayStation retail & wholesale',
         title: 'PlayStation, refined.',
@@ -474,10 +472,6 @@ export default function Page() {
           <button onClick={() => scrollTo('inquiry')}>
             {copy.navContact}
           </button>
-
-          <a href="/creators" onClick={() => setMobileOpen(false)}>
-            {copy.navCreators}
-          </a>
         </nav>
 
         <div className="header-actions">
