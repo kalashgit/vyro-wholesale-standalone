@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   ArrowRight,
   Check,
@@ -92,7 +92,7 @@ const creatorProducts = [
     partnerPrice: '€55.99',
     note: 'Wireless PlayStation controller',
     greekNote: 'Ασύρματο χειριστήριο PlayStation',
-    image: '/images/dualsense.png',
+    image: '/images/dual-sense.png',
     link: 'https://buy.stripe.com/7sY4gseXCeDQec74qTcQU0d',
   },
 ]
@@ -216,6 +216,100 @@ export default function CreatorsPage() {
         footer: 'VYRO Creator Access · PlayStation retail & distribution.',
       }
 
+  /*
+   * Keep the active product synced with native horizontal scrolling.
+   *
+   * This is what makes the mobile experience feel like a real
+   * horizontal product carousel:
+   *
+   * finger swipe
+   *      ↓
+   * product settles
+   *      ↓
+   * activeProduct updates
+   *      ↓
+   * number + dots + active CSS state update
+   */
+  useEffect(() => {
+    const container = catalogueRef.current
+
+    if (!container) return
+
+    let frame = 0
+
+    const updateActiveProduct = () => {
+      cancelAnimationFrame(frame)
+
+      frame = requestAnimationFrame(() => {
+        const slides = Array.from(
+          container.querySelectorAll<HTMLElement>(
+            '[data-product-index]'
+          )
+        )
+
+        if (!slides.length) return
+
+        const containerRect =
+          container.getBoundingClientRect()
+
+        const containerCenter =
+          containerRect.left + containerRect.width / 2
+
+        let closestIndex = 0
+        let closestDistance = Infinity
+
+        slides.forEach((slide, index) => {
+          const rect = slide.getBoundingClientRect()
+
+          const slideCenter =
+            rect.left + rect.width / 2
+
+          const distance = Math.abs(
+            slideCenter - containerCenter
+          )
+
+          if (distance < closestDistance) {
+            closestDistance = distance
+            closestIndex = index
+          }
+        })
+
+        setActiveProduct((current) =>
+          current === closestIndex
+            ? current
+            : closestIndex
+        )
+      })
+    }
+
+    container.addEventListener(
+      'scroll',
+      updateActiveProduct,
+      { passive: true }
+    )
+
+    window.addEventListener(
+      'resize',
+      updateActiveProduct
+    )
+
+    updateActiveProduct()
+
+    return () => {
+      container.removeEventListener(
+        'scroll',
+        updateActiveProduct
+      )
+
+      window.removeEventListener(
+        'resize',
+        updateActiveProduct
+      )
+
+      cancelAnimationFrame(frame)
+    }
+  }, [accessGranted])
+
   function unlockAccess() {
     const normalized = code.trim().toUpperCase()
 
@@ -236,7 +330,12 @@ export default function CreatorsPage() {
   }
 
   function goToProduct(index: number) {
-    if (index < 0 || index >= creatorProducts.length) return
+    if (
+      index < 0 ||
+      index >= creatorProducts.length
+    ) {
+      return
+    }
 
     setActiveProduct(index)
 
@@ -307,12 +406,16 @@ export default function CreatorsPage() {
           <button
             className="language-toggle"
             onClick={() =>
-              setLanguage(isGreek ? 'en' : 'el')
+              setLanguage(
+                isGreek ? 'en' : 'el'
+              )
             }
             aria-label="Switch language"
           >
             <Globe2 size={15} />
-            <span>{isGreek ? 'EN' : 'ΕΛ'}</span>
+            <span>
+              {isGreek ? 'EN' : 'ΕΛ'}
+            </span>
           </button>
 
           <button
@@ -372,7 +475,9 @@ export default function CreatorsPage() {
                       unlockAccess()
                     }
                   }}
-                  placeholder={copy.codePlaceholder}
+                  placeholder={
+                    copy.codePlaceholder
+                  }
                   autoComplete="off"
                   spellCheck={false}
                 />
@@ -421,7 +526,9 @@ export default function CreatorsPage() {
                 <span>{creatorName}.</span>
               </h1>
 
-              <p>{copy.partnerPricing}</p>
+              <p>
+                {copy.partnerPricing}
+              </p>
             </div>
 
             <div className="creator-access-badge">
@@ -438,7 +545,9 @@ export default function CreatorsPage() {
                   {copy.catalogueEyebrow}
                 </div>
 
-                <h2>{copy.catalogueTitle}</h2>
+                <h2>
+                  {copy.catalogueTitle}
+                </h2>
               </div>
 
               <div className="creator-showcase-controls">
@@ -446,27 +555,34 @@ export default function CreatorsPage() {
                   type="button"
                   aria-label="Previous product"
                   onClick={() =>
-                    goToProduct(activeProduct - 1)
+                    goToProduct(
+                      activeProduct - 1
+                    )
                   }
-                  disabled={activeProduct === 0}
+                  disabled={
+                    activeProduct === 0
+                  }
                 >
                   <ChevronLeft size={18} />
                 </button>
 
                 <span>
-                  {String(activeProduct + 1).padStart(2, '0')}
+                  {String(
+                    activeProduct + 1
+                  ).padStart(2, '0')}
                   {' / '}
-                  {String(creatorProducts.length).padStart(
-                    2,
-                    '0'
-                  )}
+                  {String(
+                    creatorProducts.length
+                  ).padStart(2, '0')}
                 </span>
 
                 <button
                   type="button"
                   aria-label="Next product"
                   onClick={() =>
-                    goToProduct(activeProduct + 1)
+                    goToProduct(
+                      activeProduct + 1
+                    )
                   }
                   disabled={
                     activeProduct ===
@@ -482,95 +598,109 @@ export default function CreatorsPage() {
               className="creator-showcase-track"
               ref={catalogueRef}
             >
-              {creatorProducts.map((product, index) => (
-                <article
-                  className={`creator-product-slide product-${product.key}`}
-                  key={product.key}
-                  data-product-index={index}
-                >
-                  <div className="creator-product-scene">
-                    <span className="creator-product-number">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-
-                    <div className="creator-product-glow" />
-
-                    <img
-                      className="creator-product-image"
-                      src={product.image}
-                      alt={product.name}
-                      draggable={false}
-                    />
-                  </div>
-
-                  <div className="creator-product-details">
-                    <div className="creator-product-copy">
-                      <span className="creator-product-category">
-                        PLAYSTATION
-                      </span>
-
-                      <h3>
-                        {isGreek
-                          ? product.greek
-                          : product.name}
-                      </h3>
-
-                      <p>
-                        {isGreek
-                          ? product.greekNote
-                          : product.note}
-                      </p>
-                    </div>
-
-                    <div className="creator-product-purchase">
-                      <div className="creator-product-price">
-                        <span>
-                          {copy.partnerPrice}
-                        </span>
-
-                        <strong>
-                          {product.partnerPrice}
-                        </strong>
-
-                        {product.publicPrice && (
-                          <del>
-                            {product.publicPrice}
-                          </del>
-                        )}
-                      </div>
-
-                      <a
-                        className="creator-buy-button"
-                        href={product.link}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {copy.buy}
-                        <ArrowRight size={16} />
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="creator-showcase-bottom">
-              <p>{copy.catalogueText}</p>
-
-              <div className="creator-product-dots">
-                {creatorProducts.map((product, index) => (
-                  <button
-                    key={product.key}
-                    type="button"
-                    aria-label={`View ${product.name}`}
-                    className={
+              {creatorProducts.map(
+                (product, index) => (
+                  <article
+                    className={`creator-product-slide product-${product.key} ${
                       index === activeProduct
                         ? 'is-active'
                         : ''
-                    }
-                    onClick={() => goToProduct(index)}
-                  />
-                ))}
+                    }`}
+                    key={product.key}
+                    data-product-index={index}
+                  >
+                    <div className="creator-product-scene">
+                      <span className="creator-product-number">
+                        {String(
+                          index + 1
+                        ).padStart(2, '0')}
+                      </span>
+
+                      <div className="creator-product-glow" />
+
+                      <img
+                        className="creator-product-image"
+                        src={product.image}
+                        alt={product.name}
+                        draggable={false}
+                      />
+                    </div>
+
+                    <div className="creator-product-details">
+                      <div className="creator-product-copy">
+                        <span className="creator-product-category">
+                          PLAYSTATION
+                        </span>
+
+                        <h3>
+                          {isGreek
+                            ? product.greek
+                            : product.name}
+                        </h3>
+
+                        <p>
+                          {isGreek
+                            ? product.greekNote
+                            : product.note}
+                        </p>
+                      </div>
+
+                      <div className="creator-product-purchase">
+                        <div className="creator-product-price">
+                          <span>
+                            {copy.partnerPrice}
+                          </span>
+
+                          <strong>
+                            {product.partnerPrice}
+                          </strong>
+
+                          {product.publicPrice && (
+                            <del>
+                              {product.publicPrice}
+                            </del>
+                          )}
+                        </div>
+
+                        <a
+                          className="creator-buy-button"
+                          href={product.link}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {copy.buy}
+                          <ArrowRight size={16} />
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                )
+              )}
+            </div>
+
+            <div className="creator-showcase-bottom">
+              <p>
+                {copy.catalogueText}
+              </p>
+
+              <div className="creator-product-dots">
+                {creatorProducts.map(
+                  (product, index) => (
+                    <button
+                      key={product.key}
+                      type="button"
+                      aria-label={`View ${product.name}`}
+                      className={
+                        index === activeProduct
+                          ? 'is-active'
+                          : ''
+                      }
+                      onClick={() =>
+                        goToProduct(index)
+                      }
+                    />
+                  )
+                )}
               </div>
             </div>
           </section>
@@ -583,10 +713,14 @@ export default function CreatorsPage() {
                   {copy.benefitsEyebrow}
                 </div>
 
-                <h2>{copy.benefitsTitle}</h2>
+                <h2>
+                  {copy.benefitsTitle}
+                </h2>
               </div>
 
-              <p>{copy.benefitsText}</p>
+              <p>
+                {copy.benefitsText}
+              </p>
             </div>
 
             <div className="service-grid">
@@ -594,7 +728,9 @@ export default function CreatorsPage() {
                 <ShieldCheck size={18} />
 
                 <div>
-                  <h3>{copy.benefitOne}</h3>
+                  <h3>
+                    {copy.benefitOne}
+                  </h3>
                 </div>
               </article>
 
@@ -602,7 +738,9 @@ export default function CreatorsPage() {
                 <Package size={18} />
 
                 <div>
-                  <h3>{copy.benefitTwo}</h3>
+                  <h3>
+                    {copy.benefitTwo}
+                  </h3>
                 </div>
               </article>
 
@@ -610,7 +748,9 @@ export default function CreatorsPage() {
                 <ArrowRight size={18} />
 
                 <div>
-                  <h3>{copy.benefitThree}</h3>
+                  <h3>
+                    {copy.benefitThree}
+                  </h3>
                 </div>
               </article>
 
@@ -618,7 +758,9 @@ export default function CreatorsPage() {
                 <Check size={18} />
 
                 <div>
-                  <h3>{copy.benefitFour}</h3>
+                  <h3>
+                    {copy.benefitFour}
+                  </h3>
                 </div>
               </article>
             </div>
@@ -631,9 +773,13 @@ export default function CreatorsPage() {
                 VYRO
               </div>
 
-              <h2>{copy.contact}</h2>
+              <h2>
+                {copy.contact}
+              </h2>
 
-              <p>{copy.contactText}</p>
+              <p>
+                {copy.contactText}
+              </p>
             </div>
 
             <a
@@ -660,7 +806,9 @@ export default function CreatorsPage() {
 
         <p>{copy.footer}</p>
 
-        <span>© 2026 VYRO.</span>
+        <span>
+          © 2026 VYRO.
+        </span>
       </footer>
     </main>
   )
