@@ -1688,19 +1688,20 @@ fieldset {
 .creators-page .creator-showcase-track {
   width: 100%;
   display: flex;
-  gap: 22px;
+  gap: 24px;
   overflow-x: auto;
   overflow-y: hidden;
   padding:
-    18px
+    24px
     max(20px, calc((100vw - 1240px) / 2))
-    40px;
+    46px;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overscroll-behavior-x: contain;
   touch-action: pan-x;
   cursor: grab;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .creators-page .creator-showcase-track:active {
@@ -1723,9 +1724,9 @@ fieldset {
   scroll-snap-stop: always;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  border: 1px solid rgba(177,205,234,.12);
-  border-radius: 24px;
+  grid-template-columns: 1.18fr .82fr;
+  border: 1px solid rgba(177,205,234,.10);
+  border-radius: 28px;
   background:
     radial-gradient(
       circle at 35% 45%,
@@ -1735,98 +1736,250 @@ fieldset {
     linear-gradient(
       145deg,
       rgba(255,255,255,.045),
-      rgba(255,255,255,.012)
+      rgba(255,255,255,.008)
     );
   box-shadow:
-    0 30px 90px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.025);
+    0 38px 110px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.035);
+  isolation: isolate;
 }
 
-/* PRODUCT ATMOSPHERE */
+/* =========================================================
+   PRODUCT ENVIRONMENTS
+   ========================================================= */
+
+.creators-page .creator-product-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: .9;
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,.035),
+      transparent 30%,
+      transparent 70%,
+      rgba(255,255,255,.012)
+    );
+}
+
+.creators-page .creator-product-slide::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  width: 65%;
+  height: 120%;
+  left: -8%;
+  top: -10%;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: .34;
+}
+
+/* PRO */
 
 .creators-page .creator-product-slide.product-pro {
   background:
     radial-gradient(
-      circle at 34% 45%,
-      rgba(45,140,255,.14),
-      transparent 38%
+      circle at 31% 48%,
+      rgba(45,140,255,.17),
+      transparent 37%
+    ),
+    radial-gradient(
+      circle at 73% 30%,
+      rgba(45,140,255,.045),
+      transparent 30%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.05),
-      rgba(255,255,255,.012)
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.008)
     );
 }
+
+.creators-page .creator-product-slide.product-pro::after {
+  background: radial-gradient(
+    circle,
+    rgba(45,140,255,.24),
+    transparent 65%
+  );
+}
+
+/* DIGITAL */
 
 .creators-page .creator-product-slide.product-digital {
   background:
     radial-gradient(
-      circle at 35% 45%,
-      rgba(105,231,255,.095),
-      transparent 38%
+      circle at 32% 47%,
+      rgba(105,231,255,.13),
+      transparent 37%
+    ),
+    radial-gradient(
+      circle at 75% 22%,
+      rgba(45,140,255,.04),
+      transparent 28%
     ),
     linear-gradient(
       145deg,
       rgba(255,255,255,.045),
-      rgba(255,255,255,.012)
+      rgba(255,255,255,.008)
     );
 }
+
+.creators-page .creator-product-slide.product-digital::after {
+  background: radial-gradient(
+    circle,
+    rgba(105,231,255,.20),
+    transparent 65%
+  );
+}
+
+/* DISC */
 
 .creators-page .creator-product-slide.product-disc {
   background:
     radial-gradient(
-      circle at 35% 45%,
-      rgba(126,101,255,.10),
-      transparent 38%
+      circle at 32% 47%,
+      rgba(126,101,255,.15),
+      transparent 37%
+    ),
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(105,231,255,.035),
+      transparent 28%
     ),
     linear-gradient(
       145deg,
       rgba(255,255,255,.045),
-      rgba(255,255,255,.012)
+      rgba(255,255,255,.008)
     );
 }
+
+.creators-page .creator-product-slide.product-disc::after {
+  background: radial-gradient(
+    circle,
+    rgba(126,101,255,.20),
+    transparent 65%
+  );
+}
+
+/* SLIM DISC */
 
 .creators-page .creator-product-slide.product-slimDisc {
   background:
     radial-gradient(
-      circle at 35% 45%,
-      rgba(45,140,255,.11),
-      transparent 38%
+      circle at 31% 48%,
+      rgba(45,140,255,.13),
+      transparent 37%
+    ),
+    radial-gradient(
+      circle at 74% 28%,
+      rgba(105,231,255,.035),
+      transparent 28%
     ),
     linear-gradient(
       145deg,
       rgba(255,255,255,.045),
-      rgba(255,255,255,.012)
+      rgba(255,255,255,.008)
     );
 }
+
+.creators-page .creator-product-slide.product-slimDisc::after {
+  background: radial-gradient(
+    circle,
+    rgba(45,140,255,.18),
+    transparent 65%
+  );
+}
+
+/* SLIM DIGITAL */
 
 .creators-page .creator-product-slide.product-slimDigital {
   background:
     radial-gradient(
-      circle at 35% 45%,
-      rgba(105,231,255,.075),
-      transparent 38%
+      circle at 31% 48%,
+      rgba(105,231,255,.10),
+      transparent 37%
+    ),
+    radial-gradient(
+      circle at 76% 24%,
+      rgba(45,140,255,.035),
+      transparent 28%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.012)
+      rgba(255,255,255,.043),
+      rgba(255,255,255,.008)
     );
 }
 
-.creators-page .creator-product-slide.product-discDrive,
-.creators-page .creator-product-slide.product-controller {
+.creators-page .creator-product-slide.product-slimDigital::after {
+  background: radial-gradient(
+    circle,
+    rgba(105,231,255,.16),
+    transparent 65%
+  );
+}
+
+/* DISC DRIVE */
+
+.creators-page .creator-product-slide.product-discDrive {
   background:
     radial-gradient(
-      circle at 35% 45%,
-      rgba(105,231,255,.065),
-      transparent 35%
+      circle at 32% 48%,
+      rgba(105,231,255,.075),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 72% 27%,
+      rgba(45,140,255,.035),
+      transparent 26%
     ),
     linear-gradient(
       145deg,
       rgba(255,255,255,.04),
-      rgba(255,255,255,.01)
+      rgba(255,255,255,.007)
     );
+}
+
+.creators-page .creator-product-slide.product-discDrive::after {
+  background: radial-gradient(
+    circle,
+    rgba(105,231,255,.14),
+    transparent 65%
+  );
+}
+
+/* CONTROLLER */
+
+.creators-page .creator-product-slide.product-controller {
+  background:
+    radial-gradient(
+      circle at 33% 47%,
+      rgba(105,231,255,.085),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 74% 24%,
+      rgba(45,140,255,.035),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.04),
+      rgba(255,255,255,.007)
+    );
+}
+
+.creators-page .creator-product-slide.product-controller::after {
+  background: radial-gradient(
+    circle,
+    rgba(105,231,255,.15),
+    transparent 65%
+  );
 }
 
 /* =========================================================
@@ -1840,44 +1993,80 @@ fieldset {
   display: grid;
   place-items: center;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .creators-page .creator-product-scene::before {
   content: '';
   position: absolute;
-  width: 78%;
-  height: 78%;
+  width: 72%;
+  height: 72%;
   border-radius: 50%;
   background:
     radial-gradient(
       circle,
-      rgba(45,140,255,.12),
+      rgba(45,140,255,.13),
       rgba(45,140,255,.035) 42%,
       transparent 70%
     );
-  filter: blur(18px);
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+.creators-page .creator-product-scene::after {
+  content: '';
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 9%;
+  height: 15%;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.18) 45%,
+      transparent 72%
+    );
+  filter: blur(15px);
   pointer-events: none;
 }
 
 .creators-page .creator-product-glow {
   position: absolute;
-  width: 55%;
+  width: 58%;
   aspect-ratio: 1;
   border-radius: 50%;
   background:
     radial-gradient(
       circle,
       rgba(105,231,255,.10),
-      transparent 68%
+      rgba(45,140,255,.035) 42%,
+      transparent 70%
     );
-  filter: blur(12px);
+  filter: blur(14px);
   pointer-events: none;
+  animation: creator-product-breathe 5s ease-in-out infinite;
+}
+
+@keyframes creator-product-breathe {
+  0%,
+  100% {
+    transform: scale(.96);
+    opacity: .72;
+  }
+
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
 }
 
 .creators-page .creator-product-number {
   position: absolute;
-  top: 30px;
-  left: 34px;
+  top: 31px;
+  left: 35px;
+  z-index: 5;
   color: #566274;
   font-size: 9px;
   font-weight: 800;
@@ -1888,30 +2077,60 @@ fieldset {
 .creators-page .creator-product-image {
   position: relative;
   z-index: 2;
-  width: 86%;
-  height: 78%;
-  max-height: 610px;
+  width: 90%;
+  height: 82%;
+  max-height: 625px;
   object-fit: contain;
   object-position: center;
   display: block;
   mix-blend-mode: screen;
   filter:
-    contrast(1.02)
-    saturate(.94)
-    drop-shadow(0 35px 55px rgba(0,0,0,.32));
+    contrast(1.04)
+    saturate(.96)
+    brightness(1.01)
+    drop-shadow(0 38px 55px rgba(0,0,0,.34))
+    drop-shadow(0 0 18px rgba(45,140,255,.055));
   user-select: none;
   -webkit-user-drag: none;
   transition:
-    transform .5s cubic-bezier(.2,.7,.2,1),
-    filter .5s ease;
+    transform .65s cubic-bezier(.2,.7,.2,1),
+    filter .65s ease;
 }
 
 .creators-page .creator-product-slide:hover .creator-product-image {
-  transform: scale(1.025);
+  transform: scale(1.025) translateY(-3px);
   filter:
-    contrast(1.03)
+    contrast(1.05)
     saturate(1)
-    drop-shadow(0 42px 65px rgba(0,0,0,.38));
+    brightness(1.015)
+    drop-shadow(0 45px 68px rgba(0,0,0,.40))
+    drop-shadow(0 0 22px rgba(45,140,255,.075));
+}
+
+/* Product-specific image scale */
+
+.creators-page .product-pro .creator-product-image {
+  width: 91%;
+}
+
+.creators-page .product-digital .creator-product-image {
+  width: 89%;
+}
+
+.creators-page .product-slimDisc .creator-product-image {
+  width: 90%;
+}
+
+.creators-page .product-slimDigital .creator-product-image {
+  width: 89%;
+}
+
+.creators-page .product-discDrive .creator-product-image {
+  width: 76%;
+}
+
+.creators-page .product-controller .creator-product-image {
+  width: 86%;
 }
 
 /* =========================================================
@@ -1922,7 +2141,7 @@ fieldset {
   position: relative;
   z-index: 3;
   min-width: 0;
-  padding: 48px 48px 44px 22px;
+  padding: 48px 55px 48px 18px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -2199,8 +2418,23 @@ fieldset {
   }
 
   .creators-page .creator-product-image {
-    width: 90%;
-    height: 70%;
+    width: 91%;
+    height: 72%;
+  }
+
+  .creators-page .product-pro .creator-product-image,
+  .creators-page .product-digital .creator-product-image,
+  .creators-page .product-slimDisc .creator-product-image,
+  .creators-page .product-slimDigital .creator-product-image {
+    width: 92%;
+  }
+
+  .creators-page .product-discDrive .creator-product-image {
+    width: 78%;
+  }
+
+  .creators-page .product-controller .creator-product-image {
+    width: 88%;
   }
 
   .creators-page .creator-product-details {
@@ -2347,14 +2581,37 @@ fieldset {
     height: 90%;
   }
 
+  .creators-page .creator-product-scene::after {
+    left: 12%;
+    right: 12%;
+    bottom: 7%;
+    height: 14%;
+    filter: blur(12px);
+  }
+
   .creators-page .creator-product-glow {
     width: 75%;
   }
 
   .creators-page .creator-product-image {
-    width: 92%;
+    width: 94%;
     height: 82%;
     max-height: 380px;
+  }
+
+  .creators-page .product-pro .creator-product-image,
+  .creators-page .product-digital .creator-product-image,
+  .creators-page .product-slimDisc .creator-product-image,
+  .creators-page .product-slimDigital .creator-product-image {
+    width: 94%;
+  }
+
+  .creators-page .product-discDrive .creator-product-image {
+    width: 80%;
+  }
+
+  .creators-page .product-controller .creator-product-image {
+    width: 90%;
   }
 
   /* DETAILS */
@@ -2519,8 +2776,10 @@ fieldset {
 
   .creators-page .creator-product-image,
   .creators-page .creator-buy-button,
-  .creators-page .creator-showcase-arrow {
+  .creators-page .creator-showcase-arrow,
+  .creators-page .creator-product-glow {
     transition: none;
+    animation: none;
   }
 
   .creators-page .creator-product-slide:hover .creator-product-image {
