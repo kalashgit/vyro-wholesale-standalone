@@ -36,73 +36,62 @@ const creatorProducts = [
     note: 'Performance flagship',
     greekNote: 'Ναυαρχίδα επιδόσεων',
     image: '/images/ps5-pro.png',
-    link: '',
+    link: 'https://buy.stripe.com/aFadR25n29jwc3Z0aDcQU0b',
   },
   {
     key: 'digital',
-    name: 'PS5 Digital Edition',
-    greek: 'PS5 Digital Edition',
+    name: 'PS5 Digital Edition 825GB',
+    greek: 'PS5 Digital Edition 825GB',
     publicPrice: '€489.99',
-    partnerPrice: '',
-    note: 'All-digital next gen',
-    greekNote: 'Ψηφιακή εμπειρία νέας γενιάς',
+    partnerPrice: '€460.00',
+    note: 'All-digital PlayStation 5',
+    greekNote: 'Ψηφιακή έκδοση PlayStation 5',
     image: '/images/ps5-digital.png',
-    link: '',
+    link: 'https://buy.stripe.com/28EeV6dTy8fs9VRbTlcQU0a',
   },
   {
     key: 'slimDisc',
     name: 'PS5 Slim Disc Edition',
     greek: 'PS5 Slim Disc Edition',
     publicPrice: '€549.99',
-    partnerPrice: '',
+    partnerPrice: '€530.00',
     note: 'Slimline with disc drive',
-    greekNote: 'Λεπτή έκδοση με drive',
+    greekNote: 'Λεπτή έκδοση με disc drive',
     image: '/images/ps5-slim-disc.png',
-    link: '',
+    link: 'https://buy.stripe.com/eVq8wIcPugLYaZV4qTcQU09',
   },
   {
     key: 'slimDigital',
-    name: 'PS5 Slim Digital',
-    greek: 'PS5 Slim Digital',
+    name: 'PS5 Slim Digital Edition',
+    greek: 'PS5 Slim Digital Edition',
     publicPrice: '€490.00',
-    partnerPrice: '',
-    note: 'Slimline digital',
+    partnerPrice: '€470.00',
+    note: 'Slimline digital edition',
     greekNote: 'Λεπτή ψηφιακή έκδοση',
     image: '/images/ps5-slim-digital.png',
-    link: '',
-  },
-  {
-    key: 'controller',
-    name: 'DualSense Wireless Controller',
-    greek: 'Χειριστήριο DualSense',
-    publicPrice: '',
-    partnerPrice: '',
-    note: 'Wireless PlayStation controller',
-    greekNote: 'Ασύρματο χειριστήριο PlayStation',
-    image: '/images/dualsense.png',
-    link: '',
+    link: 'https://buy.stripe.com/bJe14g6r6fHU3xt2iLcQU0e',
   },
   {
     key: 'discDrive',
-    name: 'PS5 Disc Drive',
-    greek: 'PS5 Disc Drive',
+    name: 'Sony PS5 Disc Drive',
+    greek: 'Sony PS5 Disc Drive',
     publicPrice: '',
-    partnerPrice: '',
-    note: 'Disc drive for compatible PS5 models',
-    greekNote: 'Disc drive για συμβατά μοντέλα PS5',
+    partnerPrice: '€69.99',
+    note: 'For compatible PS5 models',
+    greekNote: 'Για συμβατά μοντέλα PS5',
     image: '/images/ps5-disc-drive.png',
-    link: '',
+    link: 'https://buy.stripe.com/fZu4gscPucvI9VR7D5cQU0c',
   },
   {
-    key: 'charging',
-    name: 'DualSense Charging Station',
-    greek: 'DualSense Charging Station',
+    key: 'controller',
+    name: 'DualSense PS5 Controller',
+    greek: 'Χειριστήριο DualSense PS5',
     publicPrice: '',
-    partnerPrice: '',
-    note: 'Charging solution for DualSense controllers',
-    greekNote: 'Λύση φόρτισης για χειριστήρια DualSense',
-    image: '/images/charging-station.png',
-    link: '',
+    partnerPrice: '€55.99',
+    note: 'Wireless PlayStation controller',
+    greekNote: 'Ασύρματο χειριστήριο PlayStation',
+    image: '/images/dualsense.png',
+    link: 'https://buy.stripe.com/7sY4gseXCeDQec74qTcQU0d',
   },
 ]
 
@@ -124,55 +113,50 @@ export default function CreatorsPage() {
         navContact: 'Επικοινωνία',
 
         eyebrow: 'VYRO Creator Access',
-        title: 'Πρόσβαση σε ειδικούς όρους.',
-        accent: 'Χτισμένο για creators.',
+        title: 'Ιδιωτική πρόσβαση.',
+        accent: 'Ειδικές τιμές για creators.',
         intro:
-          'Ιδιωτική πρόσβαση σε επιλεγμένα PlayStation προϊόντα, ειδικές τιμές και ευκαιρίες συνεργασίας μέσω της VYRO.',
+          'Επιλεγμένα PlayStation προϊόντα σε ειδικές τιμές, διαθέσιμα μέσω του προσωπικού σας VYRO access.',
 
-        codeLabel: 'Κωδικός συνεργάτη',
+        codeLabel: 'Κωδικός πρόσβασης',
         codePlaceholder: 'Εισάγετε τον κωδικό σας',
-        unlock: 'Ενεργοποίηση πρόσβασης',
+        unlock: 'Συνέχεια',
         invalid:
           'Ο κωδικός δεν είναι έγκυρος. Ελέγξτε τον και δοκιμάστε ξανά.',
 
-        privateAccess: 'Ιδιωτική πρόσβαση',
-        welcome:
-          'Καλώς ήρθατε στο VYRO Creator Access.',
+        privateAccess: 'Private creator access',
+        welcome: 'Καλώς ήρθατε,',
         partnerPricing:
-          'Η πρόσβασή σας στις ειδικές τιμές είναι ενεργή.',
+          'Η προσωπική σας creator τιμολόγηση είναι ενεργή.',
 
         backToVYRO: 'Επιστροφή στο VYRO',
 
-        catalogueEyebrow: 'Private creator catalogue',
-        catalogueTitle: 'Προϊόντα για το setup σας.',
+        catalogueEyebrow: 'Creator offer',
+        catalogueTitle: 'Ειδικές τιμές.',
         catalogueText:
-          'Δείτε τα διαθέσιμα προϊόντα και τους ειδικούς όρους σας. Για προϊόντα χωρίς εμφανή τιμή, επικοινωνήστε απευθείας με τη VYRO.',
+          'Επιλεγμένα PlayStation προϊόντα διαθέσιμα απευθείας μέσω VYRO.',
 
-        partnerPrice: 'Τιμή συνεργάτη',
-        publicPrice: 'Κανονική τιμή',
-        unavailable: 'Τιμή κατόπιν επικοινωνίας',
-        buy: 'Επικοινωνία',
+        partnerPrice: 'Creator price',
+        publicPrice: 'Public price',
+        buy: 'Αγορά',
 
-        benefitsEyebrow: 'The VYRO Creator Opportunity',
-        benefitsTitle: 'Περισσότερα από μια έκπτωση.',
+        benefitsEyebrow: 'VYRO × Creator',
+        benefitsTitle: 'Περισσότερα από μια τιμή.',
         benefitsText:
-          'Το Creator Access δημιουργεί μια άμεση σχέση μεταξύ του creator και της VYRO — από ειδικές τιμές προϊόντων μέχρι referrals, launches και μελλοντικές εμπορικές ευκαιρίες.',
+          'Το Creator Access δημιουργεί μια άμεση σχέση με τη VYRO — από ειδικές τιμές προϊόντων μέχρι referrals, launches και μελλοντικές συνεργασίες.',
 
-        benefitOne: 'Ειδικές τιμές συνεργάτη',
-        benefitTwo:
-          'Άμεση πρόσβαση σε προϊόντα VYRO',
+        benefitOne: 'Ειδικές creator τιμές',
+        benefitTwo: 'Άμεση αγορά προϊόντων',
         benefitThree: 'Referral & εμπορικές ευκαιρίες',
-        benefitFour:
-          'Campaigns, launches & giveaways',
+        benefitFour: 'Campaigns, launches & giveaways',
 
-        contact: 'Θέλετε κάτι συγκεκριμένο;',
+        contact: 'Χρειάζεστε κάτι άλλο;',
         contactText:
-          'Στείλτε μας μήνυμα για διαθεσιμότητα, ειδικές τιμές, προϊόντα ή την επόμενη ευκαιρία συνεργασίας.',
+          'Επικοινωνήστε μαζί μας για διαθεσιμότητα, προϊόντα ή ειδικές συνεργασίες.',
 
         whatsapp: 'Επικοινωνία μέσω WhatsApp',
 
-        footer:
-          'VYRO Creator Access · PlayStation retail & distribution.',
+        footer: 'VYRO Creator Access · PlayStation retail & distribution.',
       }
     : {
         navHome: 'Home',
@@ -181,55 +165,50 @@ export default function CreatorsPage() {
         navContact: 'Contact',
 
         eyebrow: 'VYRO Creator Access',
-        title: 'Access preferential terms.',
-        accent: 'Built for creators.',
+        title: 'Private access.',
+        accent: 'Special pricing for creators.',
         intro:
-          'Private access to selected PlayStation products, partner pricing and opportunities through VYRO.',
+          'Selected PlayStation products at exclusive creator pricing, available through your personal VYRO access.',
 
-        codeLabel: 'Partner access code',
+        codeLabel: 'Access code',
         codePlaceholder: 'Enter your access code',
-        unlock: 'Activate access',
+        unlock: 'Continue',
         invalid:
           'That access code is not valid. Check it and try again.',
 
-        privateAccess: 'Private access',
-        welcome:
-          'Welcome to VYRO Creator Access.',
+        privateAccess: 'Private creator access',
+        welcome: 'Welcome,',
         partnerPricing:
-          'Your preferential pricing is now active.',
+          'Your personal creator pricing is active.',
 
         backToVYRO: 'Back to VYRO',
 
-        catalogueEyebrow: 'Private creator catalogue',
-        catalogueTitle: 'Products for your setup.',
+        catalogueEyebrow: 'Creator offer',
+        catalogueTitle: 'Exclusive pricing.',
         catalogueText:
-          'Explore your available products and partner terms. For products without displayed pricing, contact VYRO directly.',
+          'Selected PlayStation products available directly through VYRO.',
 
-        partnerPrice: 'Partner price',
+        partnerPrice: 'Creator price',
         publicPrice: 'Public price',
-        unavailable: 'Price on request',
-        buy: 'Contact VYRO',
+        buy: 'Buy now',
 
-        benefitsEyebrow: 'The VYRO Creator Opportunity',
-        benefitsTitle: 'More than a discount.',
+        benefitsEyebrow: 'VYRO × Creator',
+        benefitsTitle: 'More than a price.',
         benefitsText:
-          'Creator Access creates a direct relationship between the creator and VYRO — from preferential product pricing to referrals, launches and future commercial opportunities.',
+          'Creator Access creates a direct relationship with VYRO — from exclusive product pricing to referrals, launches and future collaborations.',
 
-        benefitOne: 'Preferential creator pricing',
-        benefitTwo:
-          'Direct access to VYRO products',
+        benefitOne: 'Exclusive creator pricing',
+        benefitTwo: 'Direct product purchasing',
         benefitThree: 'Referral & commercial opportunities',
-        benefitFour:
-          'Campaigns, launches & giveaways',
+        benefitFour: 'Campaigns, launches & giveaways',
 
-        contact: 'Looking for something specific?',
+        contact: 'Looking for something else?',
         contactText:
-          'Message us for availability, partner pricing, products or the next opportunity to work with VYRO.',
+          'Contact us for availability, products or special collaboration opportunities.',
 
         whatsapp: 'Contact VYRO via WhatsApp',
 
-        footer:
-          'VYRO Creator Access · PlayStation retail & distribution.',
+        footer: 'VYRO Creator Access · PlayStation retail & distribution.',
       }
 
   function unlockAccess() {
@@ -411,16 +390,17 @@ export default function CreatorsPage() {
                 {copy.privateAccess}
               </div>
 
-              <h1>{copy.welcome}</h1>
+              <h1>
+                {copy.welcome}{' '}
+                <span>{creatorName}.</span>
+              </h1>
 
-              <p>
-                {creatorName} · {copy.partnerPricing}
-              </p>
+              <p>{copy.partnerPricing}</p>
             </div>
 
             <div className="creator-access-badge">
               <Check size={16} />
-              PARTNER ACCESS ACTIVE
+              ACCESS ACTIVE
             </div>
           </section>
 
@@ -472,57 +452,31 @@ export default function CreatorsPage() {
                     </div>
 
                     <div className="price">
-                      {product.partnerPrice ? (
-                        <>
-                          <small>
-                            {copy.partnerPrice}
-                          </small>
+                      <small>
+                        {copy.partnerPrice}
+                      </small>
 
-                          <strong>
-                            {product.partnerPrice}
-                          </strong>
+                      <strong>
+                        {product.partnerPrice}
+                      </strong>
 
-                          {product.publicPrice && (
-                            <del>
-                              {product.publicPrice}
-                            </del>
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          <small>
-                            {copy.partnerPrice}
-                          </small>
-
-                          <strong className="price-request">
-                            {copy.unavailable}
-                          </strong>
-                        </>
+                      {product.publicPrice && (
+                        <del>
+                          {product.publicPrice}
+                        </del>
                       )}
                     </div>
                   </div>
 
-                  {product.link ? (
-                    <a
-                      className="product-link"
-                      href={product.link}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {copy.buy}
-                      <ArrowRight size={15} />
-                    </a>
-                  ) : (
-                    <a
-                      className="product-link"
-                      href="https://wa.me/306978255016"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {copy.buy}
-                      <ArrowRight size={15} />
-                    </a>
-                  )}
+                  <a
+                    className="product-link"
+                    href={product.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {copy.buy}
+                    <ArrowRight size={15} />
+                  </a>
                 </article>
               ))}
             </div>
