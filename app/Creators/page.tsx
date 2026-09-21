@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   ArrowRight,
   Check,
+  ChevronLeft,
+  ChevronRight,
   Globe2,
   LockKeyhole,
   Menu,
@@ -102,6 +104,9 @@ export default function CreatorsPage() {
   const [accessGranted, setAccessGranted] = useState(false)
   const [creatorName, setCreatorName] = useState('')
   const [error, setError] = useState('')
+  const [activeProduct, setActiveProduct] = useState(0)
+
+  const catalogueRef = useRef<HTMLDivElement>(null)
 
   const isGreek = language === 'el'
 
@@ -134,7 +139,7 @@ export default function CreatorsPage() {
         catalogueEyebrow: 'Creator offer',
         catalogueTitle: 'Ειδικές τιμές.',
         catalogueText:
-          'Επιλεγμένα PlayStation προϊόντα διαθέσιμα απευθείας μέσω VYRO.',
+          'Swipe για να εξερευνήσετε τα διαθέσιμα προϊόντα.',
 
         partnerPrice: 'Creator price',
         publicPrice: 'Public price',
@@ -143,7 +148,7 @@ export default function CreatorsPage() {
         benefitsEyebrow: 'VYRO × Creator',
         benefitsTitle: 'Περισσότερα από μια τιμή.',
         benefitsText:
-          'Το Creator Access δημιουργεί μια άμεση σχέση με τη VYRO — από ειδικές τιμές προϊόντων μέχρι referrals, launches και μελλοντικές συνεργασίες.',
+          'Ειδικές τιμές, άμεση αγορά και ευκαιρίες συνεργασίας.',
 
         benefitOne: 'Ειδικές creator τιμές',
         benefitTwo: 'Άμεση αγορά προϊόντων',
@@ -152,7 +157,7 @@ export default function CreatorsPage() {
 
         contact: 'Χρειάζεστε κάτι άλλο;',
         contactText:
-          'Επικοινωνήστε μαζί μας για διαθεσιμότητα, προϊόντα ή ειδικές συνεργασίες.',
+          'Επικοινωνήστε μαζί μας για διαθεσιμότητα, προϊόντα ή συνεργασίες.',
 
         whatsapp: 'Επικοινωνία μέσω WhatsApp',
 
@@ -186,7 +191,7 @@ export default function CreatorsPage() {
         catalogueEyebrow: 'Creator offer',
         catalogueTitle: 'Exclusive pricing.',
         catalogueText:
-          'Selected PlayStation products available directly through VYRO.',
+          'Swipe to explore the available products.',
 
         partnerPrice: 'Creator price',
         publicPrice: 'Public price',
@@ -195,7 +200,7 @@ export default function CreatorsPage() {
         benefitsEyebrow: 'VYRO × Creator',
         benefitsTitle: 'More than a price.',
         benefitsText:
-          'Creator Access creates a direct relationship with VYRO — from exclusive product pricing to referrals, launches and future collaborations.',
+          'Exclusive pricing, direct purchasing and future collaboration opportunities.',
 
         benefitOne: 'Exclusive creator pricing',
         benefitTwo: 'Direct product purchasing',
@@ -227,6 +232,27 @@ export default function CreatorsPage() {
     setCreatorName(match.creator)
     setAccessGranted(true)
     setError('')
+    setActiveProduct(0)
+  }
+
+  function goToProduct(index: number) {
+    if (index < 0 || index >= creatorProducts.length) return
+
+    setActiveProduct(index)
+
+    const container = catalogueRef.current
+
+    if (!container) return
+
+    const slide = container.querySelector(
+      `[data-product-index="${index}"]`
+    ) as HTMLElement | null
+
+    slide?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    })
   }
 
   return (
@@ -404,8 +430,8 @@ export default function CreatorsPage() {
             </div>
           </section>
 
-          <section className="section creator-catalogue">
-            <div className="section-heading">
+          <section className="creator-showcase">
+            <div className="creator-showcase-top">
               <div>
                 <div className="eyebrow">
                   <span className="eyebrow-line" />
@@ -415,29 +441,74 @@ export default function CreatorsPage() {
                 <h2>{copy.catalogueTitle}</h2>
               </div>
 
-              <p>{copy.catalogueText}</p>
+              <div className="creator-showcase-controls">
+                <button
+                  type="button"
+                  aria-label="Previous product"
+                  onClick={() =>
+                    goToProduct(activeProduct - 1)
+                  }
+                  disabled={activeProduct === 0}
+                >
+                  <ChevronLeft size={18} />
+                </button>
+
+                <span>
+                  {String(activeProduct + 1).padStart(2, '0')}
+                  {' / '}
+                  {String(creatorProducts.length).padStart(
+                    2,
+                    '0'
+                  )}
+                </span>
+
+                <button
+                  type="button"
+                  aria-label="Next product"
+                  onClick={() =>
+                    goToProduct(activeProduct + 1)
+                  }
+                  disabled={
+                    activeProduct ===
+                    creatorProducts.length - 1
+                  }
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
             </div>
 
-            <div className="product-grid">
+            <div
+              className="creator-showcase-track"
+              ref={catalogueRef}
+            >
               {creatorProducts.map((product, index) => (
                 <article
-                  className={`product-card product-${product.key}`}
+                  className={`creator-product-slide product-${product.key}`}
                   key={product.key}
+                  data-product-index={index}
                 >
-                  <div className="product-visual">
-                    <img
-                      className="product-image"
-                      src={product.image}
-                      alt={product.name}
-                    />
-
-                    <span className="product-index">
+                  <div className="creator-product-scene">
+                    <span className="creator-product-number">
                       {String(index + 1).padStart(2, '0')}
                     </span>
+
+                    <div className="creator-product-glow" />
+
+                    <img
+                      className="creator-product-image"
+                      src={product.image}
+                      alt={product.name}
+                      draggable={false}
+                    />
                   </div>
 
-                  <div className="product-info">
-                    <div>
+                  <div className="creator-product-details">
+                    <div className="creator-product-copy">
+                      <span className="creator-product-category">
+                        PLAYSTATION
+                      </span>
+
                       <h3>
                         {isGreek
                           ? product.greek
@@ -451,34 +522,56 @@ export default function CreatorsPage() {
                       </p>
                     </div>
 
-                    <div className="price">
-                      <small>
-                        {copy.partnerPrice}
-                      </small>
+                    <div className="creator-product-purchase">
+                      <div className="creator-product-price">
+                        <span>
+                          {copy.partnerPrice}
+                        </span>
 
-                      <strong>
-                        {product.partnerPrice}
-                      </strong>
+                        <strong>
+                          {product.partnerPrice}
+                        </strong>
 
-                      {product.publicPrice && (
-                        <del>
-                          {product.publicPrice}
-                        </del>
-                      )}
+                        {product.publicPrice && (
+                          <del>
+                            {product.publicPrice}
+                          </del>
+                        )}
+                      </div>
+
+                      <a
+                        className="creator-buy-button"
+                        href={product.link}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {copy.buy}
+                        <ArrowRight size={16} />
+                      </a>
                     </div>
                   </div>
-
-                  <a
-                    className="product-link"
-                    href={product.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {copy.buy}
-                    <ArrowRight size={15} />
-                  </a>
                 </article>
               ))}
+            </div>
+
+            <div className="creator-showcase-bottom">
+              <p>{copy.catalogueText}</p>
+
+              <div className="creator-product-dots">
+                {creatorProducts.map((product, index) => (
+                  <button
+                    key={product.key}
+                    type="button"
+                    aria-label={`View ${product.name}`}
+                    className={
+                      index === activeProduct
+                        ? 'is-active'
+                        : ''
+                    }
+                    onClick={() => goToProduct(index)}
+                  />
+                ))}
+              </div>
             </div>
           </section>
 
