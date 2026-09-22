@@ -1644,24 +1644,23 @@ fieldset {
      ======================================================= */
 
   .product-pro .product-image {
-    transform: scale(.82);
+    transform: scale(.65);
   }
 
   .product-digital .product-image {
-    transform: scale(.88);
+    transform: scale(.78);
   }
 
   .product-disc .product-image {
-    transform: scale(.84);
+    transform: scale(.72);
   }
 
   .product-slim .product-image {
-    transform: scale(.88);
+    transform: scale(.78);
   }
 
   /*
-   * No hover/touch scaling.
-   * Keep every product exactly where it is.
+   * Keep normalized sizes fixed.
    */
 
   .product-card:hover .product-image {
