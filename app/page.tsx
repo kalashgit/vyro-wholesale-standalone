@@ -121,6 +121,7 @@ export default function Page() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const [activeProduct, setActiveProduct] = useState(products[0].key)
 
   const [form, setForm] = useState<FormState>({
     business: '',
@@ -147,6 +148,48 @@ export default function Page() {
 
     return () => clearInterval(interval)
   }, [offerEnd])
+
+  useEffect(() => {
+    const productElements = products
+      .map((product) =>
+        document.getElementById(`product-${product.key}`)
+      )
+      .filter(Boolean) as HTMLElement[]
+
+    if (!productElements.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              b.intersectionRatio - a.intersectionRatio
+          )
+
+        if (visibleEntries[0]) {
+          const key =
+            visibleEntries[0].target.getAttribute(
+              'data-product-key'
+            )
+
+          if (key) {
+            setActiveProduct(key)
+          }
+        }
+      },
+      {
+        threshold: [0.25, 0.5, 0.75],
+        rootMargin: '-20% 0px -20% 0px',
+      }
+    )
+
+    productElements.forEach((element) =>
+      observer.observe(element)
+    )
+
+    return () => observer.disconnect()
+  }, [])
 
   const countdown = useMemo(() => {
     const totalSeconds = Math.floor(timeLeft / 1000)
@@ -658,9 +701,52 @@ export default function Page() {
           )}
         </div>
 
+        <div className="product-navigator">
+          <div className="product-navigator-track">
+            {products.map((product) => (
+              <button
+                key={product.key}
+                className={
+                  activeProduct === product.key
+                    ? 'product-nav-item is-active'
+                    : 'product-nav-item'
+                }
+                type="button"
+                onClick={() => {
+                  document
+                    .getElementById(
+                      `product-${product.key}`
+                    )
+                    ?.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start',
+                    })
+
+                  setActiveProduct(product.key)
+                }}
+                aria-current={
+                  activeProduct === product.key
+                    ? 'true'
+                    : undefined
+                }
+              >
+                <span className="product-nav-dot" />
+
+                <span>
+                  {isGreek
+                    ? product.greek
+                    : product.name}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="product-grid">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <article
+              id={`product-${product.key}`}
+              data-product-key={product.key}
               className={`product-card product-${product.tone}`}
               key={product.key}
             >
@@ -670,10 +756,6 @@ export default function Page() {
                   src={product.image}
                   alt={`${product.name} console and controller`}
                 />
-
-                <span className="product-index">
-                  0{index + 1}
-                </span>
               </div>
 
               <div className="product-info">
