@@ -696,7 +696,7 @@ h1 span {
 
 /* Visual size normalization */
 .product-pro .product-image {
-  transform: scale(.65);
+  transform: scale(1.3);
 }
 
 .product-digital .product-image {
