@@ -674,77 +674,44 @@ h1 span {
 .product-image {
   position: relative;
   z-index: 1;
-
-  width: 88%;
+  width: 100%;
   height: 520px;
-
   object-fit: contain;
   object-position: center;
-
   display: block;
-
-  /*
-   * Source files remain completely untouched.
-   */
   mix-blend-mode: normal;
-
   filter:
     contrast(1.01)
     saturate(.98)
     brightness(1)
     drop-shadow(0 35px 55px rgba(0,0,0,.28));
-
-  transition:
-    transform .55s cubic-bezier(.22,1,.36,1),
-    filter .55s ease;
-
-  /*
-   * Prevent selecting, dragging, copying, or long-pressing
-   * the product image on touch devices.
-   */
+  transition: filter .55s ease;
   user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
   -webkit-user-drag: none;
-  pointer-events: none;
 }
 
 .product-image::selection {
   background: transparent;
 }
 
-/*
- * NORMALIZED PRODUCT SCALE
- *
- * The source images contain different amounts of internal
- * whitespace. These values normalize the visible console
- * size without modifying the source files.
- */
-
+/* Visual size normalization */
 .product-pro .product-image {
   transform: scale(.65);
 }
 
 .product-digital .product-image {
-  transform: scale(.88);
+  transform: scale(.78);
 }
 
 .product-disc .product-image {
-  transform: scale(.84);
+  transform: scale(.72);
 }
 
 .product-slim .product-image {
-  transform: scale(.88);
+  transform: scale(.78);
 }
 
-/*
- * IMPORTANT:
- * No hover scaling on the image.
- *
- * The product remains at exactly the same scale when the
- * user touches, holds, or interacts with the card.
- */
-
+/* Keep the normalized size on hover */
 .product-card:hover .product-image {
   transform: inherit;
 }
