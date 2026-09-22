@@ -584,207 +584,236 @@ h1 span {
    ========================================================= */
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
 }
 
 .product-card {
-  border: 1px solid var(--line);
-  background:
-    linear-gradient(
-      150deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.012)
-    );
-  border-radius: var(--radius);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .45fr);
+  min-height: 620px;
+  width: 100%;
   overflow: hidden;
-  transition: .25s ease;
+
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 24px;
+
+  /*
+   * Clean product gallery.
+   * No coloured orb behind the hardware.
+   */
+  background: #0a0d12;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.25);
+
+  isolation: isolate;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(105,231,255,.55);
+  border-color: rgba(255,255,255,.12);
 }
+
+/* =========================================================
+   PRODUCT VISUAL
+   ========================================================= */
 
 .product-visual {
-  height: 230px;
   position: relative;
-  display: grid;
-  place-items: center;
+  min-height: 620px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   overflow: hidden;
-  background:
-    radial-gradient(
-      circle at 50% 48%,
-      rgba(45,140,255,.17),
-      transparent 52%
-    );
+
+  padding: 44px 60px;
+
+  background: #0a0d12;
 }
 
+/*
+ * No artificial radial glow.
+ * The product itself is the visual.
+ */
+
+/* =========================================================
+   PRODUCT IMAGE
+   ========================================================= */
+
 .product-image {
-  width: 100%;
-  height: 100%;
+  position: relative;
+  z-index: 1;
+
+  width: 88%;
+  height: 520px;
+
   object-fit: contain;
   object-position: center;
+
   display: block;
-  mix-blend-mode: screen;
+
+  /*
+   * Important for the current white-background images.
+   */
+  mix-blend-mode: normal;
+
+  filter:
+    contrast(1.01)
+    saturate(.98)
+    brightness(1)
+    drop-shadow(0 35px 55px rgba(0,0,0,.28));
+
+  transition:
+    transform .55s cubic-bezier(.22,1,.36,1),
+    filter .55s ease;
+
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .product-image::selection {
   background: transparent;
 }
 
-.product-digital .product-visual {
-  background:
-    radial-gradient(
-      circle at 50% 48%,
-      rgba(105,231,255,.14),
-      transparent 52%
-    );
+/*
+ * Keep the four products visually close in scale.
+ * The source images themselves have different internal framing,
+ * so this gives us a consistent starting point.
+ */
+
+.product-pro .product-image,
+.product-digital .product-image,
+.product-disc .product-image,
+.product-slim .product-image {
+  transform: scale(.92);
 }
 
-.product-disc .product-visual {
-  background:
-    radial-gradient(
-      circle at 50% 48%,
-      rgba(126,101,255,.15),
-      transparent 52%
-    );
+.product-card:hover .product-image,
+.product-pro:hover .product-image,
+.product-digital:hover .product-image,
+.product-disc:hover .product-image,
+.product-slim:hover .product-image {
+  transform: scale(.95);
 }
 
-.console-shape {
-  width: 54px;
-  height: 147px;
-  border: 2px solid #bcd2ed;
-  border-radius: 6px 18px 12px 20px;
-  transform: skewY(-5deg) rotate(11deg);
-  position: relative;
-  box-shadow:
-    12px 8px 25px rgba(45,140,255,.25),
-    inset -8px 0 12px rgba(255,255,255,.08);
-}
-
-.console-shape::before {
-  content: '';
-  position: absolute;
-  left: -8px;
-  top: 4px;
-  width: 7px;
-  height: 135px;
-  border-radius: 5px 0 0 15px;
-  background: #d9e6f6;
-  opacity: .55;
-}
-
-.console-shape::after {
-  content: '';
-  position: absolute;
-  right: -11px;
-  bottom: 12px;
-  width: 12px;
-  height: 3px;
-  background: var(--cyan);
-  box-shadow: 0 0 12px var(--cyan);
-}
-
-.console-light {
-  position: absolute;
-  top: 9px;
-  left: 4px;
-  width: 2px;
-  height: 120px;
-  background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
-}
-
-.product-disc .console-shape::after {
-  background: #b18cff;
-  box-shadow: 0 0 12px #b18cff;
-}
-
-.product-index {
-  position: absolute;
-  top: 16px;
-  right: 18px;
-  color: #546174;
-  font-size: 10px;
-  font-weight: 800;
-}
+/* =========================================================
+   PRODUCT INFORMATION
+   ========================================================= */
 
 .product-info {
-  padding: 17px 17px 15px;
+  position: relative;
+  z-index: 2;
+
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  min-height: 104px;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 60px 60px 60px 20px;
 }
 
 .product-info h3 {
-  font-size: 14px;
-  max-width: 135px;
-  line-height: 1.2;
+  margin: 0;
+
+  font-size: clamp(30px, 3vw, 52px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  font-weight: 600;
+
+  color: var(--text);
 }
 
 .product-info p {
+  margin: 18px 0 0;
+
+  max-width: 260px;
+
   color: var(--muted);
-  font-size: 10px;
-  line-height: 1.4;
-  margin-top: 7px;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .price {
-  text-align: right;
-  flex-shrink: 0;
+  text-align: left;
 }
 
-.price small {
-  display: block;
-  color: #637082;
-  font-size: 9px;
+.product-info .price {
+  margin-top: 42px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.price strong {
-  display: block;
-  margin-top: 5px;
-  color: var(--cyan);
-  font-size: 15px;
-  white-space: nowrap;
-}
+.product-info .price small {
+  color: var(--muted);
 
-.price del {
-  display: block;
-  margin-top: 3px;
-  color: #566274;
   font-size: 10px;
-  white-space: nowrap;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
 }
+
+.product-info .price strong {
+  color: var(--text);
+
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -.025em;
+  font-weight: 600;
+}
+
+/* =========================================================
+   PRODUCT CTA
+   ========================================================= */
 
 .product-link {
-  margin: 0 17px 17px;
-  min-height: 42px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  color: #d4dce8;
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: 800;
-  display: flex;
+  position: absolute;
+
+  right: 60px;
+  bottom: 52px;
+  z-index: 3;
+
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
-  transition: .2s ease;
+  gap: 9px;
+
+  padding: 12px 17px;
+
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.035);
+
+  color: var(--text);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    transform .25s ease;
 }
 
 .product-link:hover {
-  border-color: var(--blue);
-  background: rgba(45,140,255,.09);
-  color: white;
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
+  transform: translateY(-2px);
 }
 
 .product-trade-note {
   display: block;
   margin: -5px 17px 16px;
+
   color: var(--muted);
+
   font-size: 8px;
   line-height: 1.4;
   letter-spacing: .06em;
@@ -1090,10 +1119,38 @@ fieldset {
     margin-top: 10px;
   }
 
-  .product-grid,
+  .product-grid {
+    gap: 18px;
+  }
+
   .tier-grid,
   .service-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-card {
+    grid-template-columns: minmax(0, 1.35fr) minmax(240px, .65fr);
+    min-height: 560px;
+  }
+
+  .product-visual {
+    min-height: 560px;
+  }
+
+  .product-image {
+    height: 470px;
+  }
+
+  .product-info {
+    padding-right: 35px;
+  }
+
+  .product-info h3 {
+    font-size: clamp(30px, 4vw, 44px);
+  }
+
+  .product-link {
+    right: 35px;
   }
 
   .inquiry-section {
@@ -1287,44 +1344,92 @@ fieldset {
     font-size: 9px;
   }
 
-  .product-grid,
-  .tier-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  /* =======================================================
+     MOBILE PRODUCT GALLERY
+     ======================================================= */
+
+  .product-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border-radius: 20px;
   }
 
   .product-visual {
-    height: 177px;
+    min-height: 420px;
+    height: 420px;
+    padding: 25px 20px;
+    background: #0a0d12;
   }
 
   .product-image {
-    object-fit: contain;
+    width: 100%;
+    height: 370px;
+  }
+
+  .product-pro .product-image,
+  .product-digital .product-image,
+  .product-disc .product-image,
+  .product-slim .product-image {
+    transform: scale(.92);
+  }
+
+  .product-card:hover .product-image,
+  .product-pro:hover .product-image,
+  .product-digital:hover .product-image,
+  .product-disc:hover .product-image,
+  .product-slim:hover .product-image {
+    transform: scale(.92);
   }
 
   .product-info {
-    display: block;
-    min-height: 133px;
-    padding: 14px;
+    padding: 28px 24px 86px;
+    display: flex;
+    min-height: 0;
   }
 
   .product-info h3 {
-    font-size: 13px;
+    font-size: 32px;
   }
 
-  .price {
-    text-align: left;
-    margin-top: 13px;
+  .product-info p {
+    margin-top: 12px;
+  }
+
+  .product-info .price {
+    margin-top: 24px;
+  }
+
+  .product-info .price strong {
+    font-size: 26px;
   }
 
   .product-link {
-    margin: 0 14px 14px;
-    font-size: 9px;
+    left: 24px;
+    right: 24px;
+    bottom: 22px;
+    justify-content: center;
   }
 
   .product-trade-note {
     margin: -5px 14px 14px;
     font-size: 7px;
     line-height: 1.35;
+  }
+
+  /* =======================================================
+     WHOLESALE
+     ======================================================= */
+
+  .tier-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
   .tier-card {
@@ -1345,6 +1450,10 @@ fieldset {
     right: 13px;
     font-size: 8px;
   }
+
+  /* =======================================================
+     INQUIRY
+     ======================================================= */
 
   .inquiry-section {
     display: block;
@@ -1759,11 +1868,6 @@ fieldset {
   isolation: isolate;
 }
 
-/*
- * Very subtle surface treatment.
- * Kept intentionally quiet so the hardware remains the focus.
- */
-
 .creators-page .creator-product-slide::before {
   content: '';
   position: absolute;
@@ -1780,10 +1884,6 @@ fieldset {
       rgba(255,255,255,.008)
     );
 }
-
-/*
- * Large environmental glow behind the product.
- */
 
 .creators-page .creator-product-slide::after {
   content: '';
@@ -2013,11 +2113,6 @@ fieldset {
   isolation: isolate;
 }
 
-/*
- * Central ambient light.
- * Deliberately softer than the old version.
- */
-
 .creators-page .creator-product-scene::before {
   content: '';
   position: absolute;
@@ -2034,10 +2129,6 @@ fieldset {
   filter: blur(28px);
   pointer-events: none;
 }
-
-/*
- * Ground shadow.
- */
 
 .creators-page .creator-product-scene::after {
   content: '';
@@ -2057,8 +2148,6 @@ fieldset {
   filter: blur(18px);
   pointer-events: none;
 }
-
-/* Ambient breathing light */
 
 .creators-page .creator-product-glow {
   position: absolute;
@@ -2106,30 +2195,10 @@ fieldset {
    PRODUCT IMAGE
    ========================================================= */
 
-/*
- * IMPORTANT:
- *
- * The old creator image used:
- *     mix-blend-mode: screen;
- *
- * That is great for transparent/light assets,
- * but it fights the current white-background product images.
- *
- * We intentionally remove it here.
- *
- * Current white-background assets therefore appear as a clean
- * product presentation stage.
- *
- * Later, transparent renders can simply be dropped in.
- */
-
 .creators-page .creator-product-image {
   position: relative;
   z-index: 2;
 
-  /*
-   * Much larger visual presence.
-   */
   width: 96%;
   height: 91%;
   max-height: 700px;
@@ -2155,11 +2224,6 @@ fieldset {
     transform .7s cubic-bezier(.2,.7,.2,1),
     filter .7s ease;
 }
-
-/*
- * Very restrained hover movement.
- * The product should feel physical, not animated.
- */
 
 .creators-page .creator-product-slide:hover .creator-product-image {
   transform: scale(1.018) translateY(-4px);
@@ -2204,14 +2268,6 @@ fieldset {
    PRODUCT INFORMATION
    ========================================================= */
 
-/*
- * Information is intentionally pushed back.
- *
- * Product first.
- * Name second.
- * Price / action third.
- */
-
 .creators-page .creator-product-details {
   position: relative;
   z-index: 3;
@@ -2242,10 +2298,6 @@ fieldset {
   letter-spacing: -.07em;
 }
 
-/*
- * Description is quieter and smaller.
- */
-
 .creators-page .creator-product-note {
   max-width: 315px;
   margin-top: 15px;
@@ -2254,10 +2306,6 @@ fieldset {
   font-size: 11px;
   line-height: 1.5;
 }
-
-/*
- * Purchase area is deliberately minimal.
- */
 
 .creators-page .creator-product-purchase {
   width: 100%;
@@ -2547,7 +2595,7 @@ fieldset {
   .creators-page .creator-product-details h3 {
     font-size: clamp(32px, 5vw, 48px);
   }
-  
+
   .creators-page .creator-benefits .service-grid {
     grid-template-columns: repeat(2, 1fr);
   }
