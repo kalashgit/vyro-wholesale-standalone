@@ -723,7 +723,7 @@ h1 span {
  */
 
 .product-pro .product-image {
-  transform: scale(.82);
+  transform: scale(.75);
 }
 
 .product-digital .product-image {
