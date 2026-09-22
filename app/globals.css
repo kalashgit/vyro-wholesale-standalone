@@ -714,19 +714,32 @@ h1 span {
   background: transparent;
 }
 
-.product-pro .product-image,
-.product-digital .product-image,
-.product-disc .product-image,
-.product-slim .product-image {
-  transform: scale(.92);
+/*
+ * NORMALIZED PRODUCT SCALE
+ *
+ * The source images contain different amounts of internal
+ * whitespace. These values normalize the visible console
+ * size without modifying the source files.
+ */
+
+.product-pro .product-image {
+  transform: scale(.82);
 }
 
-.product-card:hover .product-image,
-.product-pro:hover .product-image,
-.product-digital:hover .product-image,
-.product-disc:hover .product-image,
-.product-slim:hover .product-image {
-  transform: scale(.95);
+.product-digital .product-image {
+  transform: scale(.88);
+}
+
+.product-disc .product-image {
+  transform: scale(.84);
+}
+
+.product-slim .product-image {
+  transform: scale(.88);
+}
+
+.product-card:hover .product-image {
+  transform: scale(1);
 }
 
 /* =========================================================
@@ -1655,23 +1668,34 @@ fieldset {
     object-position: center;
 
     display: block;
-
-    transform: scale(.92);
   }
 
-  .product-pro .product-image,
-  .product-digital .product-image,
-  .product-disc .product-image,
+  /*
+   * MOBILE PRODUCT SCALE NORMALIZATION
+   *
+   * Each source image contains different internal
+   * whitespace, so the visible consoles are normalized
+   * individually without modifying the source files.
+   */
+
+  .product-pro .product-image {
+    transform: scale(.82);
+  }
+
+  .product-digital .product-image {
+    transform: scale(.88);
+  }
+
+  .product-disc .product-image {
+    transform: scale(.84);
+  }
+
   .product-slim .product-image {
-    transform: scale(.92);
+    transform: scale(.88);
   }
 
-  .product-card:hover .product-image,
-  .product-pro:hover .product-image,
-  .product-digital:hover .product-image,
-  .product-disc:hover .product-image,
-  .product-slim:hover .product-image {
-    transform: scale(.92);
+  .product-card:hover .product-image {
+    transform: none;
   }
 
   /* =======================================================
