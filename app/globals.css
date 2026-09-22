@@ -583,28 +583,66 @@ h1 span {
    PRODUCTS
    ========================================================= */
 
-.product-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+/*
+ * HORIZONTAL PRODUCT TRACK
+ *
+ * One product occupies the stage at a time.
+ * Mobile = swipe horizontally.
+ * Desktop = same behavior with arrow controls.
+ */
+
+.product-carousel {
+  position: relative;
   width: 100%;
 }
 
+.product-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+  scroll-behavior: smooth;
+
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+
+  scrollbar-width: none;
+}
+
+.product-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================================
+   PRODUCT CARD / SLIDE
+   ========================================================= */
+
 .product-card {
   position: relative;
+
+  flex: 0 0 100%;
+  width: 100%;
+
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(280px, .45fr);
+
   min-height: 620px;
-  width: 100%;
+
   overflow: hidden;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 
   border: 1px solid rgba(255,255,255,.07);
   border-radius: 24px;
 
-  /*
-   * Clean product gallery.
-   * No coloured orb behind the hardware.
-   */
   background: #0a0d12;
 
   box-shadow:
@@ -623,6 +661,7 @@ h1 span {
 
 .product-visual {
   position: relative;
+
   min-height: 620px;
 
   display: flex;
@@ -635,11 +674,6 @@ h1 span {
 
   background: #0a0d12;
 }
-
-/*
- * No artificial radial glow.
- * The product itself is the visual.
- */
 
 /* =========================================================
    PRODUCT IMAGE
@@ -658,7 +692,7 @@ h1 span {
   display: block;
 
   /*
-   * Important for the current white-background images.
+   * Source files remain completely untouched.
    */
   mix-blend-mode: normal;
 
@@ -680,12 +714,6 @@ h1 span {
   background: transparent;
 }
 
-/*
- * Keep the four products visually close in scale.
- * The source images themselves have different internal framing,
- * so this gives us a consistent starting point.
- */
-
 .product-pro .product-image,
 .product-digital .product-image,
 .product-disc .product-image,
@@ -699,6 +727,143 @@ h1 span {
 .product-disc:hover .product-image,
 .product-slim:hover .product-image {
   transform: scale(.95);
+}
+
+/* =========================================================
+   PRODUCT NAVIGATOR
+   ========================================================= */
+
+.product-navigator {
+  width: 100%;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.product-navigator-track {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-navigator-track::-webkit-scrollbar {
+  display: none;
+}
+
+.product-nav-item {
+  flex: 0 0 auto;
+
+  min-height: 34px;
+  padding: 0 11px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.018);
+
+  color: #657183;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .05em;
+
+  white-space: nowrap;
+
+  transition:
+    color .2s ease,
+    border-color .2s ease,
+    background .2s ease;
+}
+
+.product-nav-item:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,.16);
+}
+
+.product-nav-item.is-active {
+  color: var(--text);
+  border-color: rgba(45,140,255,.55);
+  background: rgba(45,140,255,.08);
+}
+
+.product-nav-dot {
+  width: 5px;
+  height: 5px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #465263;
+
+  transition:
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.product-nav-item.is-active .product-nav-dot {
+  background: var(--blue);
+  box-shadow: 0 0 8px rgba(45,140,255,.7);
+}
+
+/* =========================================================
+   PRODUCT ARROWS
+   ========================================================= */
+
+.product-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 8;
+
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+
+  background: rgba(6,8,12,.72);
+  backdrop-filter: blur(10px);
+
+  color: #c8d2df;
+
+  transform: translateY(-50%);
+
+  transition:
+    opacity .2s ease,
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.product-carousel-arrow:hover:not(:disabled) {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(105,231,255,.38);
+  color: white;
+}
+
+.product-carousel-arrow:disabled {
+  opacity: .22;
+  cursor: default;
+}
+
+.product-carousel-arrow-left {
+  left: 18px;
+}
+
+.product-carousel-arrow-right {
+  right: 18px;
 }
 
 /* =========================================================
@@ -817,6 +982,45 @@ h1 span {
   font-size: 8px;
   line-height: 1.4;
   letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   CAROUSEL HINT
+   ========================================================= */
+
+.product-carousel-hint {
+  min-height: 34px;
+
+  margin-top: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #566274;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-carousel-hint-line {
+  width: 28px;
+  height: 1px;
+  background: rgba(177,205,234,.18);
+}
+
+.product-carousel-hint small {
+  margin-left: 5px;
+
+  color: #4e5b6c;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .1em;
   text-transform: uppercase;
 }
 
@@ -1119,10 +1323,6 @@ fieldset {
     margin-top: 10px;
   }
 
-  .product-grid {
-    gap: 18px;
-  }
-
   .tier-grid,
   .service-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1345,32 +1545,118 @@ fieldset {
   }
 
   /* =======================================================
-     MOBILE PRODUCT GALLERY
+     MOBILE PRODUCT NAVIGATOR
      ======================================================= */
+
+  .product-navigator {
+    margin-bottom: 12px;
+  }
+
+  .product-navigator-track {
+    gap: 7px;
+
+    padding-right: 20px;
+
+    scroll-snap-type: x proximity;
+  }
+
+  .product-nav-item {
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 8px;
+  }
+
+  /* =======================================================
+     MOBILE PRODUCT CAROUSEL
+     ======================================================= */
+
+  .product-carousel {
+    width: 100%;
+  }
 
   .product-grid {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    gap: 0;
+
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+
+    padding: 0;
+
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
 
+  .product-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /*
+   * EXACTLY ONE PRODUCT PER SCREEN.
+   *
+   * Every card has the same width, so swiping from
+   * product 1 -> 2 -> 3 -> 4 keeps the product stage
+   * in exactly the same position.
+   */
+
   .product-card {
+    flex: 0 0 100%;
+    width: 100%;
+
     display: flex;
     flex-direction: column;
+
     min-height: 0;
+
     border-radius: 20px;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
+
+  /* =======================================================
+     MOBILE PRODUCT IMAGE STAGE
+     ======================================================= */
 
   .product-visual {
     min-height: 420px;
     height: 420px;
+
+    flex: 0 0 420px;
+
     padding: 25px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: #0a0d12;
   }
+
+  /*
+   * Same image box for every product.
+   * The actual image files are not edited or generated.
+   */
 
   .product-image {
     width: 100%;
     height: 370px;
+
+    object-fit: contain;
+    object-position: center;
+
+    display: block;
+
+    transform: scale(.92);
   }
 
   .product-pro .product-image,
@@ -1388,9 +1674,15 @@ fieldset {
     transform: scale(.92);
   }
 
+  /* =======================================================
+     MOBILE PRODUCT INFORMATION
+     ======================================================= */
+
   .product-info {
     padding: 28px 24px 86px;
+
     display: flex;
+
     min-height: 0;
   }
 
@@ -1414,13 +1706,45 @@ fieldset {
     left: 24px;
     right: 24px;
     bottom: 22px;
+
     justify-content: center;
   }
 
-  .product-trade-note {
-    margin: -5px 14px 14px;
+  /* =======================================================
+     MOBILE ARROWS
+     ======================================================= */
+
+  .product-carousel-arrow {
+    width: 38px;
+    height: 38px;
+
+    background: rgba(6,8,12,.62);
+
+    backdrop-filter: blur(8px);
+  }
+
+  .product-carousel-arrow-left {
+    left: 10px;
+  }
+
+  .product-carousel-arrow-right {
+    right: 10px;
+  }
+
+  /* =======================================================
+     MOBILE CAROUSEL HINT
+     ======================================================= */
+
+  .product-carousel-hint {
+    margin-top: 10px;
+
+    min-height: 28px;
+
+    font-size: 8px;
+  }
+
+  .product-carousel-hint small {
     font-size: 7px;
-    line-height: 1.35;
   }
 
   /* =======================================================
@@ -1840,10 +2164,6 @@ fieldset {
   border: 1px solid rgba(177,205,234,.075);
   border-radius: 30px;
 
-  /*
-   * The slide is now an environment rather than a glass card.
-   * The product gets the visual priority.
-   */
   background:
     radial-gradient(
       circle at 35% 50%,
@@ -2706,11 +3026,6 @@ fieldset {
     scroll-padding-inline: 16px;
   }
 
-  /*
-   * Mobile becomes a large product poster.
-   * Image gets most of the screen.
-   */
-
   .creators-page .creator-product-slide {
     flex: 0 0 calc(100vw - 32px);
     min-height: 700px;
@@ -2718,8 +3033,6 @@ fieldset {
     flex-direction: column;
     border-radius: 20px;
   }
-
-  /* PRODUCT SCENE */
 
   .creators-page .creator-product-scene {
     flex: 1 1 auto;
@@ -2770,8 +3083,6 @@ fieldset {
     width: 94%;
   }
 
-  /* DETAILS */
-
   .creators-page .creator-product-details {
     flex: 0 0 auto;
     padding: 20px 21px 22px;
@@ -2819,8 +3130,6 @@ fieldset {
     font-size: 10px;
   }
 
-  /* PROGRESS */
-
   .creators-page .creator-showcase-bottom {
     padding: 0 20px;
   }
@@ -2841,8 +3150,6 @@ fieldset {
   .creators-page .creator-product-dot.is-active {
     width: 25px;
   }
-
-  /* BENEFITS */
 
   .creators-page .creator-benefits {
     padding: 58px 20px 62px;
@@ -2871,8 +3178,6 @@ fieldset {
     font-size: 10px;
     line-height: 1.3;
   }
-
-  /* CONTACT */
 
   .creators-page .creator-contact {
     padding: 54px 20px 60px;
@@ -2925,6 +3230,10 @@ fieldset {
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
+  .product-grid {
+    scroll-behavior: auto;
+  }
 
   .creators-page .creator-showcase-track {
     scroll-behavior: auto;
