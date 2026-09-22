@@ -1714,39 +1714,55 @@ fieldset {
 
 /* =========================================================
    PRODUCT SLIDE
+   APPLE-STYLE PRODUCT STAGE
    ========================================================= */
 
 .creators-page .creator-product-slide {
   position: relative;
-  flex: 0 0 min(91vw, 1190px);
-  min-height: min(72svh, 760px);
+  flex: 0 0 min(93vw, 1240px);
+  min-height: min(76svh, 820px);
   scroll-snap-align: center;
   scroll-snap-stop: always;
   overflow: hidden;
+
   display: grid;
-  grid-template-columns: 1.18fr .82fr;
-  border: 1px solid rgba(177,205,234,.10);
-  border-radius: 28px;
+  grid-template-columns: 1.48fr .52fr;
+
+  border: 1px solid rgba(177,205,234,.075);
+  border-radius: 30px;
+
+  /*
+   * The slide is now an environment rather than a glass card.
+   * The product gets the visual priority.
+   */
   background:
     radial-gradient(
-      circle at 35% 45%,
-      rgba(45,140,255,.09),
-      transparent 34%
+      circle at 35% 50%,
+      rgba(45,140,255,.10),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 82% 25%,
+      rgba(105,231,255,.025),
+      transparent 32%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.008)
+      rgba(255,255,255,.026),
+      rgba(255,255,255,.004)
     );
+
   box-shadow:
-    0 38px 110px rgba(0,0,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.035);
+    0 50px 130px rgba(0,0,0,.32),
+    inset 0 1px 0 rgba(255,255,255,.025);
+
   isolation: isolate;
 }
 
-/* =========================================================
-   PRODUCT ENVIRONMENTS
-   ========================================================= */
+/*
+ * Very subtle surface treatment.
+ * Kept intentionally quiet so the hardware remains the focus.
+ */
 
 .creators-page .creator-product-slide::before {
   content: '';
@@ -1754,232 +1770,233 @@ fieldset {
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  opacity: .9;
+  opacity: .7;
   background:
     linear-gradient(
       115deg,
-      rgba(255,255,255,.035),
-      transparent 30%,
-      transparent 70%,
-      rgba(255,255,255,.012)
+      rgba(255,255,255,.025),
+      transparent 28%,
+      transparent 72%,
+      rgba(255,255,255,.008)
     );
 }
+
+/*
+ * Large environmental glow behind the product.
+ */
 
 .creators-page .creator-product-slide::after {
   content: '';
   position: absolute;
   z-index: -1;
   pointer-events: none;
-  width: 65%;
-  height: 120%;
-  left: -8%;
-  top: -10%;
+  width: 72%;
+  height: 125%;
+  left: -13%;
+  top: -12%;
   border-radius: 50%;
-  filter: blur(60px);
-  opacity: .34;
+  filter: blur(75px);
+  opacity: .28;
 }
 
-/* PRO */
+/* =========================================================
+   PRODUCT ENVIRONMENTS
+   ========================================================= */
 
 .creators-page .creator-product-slide.product-pro {
   background:
     radial-gradient(
-      circle at 31% 48%,
-      rgba(45,140,255,.17),
-      transparent 37%
+      circle at 34% 48%,
+      rgba(45,140,255,.13),
+      transparent 39%
     ),
     radial-gradient(
-      circle at 73% 30%,
-      rgba(45,140,255,.045),
-      transparent 30%
+      circle at 83% 25%,
+      rgba(45,140,255,.035),
+      transparent 32%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.055),
-      rgba(255,255,255,.008)
+      rgba(255,255,255,.028),
+      rgba(255,255,255,.004)
     );
 }
 
 .creators-page .creator-product-slide.product-pro::after {
-  background: radial-gradient(
-    circle,
-    rgba(45,140,255,.24),
-    transparent 65%
-  );
+  background:
+    radial-gradient(
+      circle,
+      rgba(45,140,255,.22),
+      transparent 67%
+    );
 }
-
-/* DIGITAL */
 
 .creators-page .creator-product-slide.product-digital {
   background:
     radial-gradient(
-      circle at 32% 47%,
-      rgba(105,231,255,.13),
-      transparent 37%
+      circle at 34% 48%,
+      rgba(105,231,255,.10),
+      transparent 39%
     ),
     radial-gradient(
-      circle at 75% 22%,
-      rgba(45,140,255,.04),
-      transparent 28%
+      circle at 83% 25%,
+      rgba(45,140,255,.025),
+      transparent 32%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.008)
+      rgba(255,255,255,.024),
+      rgba(255,255,255,.004)
     );
 }
 
 .creators-page .creator-product-slide.product-digital::after {
-  background: radial-gradient(
-    circle,
-    rgba(105,231,255,.20),
-    transparent 65%
-  );
+  background:
+    radial-gradient(
+      circle,
+      rgba(105,231,255,.17),
+      transparent 67%
+    );
 }
-
-/* DISC */
 
 .creators-page .creator-product-slide.product-disc {
   background:
     radial-gradient(
-      circle at 32% 47%,
-      rgba(126,101,255,.15),
-      transparent 37%
+      circle at 34% 48%,
+      rgba(126,101,255,.11),
+      transparent 39%
     ),
     radial-gradient(
-      circle at 75% 25%,
-      rgba(105,231,255,.035),
-      transparent 28%
+      circle at 83% 25%,
+      rgba(105,231,255,.025),
+      transparent 32%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.008)
+      rgba(255,255,255,.024),
+      rgba(255,255,255,.004)
     );
 }
 
 .creators-page .creator-product-slide.product-disc::after {
-  background: radial-gradient(
-    circle,
-    rgba(126,101,255,.20),
-    transparent 65%
-  );
+  background:
+    radial-gradient(
+      circle,
+      rgba(126,101,255,.17),
+      transparent 67%
+    );
 }
-
-/* SLIM DISC */
 
 .creators-page .creator-product-slide.product-slimDisc {
   background:
     radial-gradient(
-      circle at 31% 48%,
-      rgba(45,140,255,.13),
-      transparent 37%
+      circle at 34% 48%,
+      rgba(45,140,255,.10),
+      transparent 39%
     ),
     radial-gradient(
-      circle at 74% 28%,
-      rgba(105,231,255,.035),
-      transparent 28%
+      circle at 83% 25%,
+      rgba(105,231,255,.025),
+      transparent 32%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.008)
+      rgba(255,255,255,.024),
+      rgba(255,255,255,.004)
     );
 }
 
 .creators-page .creator-product-slide.product-slimDisc::after {
-  background: radial-gradient(
-    circle,
-    rgba(45,140,255,.18),
-    transparent 65%
-  );
+  background:
+    radial-gradient(
+      circle,
+      rgba(45,140,255,.17),
+      transparent 67%
+    );
 }
-
-/* SLIM DIGITAL */
 
 .creators-page .creator-product-slide.product-slimDigital {
   background:
     radial-gradient(
-      circle at 31% 48%,
-      rgba(105,231,255,.10),
-      transparent 37%
+      circle at 34% 48%,
+      rgba(105,231,255,.075),
+      transparent 39%
     ),
     radial-gradient(
-      circle at 76% 24%,
-      rgba(45,140,255,.035),
-      transparent 28%
+      circle at 83% 25%,
+      rgba(45,140,255,.025),
+      transparent 32%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.043),
-      rgba(255,255,255,.008)
+      rgba(255,255,255,.022),
+      rgba(255,255,255,.004)
     );
 }
 
 .creators-page .creator-product-slide.product-slimDigital::after {
-  background: radial-gradient(
-    circle,
-    rgba(105,231,255,.16),
-    transparent 65%
-  );
+  background:
+    radial-gradient(
+      circle,
+      rgba(105,231,255,.14),
+      transparent 67%
+    );
 }
-
-/* DISC DRIVE */
 
 .creators-page .creator-product-slide.product-discDrive {
   background:
     radial-gradient(
-      circle at 32% 48%,
-      rgba(105,231,255,.075),
-      transparent 34%
+      circle at 34% 48%,
+      rgba(105,231,255,.055),
+      transparent 37%
     ),
     radial-gradient(
-      circle at 72% 27%,
-      rgba(45,140,255,.035),
-      transparent 26%
+      circle at 82% 25%,
+      rgba(45,140,255,.025),
+      transparent 31%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.04),
-      rgba(255,255,255,.007)
+      rgba(255,255,255,.021),
+      rgba(255,255,255,.004)
     );
 }
 
 .creators-page .creator-product-slide.product-discDrive::after {
-  background: radial-gradient(
-    circle,
-    rgba(105,231,255,.14),
-    transparent 65%
-  );
+  background:
+    radial-gradient(
+      circle,
+      rgba(105,231,255,.12),
+      transparent 67%
+    );
 }
-
-/* CONTROLLER */
 
 .creators-page .creator-product-slide.product-controller {
   background:
     radial-gradient(
-      circle at 33% 47%,
-      rgba(105,231,255,.085),
-      transparent 35%
+      circle at 34% 48%,
+      rgba(105,231,255,.065),
+      transparent 38%
     ),
     radial-gradient(
-      circle at 74% 24%,
-      rgba(45,140,255,.035),
-      transparent 27%
+      circle at 82% 25%,
+      rgba(45,140,255,.025),
+      transparent 31%
     ),
     linear-gradient(
       145deg,
-      rgba(255,255,255,.04),
-      rgba(255,255,255,.007)
+      rgba(255,255,255,.021),
+      rgba(255,255,255,.004)
     );
 }
 
 .creators-page .creator-product-slide.product-controller::after {
-  background: radial-gradient(
-    circle,
-    rgba(105,231,255,.15),
-    transparent 65%
-  );
+  background:
+    radial-gradient(
+      circle,
+      rgba(105,231,255,.13),
+      transparent 67%
+    );
 }
 
 /* =========================================================
@@ -1996,69 +2013,80 @@ fieldset {
   isolation: isolate;
 }
 
+/*
+ * Central ambient light.
+ * Deliberately softer than the old version.
+ */
+
 .creators-page .creator-product-scene::before {
   content: '';
   position: absolute;
-  width: 72%;
-  height: 72%;
+  width: 76%;
+  height: 76%;
   border-radius: 50%;
   background:
     radial-gradient(
       circle,
-      rgba(45,140,255,.13),
-      rgba(45,140,255,.035) 42%,
-      transparent 70%
+      rgba(45,140,255,.12),
+      rgba(45,140,255,.025) 45%,
+      transparent 72%
     );
-  filter: blur(22px);
+  filter: blur(28px);
   pointer-events: none;
 }
+
+/*
+ * Ground shadow.
+ */
 
 .creators-page .creator-product-scene::after {
   content: '';
   position: absolute;
-  left: 15%;
-  right: 15%;
-  bottom: 9%;
-  height: 15%;
+  left: 10%;
+  right: 10%;
+  bottom: 7%;
+  height: 17%;
   border-radius: 50%;
   background:
     radial-gradient(
       ellipse,
-      rgba(0,0,0,.55),
-      rgba(0,0,0,.18) 45%,
-      transparent 72%
+      rgba(0,0,0,.68),
+      rgba(0,0,0,.20) 46%,
+      transparent 73%
     );
-  filter: blur(15px);
+  filter: blur(18px);
   pointer-events: none;
 }
 
+/* Ambient breathing light */
+
 .creators-page .creator-product-glow {
   position: absolute;
-  width: 58%;
+  width: 66%;
   aspect-ratio: 1;
   border-radius: 50%;
   background:
     radial-gradient(
       circle,
-      rgba(105,231,255,.10),
-      rgba(45,140,255,.035) 42%,
-      transparent 70%
+      rgba(105,231,255,.075),
+      rgba(45,140,255,.025) 43%,
+      transparent 71%
     );
-  filter: blur(14px);
+  filter: blur(18px);
   pointer-events: none;
-  animation: creator-product-breathe 5s ease-in-out infinite;
+  animation: creator-product-breathe 6s ease-in-out infinite;
 }
 
 @keyframes creator-product-breathe {
   0%,
   100% {
     transform: scale(.96);
-    opacity: .72;
+    opacity: .68;
   }
 
   50% {
     transform: scale(1.04);
-    opacity: 1;
+    opacity: .95;
   }
 }
 
@@ -2074,74 +2102,123 @@ fieldset {
   font-variant-numeric: tabular-nums;
 }
 
+/* =========================================================
+   PRODUCT IMAGE
+   ========================================================= */
+
+/*
+ * IMPORTANT:
+ *
+ * The old creator image used:
+ *     mix-blend-mode: screen;
+ *
+ * That is great for transparent/light assets,
+ * but it fights the current white-background product images.
+ *
+ * We intentionally remove it here.
+ *
+ * Current white-background assets therefore appear as a clean
+ * product presentation stage.
+ *
+ * Later, transparent renders can simply be dropped in.
+ */
+
 .creators-page .creator-product-image {
   position: relative;
   z-index: 2;
-  width: 90%;
-  height: 82%;
-  max-height: 625px;
+
+  /*
+   * Much larger visual presence.
+   */
+  width: 96%;
+  height: 91%;
+  max-height: 700px;
+
   object-fit: contain;
   object-position: center;
+
   display: block;
-  mix-blend-mode: screen;
+
+  mix-blend-mode: normal;
+
   filter:
-    contrast(1.04)
-    saturate(.96)
+    contrast(1.025)
+    saturate(.97)
     brightness(1.01)
-    drop-shadow(0 38px 55px rgba(0,0,0,.34))
-    drop-shadow(0 0 18px rgba(45,140,255,.055));
+    drop-shadow(0 42px 65px rgba(0,0,0,.36))
+    drop-shadow(0 0 20px rgba(45,140,255,.045));
+
   user-select: none;
   -webkit-user-drag: none;
+
   transition:
-    transform .65s cubic-bezier(.2,.7,.2,1),
-    filter .65s ease;
+    transform .7s cubic-bezier(.2,.7,.2,1),
+    filter .7s ease;
 }
+
+/*
+ * Very restrained hover movement.
+ * The product should feel physical, not animated.
+ */
 
 .creators-page .creator-product-slide:hover .creator-product-image {
-  transform: scale(1.025) translateY(-3px);
+  transform: scale(1.018) translateY(-4px);
+
   filter:
-    contrast(1.05)
+    contrast(1.035)
     saturate(1)
     brightness(1.015)
-    drop-shadow(0 45px 68px rgba(0,0,0,.40))
-    drop-shadow(0 0 22px rgba(45,140,255,.075));
+    drop-shadow(0 50px 75px rgba(0,0,0,.42))
+    drop-shadow(0 0 25px rgba(45,140,255,.065));
 }
 
-/* Product-specific image scale */
+/* =========================================================
+   PRODUCT-SPECIFIC IMAGE SCALE
+   ========================================================= */
 
 .creators-page .product-pro .creator-product-image {
-  width: 91%;
+  width: 97%;
 }
 
 .creators-page .product-digital .creator-product-image {
-  width: 89%;
+  width: 95%;
 }
 
 .creators-page .product-slimDisc .creator-product-image {
-  width: 90%;
+  width: 96%;
 }
 
 .creators-page .product-slimDigital .creator-product-image {
-  width: 89%;
+  width: 95%;
 }
 
 .creators-page .product-discDrive .creator-product-image {
-  width: 76%;
+  width: 83%;
 }
 
 .creators-page .product-controller .creator-product-image {
-  width: 86%;
+  width: 92%;
 }
 
 /* =========================================================
    PRODUCT INFORMATION
    ========================================================= */
 
+/*
+ * Information is intentionally pushed back.
+ *
+ * Product first.
+ * Name second.
+ * Price / action third.
+ */
+
 .creators-page .creator-product-details {
   position: relative;
   z-index: 3;
   min-width: 0;
-  padding: 48px 55px 48px 18px;
+
+  padding: 55px 48px 55px 10px;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -2150,33 +2227,45 @@ fieldset {
 
 .creators-page .creator-product-category {
   color: var(--cyan);
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 800;
-  letter-spacing: .2em;
+  letter-spacing: .22em;
+  opacity: .85;
 }
 
 .creators-page .creator-product-details h3 {
-  max-width: 450px;
-  margin-top: 15px;
-  font-size: clamp(36px, 4vw, 62px);
-  line-height: .94;
-  letter-spacing: -.065em;
+  max-width: 430px;
+  margin-top: 13px;
+
+  font-size: clamp(35px, 3.7vw, 58px);
+  line-height: .92;
+  letter-spacing: -.07em;
 }
 
+/*
+ * Description is quieter and smaller.
+ */
+
 .creators-page .creator-product-note {
-  max-width: 350px;
-  margin-top: 17px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.55;
+  max-width: 315px;
+  margin-top: 15px;
+
+  color: #778394;
+  font-size: 11px;
+  line-height: 1.5;
 }
+
+/*
+ * Purchase area is deliberately minimal.
+ */
 
 .creators-page .creator-product-purchase {
   width: 100%;
-  max-width: 390px;
-  margin-top: 38px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(177,205,234,.1);
+  max-width: 360px;
+  margin-top: 32px;
+  padding-top: 19px;
+
+  border-top: 1px solid rgba(177,205,234,.085);
 }
 
 .creators-page .creator-product-price-row {
@@ -2188,25 +2277,26 @@ fieldset {
 
 .creators-page .creator-product-price-label {
   color: #687587;
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 800;
-  letter-spacing: .12em;
+  letter-spacing: .14em;
   text-transform: uppercase;
 }
 
 .creators-page .creator-product-price {
   display: block;
-  margin-top: 6px;
+  margin-top: 5px;
+
   color: var(--text);
-  font-size: 29px;
+  font-size: 28px;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -.045em;
+  letter-spacing: -.05em;
 }
 
 .creators-page .creator-product-old-price {
   color: #5d6979;
-  font-size: 10px;
+  font-size: 9px;
   white-space: nowrap;
 }
 
@@ -2214,31 +2304,42 @@ fieldset {
   text-decoration-color: rgba(255,255,255,.25);
 }
 
+/* =========================================================
+   PRODUCT CTA
+   ========================================================= */
+
 .creators-page .creator-buy-button {
   width: 100%;
-  min-height: 50px;
-  margin-top: 18px;
-  padding: 0 18px;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 0 17px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  border: 1px solid rgba(45,140,255,.55);
-  border-radius: 10px;
+
+  border: 1px solid rgba(45,140,255,.52);
+  border-radius: 9px;
+
   background:
     linear-gradient(
       135deg,
       rgba(45,140,255,.95),
       rgba(35,111,220,.95)
     );
+
   color: white;
   text-decoration: none;
-  font-size: 11px;
+
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: .02em;
+
   box-shadow:
-    0 12px 35px rgba(45,140,255,.14),
+    0 12px 35px rgba(45,140,255,.12),
     inset 0 1px 0 rgba(255,255,255,.13);
+
   transition:
     transform .2s ease,
     box-shadow .2s ease,
@@ -2247,14 +2348,16 @@ fieldset {
 
 .creators-page .creator-buy-button:hover {
   transform: translateY(-2px);
+
   background:
     linear-gradient(
       135deg,
       #55a4ff,
       #2d8cff
     );
+
   box-shadow:
-    0 16px 42px rgba(45,140,255,.22),
+    0 16px 42px rgba(45,140,255,.20),
     inset 0 1px 0 rgba(255,255,255,.15);
 }
 
@@ -2413,28 +2516,28 @@ fieldset {
   }
 
   .creators-page .creator-product-slide {
-    grid-template-columns: 1fr .82fr;
-    min-height: 650px;
+    grid-template-columns: 1.35fr .65fr;
+    min-height: 680px;
   }
 
   .creators-page .creator-product-image {
-    width: 91%;
-    height: 72%;
+    width: 95%;
+    height: 82%;
   }
 
   .creators-page .product-pro .creator-product-image,
   .creators-page .product-digital .creator-product-image,
   .creators-page .product-slimDisc .creator-product-image,
   .creators-page .product-slimDigital .creator-product-image {
-    width: 92%;
+    width: 96%;
   }
 
   .creators-page .product-discDrive .creator-product-image {
-    width: 78%;
+    width: 81%;
   }
 
   .creators-page .product-controller .creator-product-image {
-    width: 88%;
+    width: 91%;
   }
 
   .creators-page .creator-product-details {
@@ -2444,7 +2547,7 @@ fieldset {
   .creators-page .creator-product-details h3 {
     font-size: clamp(32px, 5vw, 48px);
   }
-
+  
   .creators-page .creator-benefits .service-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2555,9 +2658,14 @@ fieldset {
     scroll-padding-inline: 16px;
   }
 
+  /*
+   * Mobile becomes a large product poster.
+   * Image gets most of the screen.
+   */
+
   .creators-page .creator-product-slide {
     flex: 0 0 calc(100vw - 32px);
-    min-height: 680px;
+    min-height: 700px;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
@@ -2567,7 +2675,7 @@ fieldset {
 
   .creators-page .creator-product-scene {
     flex: 1 1 auto;
-    min-height: 390px;
+    min-height: 445px;
   }
 
   .creators-page .creator-product-number {
@@ -2577,48 +2685,48 @@ fieldset {
   }
 
   .creators-page .creator-product-scene::before {
-    width: 95%;
-    height: 90%;
+    width: 105%;
+    height: 95%;
   }
 
   .creators-page .creator-product-scene::after {
-    left: 12%;
-    right: 12%;
-    bottom: 7%;
-    height: 14%;
-    filter: blur(12px);
+    left: 8%;
+    right: 8%;
+    bottom: 6%;
+    height: 15%;
+    filter: blur(14px);
   }
 
   .creators-page .creator-product-glow {
-    width: 75%;
+    width: 82%;
   }
 
   .creators-page .creator-product-image {
-    width: 94%;
-    height: 82%;
-    max-height: 380px;
+    width: 98%;
+    height: 91%;
+    max-height: 435px;
   }
 
   .creators-page .product-pro .creator-product-image,
   .creators-page .product-digital .creator-product-image,
   .creators-page .product-slimDisc .creator-product-image,
   .creators-page .product-slimDigital .creator-product-image {
-    width: 94%;
+    width: 98%;
   }
 
   .creators-page .product-discDrive .creator-product-image {
-    width: 80%;
+    width: 84%;
   }
 
   .creators-page .product-controller .creator-product-image {
-    width: 90%;
+    width: 94%;
   }
 
   /* DETAILS */
 
   .creators-page .creator-product-details {
     flex: 0 0 auto;
-    padding: 22px 21px 22px;
+    padding: 20px 21px 22px;
   }
 
   .creators-page .creator-product-category {
@@ -2627,21 +2735,21 @@ fieldset {
 
   .creators-page .creator-product-details h3 {
     max-width: 310px;
-    margin-top: 10px;
+    margin-top: 9px;
     font-size: clamp(32px, 10vw, 45px);
   }
 
   .creators-page .creator-product-note {
     max-width: 280px;
-    margin-top: 11px;
+    margin-top: 10px;
     font-size: 10px;
     line-height: 1.45;
   }
 
   .creators-page .creator-product-purchase {
     max-width: none;
-    margin-top: 21px;
-    padding-top: 17px;
+    margin-top: 19px;
+    padding-top: 16px;
   }
 
   .creators-page .creator-product-price-label {
@@ -2658,7 +2766,7 @@ fieldset {
 
   .creators-page .creator-buy-button {
     min-height: 48px;
-    margin-top: 14px;
+    margin-top: 13px;
     border-radius: 9px;
     font-size: 10px;
   }
@@ -2744,15 +2852,15 @@ fieldset {
 @media (max-width: 390px) {
 
   .creators-page .creator-product-slide {
-    min-height: 650px;
+    min-height: 675px;
   }
 
   .creators-page .creator-product-scene {
-    min-height: 365px;
+    min-height: 425px;
   }
 
   .creators-page .creator-product-image {
-    max-height: 350px;
+    max-height: 410px;
   }
 
   .creators-page .creator-product-details h3 {
