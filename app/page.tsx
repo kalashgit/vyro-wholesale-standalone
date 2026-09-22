@@ -42,7 +42,7 @@ const products = [
     greekNote: 'Ψηφιακή εμπειρία νέας γενιάς',
     link: stripeLinks.digital,
     tone: 'digital',
-    image: '/images/ps5-digital.png',
+    image: '/images/ps5-digital.PNG',
   },
   {
     key: 'slimDisc',
@@ -53,7 +53,7 @@ const products = [
     greekNote: 'Λεπτή έκδοση με drive',
     link: stripeLinks.slimDisc,
     tone: 'disc',
-    image: '/images/ps5-slim-disc.png',
+    image: '/images/ps5-slim-disc.PNG',
   },
   {
     key: 'slimDigital',
