@@ -1,8 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { FormEvent, useEffect, useMemo, useState } from 'react'
 import {
+  FormEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import {
+  ArrowLeft,
   ArrowRight,
   Check,
   Globe2,
@@ -123,6 +130,8 @@ export default function Page() {
   const [error, setError] = useState('')
   const [activeProduct, setActiveProduct] = useState(products[0].key)
 
+  const productTrackRef = useRef<HTMLDivElement>(null)
+
   const [form, setForm] = useState<FormState>({
     business: '',
     contact: '',
@@ -149,46 +158,34 @@ export default function Page() {
     return () => clearInterval(interval)
   }, [offerEnd])
 
+  /*
+   * Keep the active product synchronized with horizontal scrolling.
+   */
   useEffect(() => {
-    const productElements = products
-      .map((product) =>
-        document.getElementById(`product-${product.key}`)
-      )
-      .filter(Boolean) as HTMLElement[]
+    const track = productTrackRef.current
 
-    if (!productElements.length) return
+    if (!track) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              b.intersectionRatio - a.intersectionRatio
-          )
+    const handleScroll = () => {
+      const width = track.clientWidth
 
-        if (visibleEntries[0]) {
-          const key =
-            visibleEntries[0].target.getAttribute(
-              'data-product-key'
-            )
+      if (!width) return
 
-          if (key) {
-            setActiveProduct(key)
-          }
-        }
-      },
-      {
-        threshold: [0.25, 0.5, 0.75],
-        rootMargin: '-20% 0px -20% 0px',
+      const index = Math.round(track.scrollLeft / width)
+      const product = products[index]
+
+      if (product) {
+        setActiveProduct(product.key)
       }
-    )
+    }
 
-    productElements.forEach((element) =>
-      observer.observe(element)
-    )
+    track.addEventListener('scroll', handleScroll, {
+      passive: true,
+    })
 
-    return () => observer.disconnect()
+    return () => {
+      track.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   const countdown = useMemo(() => {
@@ -425,6 +422,24 @@ export default function Page() {
     setSubmitted(false)
   }
 
+  function goToProduct(index: number) {
+    const track = productTrackRef.current
+
+    if (!track) return
+
+    const safeIndex = Math.max(
+      0,
+      Math.min(index, products.length - 1)
+    )
+
+    track.scrollTo({
+      left: safeIndex * track.clientWidth,
+      behavior: 'smooth',
+    })
+
+    setActiveProduct(products[safeIndex].key)
+  }
+
   function submitInquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -487,6 +502,10 @@ export default function Page() {
     setSubmitted(true)
     setError('')
   }
+
+  const activeProductIndex = products.findIndex(
+    (product) => product.key === activeProduct
+  )
 
   return (
     <main className="site-shell">
@@ -712,18 +731,14 @@ export default function Page() {
                     : 'product-nav-item'
                 }
                 type="button"
-                onClick={() => {
-                  document
-                    .getElementById(
-                      `product-${product.key}`
+                onClick={() =>
+                  goToProduct(
+                    products.findIndex(
+                      (item) =>
+                        item.key === product.key
                     )
-                    ?.scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'start',
-                    })
-
-                  setActiveProduct(product.key)
-                }}
+                  )
+                }
                 aria-current={
                   activeProduct === product.key
                     ? 'true'
@@ -742,54 +757,97 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="product-grid">
-          {products.map((product) => (
-            <article
-              id={`product-${product.key}`}
-              data-product-key={product.key}
-              className={`product-card product-${product.tone}`}
-              key={product.key}
-            >
-              <div className="product-visual">
-                <img
-                  className="product-image"
-                  src={product.image}
-                  alt={`${product.name} console and controller`}
-                />
-              </div>
+        <div className="product-carousel">
+          <button
+            className="product-carousel-arrow product-carousel-arrow-left"
+            type="button"
+            onClick={() =>
+              goToProduct(activeProductIndex - 1)
+            }
+            disabled={activeProductIndex <= 0}
+            aria-label="Previous product"
+          >
+            <ArrowLeft size={18} />
+          </button>
 
-              <div className="product-info">
-                <div>
-                  <h3>
-                    {isGreek
-                      ? product.greek
-                      : product.name}
-                  </h3>
-
-                  <p>
-                    {isGreek
-                      ? product.greekNote
-                      : product.note}
-                  </p>
-                </div>
-
-                <div className="price">
-                  <small>{copy.exVat}</small>
-                  <strong>{product.price}</strong>
-                </div>
-              </div>
-
-              <a
-                className="product-link"
-                href={product.link}
-                target="_blank"
-                rel="noreferrer"
+          <div
+            ref={productTrackRef}
+            className="product-grid"
+          >
+            {products.map((product) => (
+              <article
+                className={`product-card product-${product.tone}`}
+                key={product.key}
               >
-                {copy.buy}
-                <ArrowRight size={15} />
-              </a>
-            </article>
-          ))}
+                <div className="product-visual">
+                  <img
+                    className="product-image"
+                    src={product.image}
+                    alt={`${product.name} console and controller`}
+                    draggable={false}
+                  />
+                </div>
+
+                <div className="product-info">
+                  <div>
+                    <h3>
+                      {isGreek
+                        ? product.greek
+                        : product.name}
+                    </h3>
+
+                    <p>
+                      {isGreek
+                        ? product.greekNote
+                        : product.note}
+                    </p>
+                  </div>
+
+                  <div className="price">
+                    <small>{copy.exVat}</small>
+                    <strong>{product.price}</strong>
+                  </div>
+                </div>
+
+                <a
+                  className="product-link"
+                  href={product.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {copy.buy}
+                  <ArrowRight size={15} />
+                </a>
+              </article>
+            ))}
+          </div>
+
+          <button
+            className="product-carousel-arrow product-carousel-arrow-right"
+            type="button"
+            onClick={() =>
+              goToProduct(activeProductIndex + 1)
+            }
+            disabled={
+              activeProductIndex >= products.length - 1
+            }
+            aria-label="Next product"
+          >
+            <ArrowRight size={18} />
+          </button>
+        </div>
+
+        <div className="product-carousel-hint">
+          <span>
+            {activeProductIndex + 1}
+          </span>
+          <span className="product-carousel-hint-line" />
+          <span>
+            {products.length}
+          </span>
+          <small>
+            Swipe to explore
+          </small>
         </div>
       </section>
 
