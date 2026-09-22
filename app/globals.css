@@ -583,14 +583,6 @@ h1 span {
    PRODUCTS
    ========================================================= */
 
-/*
- * HORIZONTAL PRODUCT TRACK
- *
- * One product occupies the stage at a time.
- * Mobile = swipe horizontally.
- * Desktop = same behavior with arrow controls.
- */
-
 .product-carousel {
   position: relative;
   width: 100%;
@@ -706,8 +698,15 @@ h1 span {
     transform .55s cubic-bezier(.22,1,.36,1),
     filter .55s ease;
 
+  /*
+   * Prevent selecting, dragging, copying, or long-pressing
+   * the product image on touch devices.
+   */
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .product-image::selection {
@@ -738,8 +737,16 @@ h1 span {
   transform: scale(.88);
 }
 
+/*
+ * IMPORTANT:
+ * No hover scaling on the image.
+ *
+ * The product remains at exactly the same scale when the
+ * user touches, holds, or interacts with the card.
+ */
+
 .product-card:hover .product-image {
-  transform: scale(1);
+  transform: inherit;
 }
 
 /* =========================================================
@@ -1567,9 +1574,7 @@ fieldset {
 
   .product-navigator-track {
     gap: 7px;
-
     padding-right: 20px;
-
     scroll-snap-type: x proximity;
   }
 
@@ -1613,14 +1618,6 @@ fieldset {
     display: none;
   }
 
-  /*
-   * EXACTLY ONE PRODUCT PER SCREEN.
-   *
-   * Every card has the same width, so swiping from
-   * product 1 -> 2 -> 3 -> 4 keeps the product stage
-   * in exactly the same position.
-   */
-
   .product-card {
     flex: 0 0 100%;
     width: 100%;
@@ -1655,11 +1652,6 @@ fieldset {
     background: #0a0d12;
   }
 
-  /*
-   * Same image box for every product.
-   * The actual image files are not edited or generated.
-   */
-
   .product-image {
     width: 100%;
     height: 370px;
@@ -1668,15 +1660,21 @@ fieldset {
     object-position: center;
 
     display: block;
+
+    /*
+     * Prevent selection, saving/dragging behavior and
+     * long-press interaction on mobile browsers.
+     */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
   }
 
-  /*
-   * MOBILE PRODUCT SCALE NORMALIZATION
-   *
-   * Each source image contains different internal
-   * whitespace, so the visible consoles are normalized
-   * individually without modifying the source files.
-   */
+  /* =======================================================
+     MOBILE PRODUCT SCALE NORMALIZATION
+     ======================================================= */
 
   .product-pro .product-image {
     transform: scale(.82);
@@ -1694,8 +1692,13 @@ fieldset {
     transform: scale(.88);
   }
 
+  /*
+   * No hover/touch scaling.
+   * Keep every product exactly where it is.
+   */
+
   .product-card:hover .product-image {
-    transform: none;
+    transform: inherit;
   }
 
   /* =======================================================
@@ -2536,7 +2539,7 @@ fieldset {
 }
 
 /* =========================================================
-   PRODUCT IMAGE
+   CREATOR PRODUCT IMAGE
    ========================================================= */
 
 .creators-page .creator-product-image {
@@ -2561,23 +2564,35 @@ fieldset {
     drop-shadow(0 42px 65px rgba(0,0,0,.36))
     drop-shadow(0 0 20px rgba(45,140,255,.045));
 
+  /*
+   * Prevent selection, dragging, copying, and long-press
+   * image interaction on touch devices.
+   */
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -webkit-user-drag: none;
+  pointer-events: none;
 
   transition:
     transform .7s cubic-bezier(.2,.7,.2,1),
     filter .7s ease;
 }
 
+/*
+ * No image hover movement.
+ * The product stays physically fixed.
+ */
+
 .creators-page .creator-product-slide:hover .creator-product-image {
-  transform: scale(1.018) translateY(-4px);
+  transform: none;
 
   filter:
-    contrast(1.035)
-    saturate(1)
-    brightness(1.015)
-    drop-shadow(0 50px 75px rgba(0,0,0,.42))
-    drop-shadow(0 0 25px rgba(45,140,255,.065));
+    contrast(1.025)
+    saturate(.97)
+    brightness(1.01)
+    drop-shadow(0 42px 65px rgba(0,0,0,.36))
+    drop-shadow(0 0 20px rgba(45,140,255,.045));
 }
 
 /* =========================================================
@@ -3090,6 +3105,12 @@ fieldset {
     width: 98%;
     height: 91%;
     max-height: 435px;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
   }
 
   .creators-page .product-pro .creator-product-image,
