@@ -39,6 +39,7 @@ const creatorProducts = [
     greekNote: 'Ναυαρχίδα επιδόσεων',
     image: '/images/ps5-pro.png',
     link: 'https://buy.stripe.com/aFadR25n29jwc3Z0aDcQU0b',
+    tone: 'pro',
   },
   {
     key: 'digital',
@@ -50,6 +51,7 @@ const creatorProducts = [
     greekNote: 'Ψηφιακή έκδοση PlayStation 5',
     image: '/images/ps5-digital.png',
     link: 'https://buy.stripe.com/28EeV6dTy8fs9VRbTlcQU0a',
+    tone: 'digital',
   },
   {
     key: 'slimDisc',
@@ -61,6 +63,7 @@ const creatorProducts = [
     greekNote: 'Λεπτή έκδοση με disc drive',
     image: '/images/ps5-slim-disc.PNG',
     link: 'https://buy.stripe.com/eVq8wIcPugLYaZV4qTcQU09',
+    tone: 'disc',
   },
   {
     key: 'slimDigital',
@@ -72,6 +75,7 @@ const creatorProducts = [
     greekNote: 'Λεπτή ψηφιακή έκδοση',
     image: '/images/ps5-slim-digital.png',
     link: 'https://buy.stripe.com/bJe14g6r6fHU3xt2iLcQU0e',
+    tone: 'slim',
   },
   {
     key: 'discDrive',
@@ -83,6 +87,7 @@ const creatorProducts = [
     greekNote: 'Για συμβατά μοντέλα PS5',
     image: '/images/ps5-disc-drive.png',
     link: 'https://buy.stripe.com/fZu4gscPucvI9VR7D5cQU0c',
+    tone: 'discDrive',
   },
   {
     key: 'controller',
@@ -94,6 +99,7 @@ const creatorProducts = [
     greekNote: 'Ασύρματο χειριστήριο PlayStation',
     image: '/images/dual-sense.png',
     link: 'https://buy.stripe.com/7sY4gseXCeDQec74qTcQU0d',
+    tone: 'controller',
   },
 ]
 
@@ -336,7 +342,7 @@ export default function CreatorsPage() {
     slide?.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
-      inline: 'center',
+      inline: 'start',
     })
   }
 
@@ -580,15 +586,17 @@ export default function CreatorsPage() {
               </div>
             </div>
 
+            {/* EXACT SAME PRODUCT CARD STRUCTURE AS MAIN PAGE */}
+
             <div
-              className="creator-showcase-track"
+              className="creator-showcase-track product-grid"
               id="creator-products"
               ref={catalogueRef}
             >
               {creatorProducts.map(
                 (product, index) => (
                   <article
-                    className={`creator-product-slide product-${product.key} ${
+                    className={`product-card product-${product.tone} ${
                       index === activeProduct
                         ? 'is-active'
                         : ''
@@ -596,29 +604,17 @@ export default function CreatorsPage() {
                     key={product.key}
                     data-product-index={index}
                   >
-                    <div className="creator-product-scene">
-                      <span className="creator-product-number">
-                        {String(
-                          index + 1
-                        ).padStart(2, '0')}
-                      </span>
-
-                      <div className="creator-product-glow" />
-
+                    <div className="product-visual">
                       <img
-                        className="creator-product-image"
+                        className="product-image"
                         src={product.image}
                         alt={product.name}
                         draggable={false}
                       />
                     </div>
 
-                    <div className="creator-product-details">
-                      <div className="creator-product-copy">
-                        <span className="creator-product-category">
-                          PLAYSTATION
-                        </span>
-
+                    <div className="product-info">
+                      <div>
                         <h3>
                           {isGreek
                             ? product.greek
@@ -632,34 +628,26 @@ export default function CreatorsPage() {
                         </p>
                       </div>
 
-                      <div className="creator-product-purchase">
-                        <div className="creator-product-price">
-                          <span>
-                            {copy.partnerPrice}
-                          </span>
+                      <div className="price">
+                        <small>
+                          {copy.partnerPrice}
+                        </small>
 
-                          <strong>
-                            {product.partnerPrice}
-                          </strong>
-
-                          {product.publicPrice && (
-                            <del>
-                              {product.publicPrice}
-                            </del>
-                          )}
-                        </div>
-
-                        <a
-                          className="creator-buy-button"
-                          href={product.link}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {copy.buy}
-                          <ArrowRight size={16} />
-                        </a>
+                        <strong>
+                          {product.partnerPrice}
+                        </strong>
                       </div>
                     </div>
+
+                    <a
+                      className="product-link"
+                      href={product.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {copy.buy}
+                      <ArrowRight size={15} />
+                    </a>
                   </article>
                 )
               )}
