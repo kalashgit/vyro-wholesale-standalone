@@ -2191,27 +2191,29 @@ fieldset {
   background: rgba(45,140,255,.07);
 }
 
+/* =========================================================
+   CREATOR SHOWCASE TRACK
+   MATCHES MAIN PRODUCT CAROUSEL
+   ========================================================= */
+
 .creators-page .creator-showcase-track {
-  width: 100%;
   display: flex;
-  gap: 24px;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+
   overflow-x: auto;
   overflow-y: hidden;
-  padding:
-    24px
-    max(20px, calc((100vw - 1240px) / 2))
-    46px;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  overscroll-behavior-x: contain;
-  touch-action: pan-x;
-  cursor: grab;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
 
-.creators-page .creator-showcase-track:active {
-  cursor: grabbing;
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+  scroll-behavior: smooth;
+
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+
+  scrollbar-width: none;
 }
 
 .creators-page .creator-showcase-track::-webkit-scrollbar {
@@ -2225,10 +2227,15 @@ fieldset {
 
 .creators-page .creator-product-slide {
   position: relative;
-  flex: 0 0 min(93vw, 1240px);
+
+  flex: 0 0 100%;
+  width: 100%;
+
   min-height: min(76svh, 820px);
-  scroll-snap-align: center;
+
+  scroll-snap-align: start;
   scroll-snap-stop: always;
+
   overflow: hidden;
 
   display: grid;
@@ -2610,9 +2617,6 @@ fieldset {
     drop-shadow(0 42px 65px rgba(0,0,0,.36))
     drop-shadow(0 0 20px rgba(45,140,255,.045));
 
-  /*
-   * Completely non-interactive image.
-   */
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -2620,18 +2624,10 @@ fieldset {
   pointer-events: none;
   touch-action: none;
 
-  /*
-   * IMPORTANT:
-   * No transform transition.
-   * No zoom animation.
-   */
   transition: none !important;
   animation: none !important;
 }
 
-/*
- * Product image stays physically fixed on hover.
- */
 .creators-page .creator-product-slide:hover .creator-product-image {
   transform: none !important;
 }
@@ -3100,20 +3096,24 @@ fieldset {
     height: 38px;
   }
 
+  /* SAME HORIZONTAL BEHAVIOUR AS MAIN PRODUCTS */
+
   .creators-page .creator-showcase-track {
-    gap: 12px;
-    padding:
-      12px
-      16px
-      27px;
-    scroll-padding-inline: 16px;
+    gap: 0;
+    padding: 12px 0 27px;
+
+    scroll-padding-inline: 0;
   }
 
   .creators-page .creator-product-slide {
-    flex: 0 0 calc(100vw - 32px);
+    flex: 0 0 100%;
+    width: 100%;
+
     min-height: 700px;
+
     display: flex;
     flex-direction: column;
+
     border-radius: 20px;
   }
 
@@ -3150,9 +3150,6 @@ fieldset {
     height: 91%;
     max-height: 435px;
 
-    /*
-     * Completely static image.
-     */
     transition: none !important;
     animation: none !important;
     transform: none;
