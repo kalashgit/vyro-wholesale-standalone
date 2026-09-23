@@ -26,6 +26,8 @@ const stripeLinks = {
   digital: 'https://buy.stripe.com/28EaEQ02IfHU2tpaPhcQU03',
   slimDisc: 'https://buy.stripe.com/aFabIU7va0N0d837D5cQU04',
   slimDigital: 'https://buy.stripe.com/8x2eV69DicvIfgbaPhcQU05',
+  controller: 'https://buy.stripe.com/7sYaEQ7vabrE8RNe1tcQU0g',
+  discDrive: 'https://buy.stripe.com/bJe9AM2aQcvI1plg9BcQU0j',
 }
 
 const products = [
@@ -73,6 +75,28 @@ const products = [
     tone: 'slim',
     image: '/images/ps5-slim-digital.png',
   },
+  {
+    key: 'controller',
+    name: 'DualSense Controller',
+    greek: 'Χειριστήριο DualSense',
+    price: '€55.99',
+    note: 'Wireless PS5 controller',
+    greekNote: 'Ασύρματο χειριστήριο PS5',
+    link: stripeLinks.controller,
+    tone: 'controller',
+    image: '/images/dual-sense.png',
+  },
+  {
+    key: 'discDrive',
+    name: 'PS5 Disc Drive',
+    greek: 'PS5 Disc Drive',
+    price: '€69.99',
+    note: 'External disc drive',
+    greekNote: 'Εξωτερικό disc drive',
+    link: stripeLinks.discDrive,
+    tone: 'discDrive',
+    image: '/images/ps5-disc-drive.png',
+  },
 ]
 
 const tiers = [
@@ -113,6 +137,8 @@ type FormState = {
   digital: string
   slimDisc: string
   slimDigital: string
+  controller: string
+  discDrive: string
   message: string
 }
 
@@ -141,6 +167,8 @@ export default function Page() {
     digital: '0',
     slimDisc: '0',
     slimDigital: '0',
+    controller: '0',
+    discDrive: '0',
     message: '',
   })
 
@@ -209,7 +237,14 @@ export default function Page() {
 
   const total = useMemo(
     () =>
-      ['pro', 'digital', 'slimDisc', 'slimDigital'].reduce(
+      [
+        'pro',
+        'digital',
+        'slimDisc',
+        'slimDigital',
+        'controller',
+        'discDrive',
+      ].reduce(
         (sum, key) =>
           sum + Number(form[key as keyof FormState] || 0),
         0
@@ -462,6 +497,8 @@ export default function Page() {
       ['PS5 Digital Edition', form.digital],
       ['PS5 Slim Disc Edition', form.slimDisc],
       ['PS5 Slim Digital', form.slimDigital],
+      ['DualSense Controller', form.controller],
+      ['PS5 Disc Drive', form.discDrive],
     ]
       .filter(([, quantity]) => Number(quantity) > 0)
       .map(([name, quantity]) => `• ${name}: ${quantity}`)
@@ -783,7 +820,7 @@ export default function Page() {
                   <img
                     className="product-image"
                     src={product.image}
-                    alt={`${product.name} console and controller`}
+                    alt={product.name}
                     draggable={false}
                   />
                 </div>
@@ -841,10 +878,13 @@ export default function Page() {
           <span>
             {activeProductIndex + 1}
           </span>
+
           <span className="product-carousel-hint-line" />
+
           <span>
             {products.length}
           </span>
+
           <small>
             Swipe to explore
           </small>
@@ -1110,6 +1150,7 @@ export default function Page() {
 
             <div className="quantity-total">
               <span>{copy.min}</span>
+
               <strong>
                 {copy.total}: {total}
               </strong>
