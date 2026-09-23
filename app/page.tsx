@@ -637,7 +637,9 @@ export default function Page() {
           <div className="hero-actions">
             <button
               className="button button-primary"
-              onClick={() => scrollTo('catalog')}
+              onClick={() =>
+                scrollTo('catalog-products')
+              }
             >
               {copy.explore}
               <ArrowRight size={17} />
@@ -794,7 +796,10 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="product-carousel">
+        <div
+          className="product-carousel"
+          id="catalog-products"
+        >
           <button
             className="product-carousel-arrow product-carousel-arrow-left"
             type="button"
