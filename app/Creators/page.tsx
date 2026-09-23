@@ -59,7 +59,7 @@ const creatorProducts = [
     partnerPrice: '€530.00',
     note: 'Slimline with disc drive',
     greekNote: 'Λεπτή έκδοση με disc drive',
-    image: '/images/ps5-slim-disc.png',
+    image: '/images/ps5-slim-disc.PNG',
     link: 'https://buy.stripe.com/eVq8wIcPugLYaZV4qTcQU09',
   },
   {
