@@ -607,7 +607,9 @@ touch-action: pan-x pan-y;
 
   scrollbar-width: none;
 }
-
+#catalog-products {
+  scroll-margin-top: 20px;
+}
 .product-grid::-webkit-scrollbar {
   display: none;
 }
