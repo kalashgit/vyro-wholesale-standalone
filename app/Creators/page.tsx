@@ -216,20 +216,6 @@ export default function CreatorsPage() {
         footer: 'VYRO Creator Access · PlayStation retail & distribution.',
       }
 
-  /*
-   * Keep the active product synced with native horizontal scrolling.
-   *
-   * This is what makes the mobile experience feel like a real
-   * horizontal product carousel:
-   *
-   * finger swipe
-   *      ↓
-   * product settles
-   *      ↓
-   * activeProduct updates
-   *      ↓
-   * number + dots + active CSS state update
-   */
   useEffect(() => {
     const container = catalogueRef.current
 
@@ -388,7 +374,7 @@ export default function CreatorsPage() {
           </a>
 
           <a
-            href="/creators"
+            href="/Creators"
             onClick={() => setMobileOpen(false)}
           >
             {copy.navCreators}
@@ -596,6 +582,7 @@ export default function CreatorsPage() {
 
             <div
               className="creator-showcase-track"
+              id="creator-products"
               ref={catalogueRef}
             >
               {creatorProducts.map(
