@@ -658,27 +658,6 @@ export default function Page() {
             {copy.trust}
           </div>
         </div>
-
-        <div
-          className="hero-orb"
-          aria-hidden="true"
-        >
-          <div className="orb-ring ring-one" />
-          <div className="orb-ring ring-two" />
-
-          <div className="orb-core">
-            <span>PS5</span>
-            <small>READY</small>
-          </div>
-
-          <div className="orb-tag tag-top">
-            01 / STOCK
-          </div>
-
-          <div className="orb-tag tag-bottom">
-            GR · EU
-          </div>
-        </div>
       </section>
 
       <section className="signal-strip">
