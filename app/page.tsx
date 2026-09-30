@@ -1,15 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { useState } from 'react'
 import {
-  FormEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
-import {
-  ArrowLeft,
   ArrowRight,
   Check,
   Globe2,
@@ -17,7 +10,6 @@ import {
   MessageCircle,
   Package,
   ShieldCheck,
-  Sparkles,
   X,
 } from 'lucide-react'
 
@@ -36,406 +28,290 @@ const products = [
     name: 'PS5 Pro',
     greek: 'PS5 Pro',
     price: '€750.00',
-    note: 'Performance flagship',
-    greekNote: 'Ναυαρχίδα επιδόσεων',
-    link: stripeLinks.pro,
-    tone: 'pro',
     image: '/images/ps5-pro.png',
+    link: stripeLinks.pro,
+    learnMore: '/products/ps5-pro',
+    en: {
+      short: 'For maximum performance.',
+      headline: 'The most powerful way to play.',
+      description:
+        'Built for players who want more from every game.',
+    },
+    el: {
+      short: 'Για μέγιστες επιδόσεις.',
+      headline: 'Ο πιο ισχυρός τρόπος να παίξετε.',
+      description:
+        'Για παίκτες που θέλουν περισσότερα από κάθε παιχνίδι.',
+    },
+  },
+  {
+    key: 'slimDisc',
+    name: 'PS5 Slim Disc',
+    greek: 'PS5 Slim Disc',
+    price: '€549.99',
+    image: '/images/ps5-slim-disc.PNG',
+    link: stripeLinks.slimDisc,
+    learnMore: '/products/ps5-slim-disc',
+    en: {
+      short: 'For physical and digital games.',
+      headline: 'Your games. Your way.',
+      description:
+        'The complete PS5 experience with an integrated disc drive.',
+    },
+    el: {
+      short: 'Για φυσικά και ψηφιακά παιχνίδια.',
+      headline: 'Τα παιχνίδια σας. Με τον τρόπο σας.',
+      description:
+        'Η ολοκληρωμένη εμπειρία PS5 με ενσωματωμένο disc drive.',
+    },
   },
   {
     key: 'digital',
     name: 'PS5 Digital Edition',
     greek: 'PS5 Digital Edition',
     price: '€489.99',
-    note: 'All-digital next gen',
-    greekNote: 'Ψηφιακή εμπειρία νέας γενιάς',
-    link: stripeLinks.digital,
-    tone: 'digital',
     image: '/images/ps5-digital.PNG',
-  },
-  {
-    key: 'slimDisc',
-    name: 'PS5 Slim Disc Edition',
-    greek: 'PS5 Slim Disc Edition',
-    price: '€549.99',
-    note: 'Slimline with disc drive',
-    greekNote: 'Λεπτή έκδοση με drive',
-    link: stripeLinks.slimDisc,
-    tone: 'disc',
-    image: '/images/ps5-slim-disc.PNG',
+    link: stripeLinks.digital,
+    learnMore: '/products/ps5-digital',
+    en: {
+      short: 'For an all-digital library.',
+      headline: 'Go all digital.',
+      description:
+        'Everything you need for the PS5 generation. No discs required.',
+    },
+    el: {
+      short: 'Για μια πλήρως ψηφιακή συλλογή.',
+      headline: 'Μπείτε στην ψηφιακή εποχή.',
+      description:
+        'Η εμπειρία της γενιάς PS5, χωρίς την ανάγκη για δίσκους.',
+    },
   },
   {
     key: 'slimDigital',
     name: 'PS5 Slim Digital',
     greek: 'PS5 Slim Digital',
     price: '€490.00',
-    note: 'Slimline digital',
-    greekNote: 'Λεπτή ψηφιακή έκδοση',
-    link: stripeLinks.slimDigital,
-    tone: 'slim',
     image: '/images/ps5-slim-digital.png',
+    link: stripeLinks.slimDigital,
+    learnMore: '/products/ps5-slim-digital',
+    en: {
+      short: 'Slim. Digital. PS5.',
+      headline: 'Less console. Same generation.',
+      description:
+        'A slim all-digital route into the PlayStation 5 generation.',
+    },
+    el: {
+      short: 'Slim. Digital. PS5.',
+      headline: 'Πιο λεπτό. Ίδια γενιά.',
+      description:
+        'Μια slim, πλήρως ψηφιακή είσοδος στη γενιά PlayStation 5.',
+    },
   },
+]
+
+const accessories = [
   {
     key: 'controller',
-    name: 'DualSense Controller',
-    greek: 'Χειριστήριο DualSense',
+    name: 'DualSense Wireless Controller',
+    greek: 'Ασύρματο χειριστήριο DualSense',
     price: '€55.99',
-    note: 'Wireless PS5 controller',
-    greekNote: 'Ασύρματο χειριστήριο PS5',
-    link: stripeLinks.controller,
-    tone: 'controller',
     image: '/images/dual-sense.png',
+    link: stripeLinks.controller,
+    en: {
+      headline: 'Another player? Another controller.',
+      description:
+        'Add another DualSense wireless controller to your setup.',
+    },
+    el: {
+      headline: 'Άλλος ένας παίκτης; Άλλο ένα χειριστήριο.',
+      description:
+        'Προσθέστε ένα ακόμη ασύρματο χειριστήριο DualSense στο setup σας.',
+    },
   },
   {
     key: 'discDrive',
     name: 'PS5 Disc Drive',
     greek: 'PS5 Disc Drive',
     price: '€69.99',
-    note: 'External disc drive',
-    greekNote: 'Εξωτερικό disc drive',
-    link: stripeLinks.discDrive,
-    tone: 'discDrive',
     image: '/images/ps5-disc-drive.png',
-  },
-]
-
-const tiers = [
-  {
-    name: 'Starter',
-    range: '5+',
-    desc: 'A focused start for new retail partners',
-    greek: 'Μια δυναμική αρχή για νέους συνεργάτες λιανικής',
-  },
-  {
-    name: 'Retailer',
-    range: '10+',
-    desc: 'Reliable stock for your retail operation',
-    greek: 'Σταθερό απόθεμα για τη λιανική σας',
-  },
-  {
-    name: 'Bulk',
-    range: '20+',
-    desc: 'Better flow and stronger commercial terms',
-    greek: 'Καλύτερη ροή και ισχυρότεροι εμπορικοί όροι',
-  },
-  {
-    name: 'Distribution',
-    range: '50+',
-    desc: 'Built for regional distribution networks',
-    greek: 'Για δίκτυα περιφερειακής διανομής',
+    link: stripeLinks.discDrive,
+    en: {
+      headline: 'Add the disc experience.',
+      description:
+        'Expand a compatible PS5 digital console with a disc drive.',
+    },
+    el: {
+      headline: 'Προσθέστε την εμπειρία του δίσκου.',
+      description:
+        'Προσθέστε disc drive σε συμβατό ψηφιακό PS5.',
+    },
   },
 ]
 
 type Language = 'en' | 'el'
 
-type FormState = {
-  business: string
-  contact: string
-  email: string
-  phone: string
-  pro: string
-  digital: string
-  slimDisc: string
-  slimDigital: string
-  controller: string
-  discDrive: string
-  message: string
-}
-
-/*
- * CHANGE THIS DATE WHEN YOU WANT TO RESTART THE PROMOTION.
- * Greece is UTC+3 during September.
- */
-const OFFER_END = '2026-09-27T23:59:59+03:00'
-
 export default function Page() {
   const [language, setLanguage] = useState<Language>('en')
-  const [selectedTier, setSelectedTier] = useState('Retailer')
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-  const [error, setError] = useState('')
-  const [activeProduct, setActiveProduct] = useState(products[0].key)
 
-  const productTrackRef = useRef<HTMLDivElement>(null)
-
-  const [form, setForm] = useState<FormState>({
-    business: '',
-    contact: '',
-    email: '',
-    phone: '',
-    pro: '0',
-    digital: '0',
-    slimDisc: '0',
-    slimDigital: '0',
-    controller: '0',
-    discDrive: '0',
-    message: '',
-  })
-
-  const offerEnd = new Date(OFFER_END).getTime()
-
-  const [timeLeft, setTimeLeft] = useState(() =>
-    Math.max(offerEnd - Date.now(), 0)
-  )
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(Math.max(offerEnd - Date.now(), 0))
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [offerEnd])
-
-  /*
-   * Keep the active product synchronized with horizontal scrolling.
-   */
-  useEffect(() => {
-    const track = productTrackRef.current
-
-    if (!track) return
-
-    const handleScroll = () => {
-      const width = track.clientWidth
-
-      if (!width) return
-
-      const index = Math.round(track.scrollLeft / width)
-      const product = products[index]
-
-      if (product) {
-        setActiveProduct(product.key)
-      }
-    }
-
-    track.addEventListener('scroll', handleScroll, {
-      passive: true,
-    })
-
-    return () => {
-      track.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  const countdown = useMemo(() => {
-    const totalSeconds = Math.floor(timeLeft / 1000)
-
-    const days = Math.floor(totalSeconds / 86400)
-    const hours = Math.floor((totalSeconds % 86400) / 3600)
-    const minutes = Math.floor((totalSeconds % 3600) / 60)
-    const seconds = totalSeconds % 60
-
-    return {
-      days,
-      hours,
-      minutes,
-      seconds,
-    }
-  }, [timeLeft])
-
-  const deadlineHasPassed = timeLeft <= 0
   const isGreek = language === 'el'
-
-  const total = useMemo(
-    () =>
-      [
-        'pro',
-        'digital',
-        'slimDisc',
-        'slimDigital',
-        'controller',
-        'discDrive',
-      ].reduce(
-        (sum, key) =>
-          sum + Number(form[key as keyof FormState] || 0),
-        0
-      ),
-    [form]
-  )
 
   const copy = isGreek
     ? {
-        navCatalog: 'Κατάλογος',
+        navShop: 'PS5',
+        navAccessories: 'Αξεσουάρ',
+        navSupport: 'Υποστήριξη',
+        navCreators: 'Creators',
         navWholesale: 'Χονδρική',
-        navCreators: 'Πρόσβαση Creators',
-        navContact: 'Επικοινωνία',
 
-        eyebrow: 'PlayStation λιανική & χονδρική',
-        title: 'Η νέα γενιά του PlayStation.',
-        titleAccent: 'Τώρα στην Ελλάδα.',
-        intro:
-          'Αυθεντικό PlayStation stock για ιδιώτες, retailers και distributors.',
+        heroLabel: 'PLAYSTATION 5 PRO',
+        heroTitle: 'Ο πιο ισχυρός τρόπος να παίξετε.',
+        heroText:
+          'PS5 Pro. Για παίκτες που θέλουν περισσότερα από κάθε παιχνίδι.',
+        vat: 'με ΦΠΑ',
+        learnMore: 'Μάθετε περισσότερα',
+        buy: 'Αγορά',
 
-        explore: 'Δείτε τον κατάλογο',
-        partner: 'Γίνετε συνεργάτης',
+        heroTrust:
+          'Εργοστασιακά σφραγισμένο · Ευρωπαϊκό μοντέλο · Αποστολή με tracking',
 
-        trust:
-          'Αποστολές σε όλη την Ελλάδα · B2B τιμολόγηση · Γνήσιο stock',
+        slimLabel: 'PLAYSTATION 5 SLIM DISC',
+        slimTitle: 'Τα παιχνίδια σας. Με τον τρόπο σας.',
+        slimText:
+          'Η ολοκληρωμένη εμπειρία PS5 με ενσωματωμένο disc drive.',
 
-        catalogEyebrow: 'Διαθέσιμο για παραγγελία',
-        catalogTitle: 'Stock που κινείται.',
-        catalogText:
-          'Επιλεγμένα PS5 μοντέλα με καθαρές τιμές συμπεριλαμβανόμενου ΦΠΑ και άμεση αγορά.',
-        exVat: 'Τιμή με ΦΠΑ',
-        buy: 'Αγορά Τώρα',
-        retailNote: 'Άμεση αγορά',
+        digitalLabel: 'PLAYSTATION 5 DIGITAL EDITION',
+        digitalTitle: 'Μπείτε στην ψηφιακή εποχή.',
+        digitalText:
+          'Η εμπειρία της γενιάς PS5, χωρίς την ανάγκη για δίσκους.',
 
-        urgency:
-          'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ ΓΙΑ ΠΕΡΙΟΡΙΣΜΕΝΟ ΧΡΟΝΟ · ΛΗΓΕΙ 27 ΣΕΠΤΕΜΒΡΙΟΥ, 23:59',
+        compareLabel: 'ΣΥΓΚΡΙΣΗ',
+        compareTitle: 'Ποιο PS5 είναι για εσάς;',
+        compareText:
+          'Βρείτε το μοντέλο που ταιριάζει στον τρόπο που παίζετε.',
+        viewModel: 'Δείτε το μοντέλο',
 
-        urgencyEnded:
-          'Η ΠΡΟΣΦΟΡΑ ΠΕΡΙΟΡΙΣΜΕΝΟΥ ΧΡΟΝΟΥ ΕΧΕΙ ΟΛΟΚΛΗΡΩΘΕΙ.',
+        standardLabel: 'ΤΟ ΠΡΟΤΥΠΟ VYRO',
+        standardTitle:
+          'Χωρίς αβεβαιότητα από την παραγγελία έως την παράδοση.',
+        standardText:
+          'Καθαρή τιμολόγηση, παρακολούθηση αποστολής και άμεση υποστήριξη όταν τη χρειάζεστε.',
 
-        serviceEyebrow: 'Το πρότυπο εξυπηρέτησης VYRO',
-        serviceTitle:
-          'Καθαρά, από την παραγγελία έως την παράδοση.',
-        serviceText:
-          'Κάθε παραγγελία VYRO συνοδεύεται από σαφή ενημέρωση, παρακολούθηση αποστολής και άμεση υποστήριξη.',
         sealedTitle: 'Εργοστασιακά σφραγισμένο',
-        sealedText: 'Νέα προϊόντα, εργοστασιακά σφραγισμένα.',
-        deliveryTitle: '5–7 εργάσιμες ημέρες',
-        deliveryText:
-          'Εκτιμώμενος χρόνος παράδοσης για standard παραγγελίες.',
-        trackingTitle: 'Παρακολούθηση αποστολής',
-        trackingText:
-          'Παρέχεται tracking μόλις αποσταλεί η παραγγελία.',
+        sealedText:
+          'Καινούργια προϊόντα, σφραγισμένα από το εργοστάσιο.',
+
+        vatTitle: 'Ο ΦΠΑ περιλαμβάνεται',
+        vatText:
+          'Η εμφανιζόμενη τιμή περιλαμβάνει ΦΠΑ.',
+
+        trackedTitle: 'Αποστολή με tracking',
+        trackedText:
+          'Παρακολούθηση μόλις αποσταλεί η παραγγελία σας.',
+
         supportTitle: 'Άμεση υποστήριξη',
         supportText:
-          'Ένα άμεσο σημείο επικοινωνίας πριν και μετά την παραγγελία.',
+          'Επικοινωνήστε απευθείας με τη VYRO πριν και μετά την αγορά.',
 
-        wholesaleEyebrow: 'Για συνεργάτες',
-        wholesaleTitle:
-          'Οι ποσότητες σας ανοίγουν καλύτερους όρους.',
+        accessoriesLabel: 'ΟΛΟΚΛΗΡΩΣΤΕ ΤΟ SETUP',
+        accessoriesTitle: 'Περισσότερα από την κονσόλα.',
+        accessoriesText:
+          'Αξεσουάρ για να ολοκληρώσετε την εμπειρία PS5.',
+
+        brandLabel: 'VYRO',
+        brandTitle: 'Gaming for the people.',
+        brandText:
+          'Πιστεύουμε ότι η κορυφαία τεχνολογία πρέπει να είναι πιο προσιτή. Η VYRO φέρνει gaming hardware σε πελάτες σε όλη την Ελλάδα με ξεκάθαρες τιμές, παρακολούθηση αποστολής και άμεση υποστήριξη.',
+
+        wholesaleTitle: 'Αγοράζετε για επιχείρηση;',
         wholesaleText:
-          'Επιλέξτε το επίπεδο που σας ταιριάζει. Θα σας απαντήσουμε με διαθεσιμότητα και εξατομικευμένη προσφορά.',
-        selected: 'Επιλεγμένο',
-        ask: 'Ρωτήστε για αυτό το επίπεδο',
-        tierHelp:
-          'Δεν είστε σίγουροι για το επίπεδό σας; Στείλτε απλώς τις ποσότητες και θα σας προτείνουμε το κατάλληλο tier.',
+          'Διατίθεται τιμολόγηση βάσει όγκου για retailers και εμπορικούς συνεργάτες.',
+        wholesaleCta: 'VYRO Wholesale',
 
-        inquiryEyebrow: 'Ας μιλήσουμε',
-        inquiryTitle: 'Χτίστε το επόμενο απόθεμά σας.',
-        inquiryText:
-          'Στείλτε μας τις ανάγκες σας και η ομάδα VYRO θα επιστρέψει με διαθεσιμότητα και εξατομικευμένη προσφορά.',
-
-        business: 'Επωνυμία επιχείρησης',
-        businessOptional: 'προαιρετικό',
-        contact: 'Όνομα υπευθύνου',
-        email: 'Email',
-        phone: 'Τηλέφωνο',
-        required: 'υποχρεωτικό',
-
-        quantities: 'Ποσότητες ανά μοντέλο',
-        message: 'Μήνυμα',
-        messagePlaceholder:
-          'Πείτε μας περισσότερα για τις ανάγκες σας...',
-
-        submit: 'Αποστολή ερωτήματος',
-
-        min: 'Ελάχιστη ποσότητα: 5 τεμάχια συνολικά',
-        total: 'Σύνολο',
-
-        success:
-          'Το ερώτημά σας είναι έτοιμο. Ανοίξαμε το WhatsApp για να ολοκληρώσετε την επικοινωνία.',
-
-        error:
-          'Παρακαλούμε συμπληρώστε τα υποχρεωτικά πεδία και τουλάχιστον 5 τεμάχια συνολικά.',
-
-        footer:
-          'Η υποδομή πίσω από το επόμενο sell-through.',
-
-        rights:
-          '© 2026 VYRO. Distribution, built for momentum.',
+        contact: 'Επικοινωνία',
+        delivery: 'Παράδοση',
+        terms: 'Όροι',
+        privacy: 'Απόρρητο',
+        footerText:
+          'PlayStation hardware για πελάτες σε όλη την Ελλάδα.',
       }
     : {
-        navCatalog: 'Catalogue',
+        navShop: 'PS5',
+        navAccessories: 'Accessories',
+        navSupport: 'Support',
+        navCreators: 'Creators',
         navWholesale: 'Wholesale',
-        navCreators: 'Creator Access',
-        navContact: 'Contact',
 
-        eyebrow: 'PlayStation retail & distribution',
-        title: 'PlayStation, refined.',
-        titleAccent: 'Now in Greece.',
-        intro:
-          'Authentic PlayStation stock for individuals, retailers and distributors.',
+        heroLabel: 'PLAYSTATION 5 PRO',
+        heroTitle: 'The most powerful way to play.',
+        heroText:
+          'PS5 Pro. Built for players who want more from every game.',
+        vat: 'VAT included',
+        learnMore: 'Learn more',
+        buy: 'Buy',
 
-        explore: 'Explore catalogue',
-        partner: 'Become a partner',
+        heroTrust:
+          'Factory sealed · European model · Tracked delivery',
 
-        trust:
-          'Nationwide shipping · B2B invoicing · Authentic stock',
+        slimLabel: 'PLAYSTATION 5 SLIM DISC',
+        slimTitle: 'Your games. Your way.',
+        slimText:
+          'The complete PS5 experience with an integrated disc drive.',
 
-        catalogEyebrow: 'Available to order',
-        catalogTitle: 'Stock that moves.',
-        catalogText:
-          'Selected PS5 models with clear VAT-included pricing and direct purchase.',
-        exVat: 'VAT included',
-        buy: 'Buy Now',
-        retailNote: 'Direct purchase',
+        digitalLabel: 'PLAYSTATION 5 DIGITAL EDITION',
+        digitalTitle: 'Go all digital.',
+        digitalText:
+          'Everything you need for the PS5 generation. No discs required.',
 
-        urgency:
-          'LIMITED-TIME PRICING · ENDS 27 SEPTEMBER, 23:59',
+        compareLabel: 'COMPARE',
+        compareTitle: 'Which PS5 is right for you?',
+        compareText:
+          'Find the model that fits the way you play.',
+        viewModel: 'View model',
 
-        urgencyEnded:
-          'LIMITED-TIME PRICING HAS ENDED.',
+        standardLabel: 'THE VYRO STANDARD',
+        standardTitle:
+          'No uncertainty between order and delivery.',
+        standardText:
+          'Clear pricing, tracked delivery and direct support when you need it.',
 
-        serviceEyebrow: 'VYRO service standard',
-        serviceTitle: 'Clear from order to delivery.',
-        serviceText:
-          'Every VYRO order is handled with clear communication, tracked fulfilment and direct support.',
         sealedTitle: 'Factory sealed',
-        sealedText: 'New products supplied factory sealed.',
-        deliveryTitle: '5–7 business days',
-        deliveryText:
-          'Estimated delivery for standard orders.',
-        trackingTitle: 'Tracked delivery',
-        trackingText:
-          'Tracking provided once your order is dispatched.',
+        sealedText:
+          'Brand-new products supplied factory sealed.',
+
+        vatTitle: 'VAT included',
+        vatText:
+          'The displayed price includes VAT.',
+
+        trackedTitle: 'Tracked delivery',
+        trackedText:
+          'Follow your order once it has been dispatched.',
+
         supportTitle: 'Direct support',
         supportText:
-          'One direct point of contact before and after your order.',
+          'Speak directly with VYRO before and after your purchase.',
 
-        wholesaleEyebrow: 'For trade partners',
-        wholesaleTitle: 'Your volume unlocks better terms.',
+        accessoriesLabel: 'COMPLETE YOUR SETUP',
+        accessoriesTitle: 'More than the console.',
+        accessoriesText:
+          'The essentials to complete your PS5 setup.',
+
+        brandLabel: 'VYRO',
+        brandTitle: 'Gaming for the people.',
+        brandText:
+          'We believe great technology should be easier to access. VYRO brings gaming hardware to customers across Greece with straightforward pricing, tracked fulfilment and direct support.',
+
+        wholesaleTitle: 'Buying for your business?',
         wholesaleText:
-          'Choose the level that fits your operation. We will come back with availability and a tailored offer.',
-        selected: 'Selected',
-        ask: 'Ask about this tier',
-        tierHelp:
-          "Not sure which tier fits? Just submit your quantities and we'll recommend the appropriate tier.",
+          'Volume pricing is available for retailers and trade partners.',
+        wholesaleCta: 'VYRO Wholesale',
 
-        inquiryEyebrow: "Let's talk",
-        inquiryTitle: 'Build your next inventory run.',
-        inquiryText:
-          'Tell us what you need and the VYRO team will come back with availability and a tailored offer.',
-
-        business: 'Business name',
-        businessOptional: 'optional',
-        contact: 'Contact name',
-        email: 'Email',
-        phone: 'Phone',
-        required: 'required',
-
-        quantities: 'Quantities by model',
-        message: 'Message',
-        messagePlaceholder:
-          'Tell us more about your requirements...',
-
-        submit: 'Send distribution inquiry',
-
-        min: 'Minimum quantity: 5 units total',
-        total: 'Total',
-
-        success:
-          'Your inquiry is ready. We opened WhatsApp to complete the conversation.',
-
-        error:
-          'Please complete the required fields and add at least 5 units total.',
-
-        footer:
-          'The infrastructure behind your next sell-through.',
-
-        rights:
-          '© 2026 VYRO. Distribution, built for momentum.',
+        contact: 'Contact',
+        delivery: 'Delivery',
+        terms: 'Terms',
+        privacy: 'Privacy',
+        footerText:
+          'PlayStation hardware for customers across Greece.',
       }
 
   function scrollTo(id: string) {
@@ -447,105 +323,12 @@ export default function Page() {
     setMobileOpen(false)
   }
 
-  function updateField(key: keyof FormState, value: string) {
-    setForm((current) => ({
-      ...current,
-      [key]: value,
-    }))
-
-    setError('')
-    setSubmitted(false)
-  }
-
-  function goToProduct(index: number) {
-    const track = productTrackRef.current
-
-    if (!track) return
-
-    const safeIndex = Math.max(
-      0,
-      Math.min(index, products.length - 1)
-    )
-
-    track.scrollTo({
-      left: safeIndex * track.clientWidth,
-      behavior: 'smooth',
-    })
-
-    setActiveProduct(products[safeIndex].key)
-  }
-
-  function submitInquiry(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    if (
-      !form.contact ||
-      !form.email ||
-      !form.phone ||
-      total < 5
-    ) {
-      setError(copy.error)
-      return
-    }
-
-    const selectedTierData = tiers.find(
-      (tier) => tier.name === selectedTier
-    )
-
-    const quantityLines = [
-      ['PS5 Pro', form.pro],
-      ['PS5 Digital Edition', form.digital],
-      ['PS5 Slim Disc Edition', form.slimDisc],
-      ['PS5 Slim Digital', form.slimDigital],
-      ['DualSense Controller', form.controller],
-      ['PS5 Disc Drive', form.discDrive],
-    ]
-      .filter(([, quantity]) => Number(quantity) > 0)
-      .map(([name, quantity]) => `• ${name}: ${quantity}`)
-
-    const lines = [
-      'VYRO DISTRIBUTION INQUIRY',
-      '────────────────────',
-      '',
-      `CONTACT: ${form.contact}`,
-      `EMAIL: ${form.email}`,
-      `PHONE: ${form.phone}`,
-      ...(form.business
-        ? [`BUSINESS: ${form.business}`]
-        : []),
-      '',
-      `SELECTED TIER: ${selectedTier.toUpperCase()}`,
-      `TIER RANGE: ${selectedTierData?.range ?? '-'}`,
-      '',
-      'QUANTITIES',
-      '──────────',
-      ...quantityLines,
-      '',
-      `TOTAL UNITS: ${total}`,
-      '',
-      `MESSAGE: ${form.message || 'No additional message.'}`,
-      '',
-      'Please confirm availability and commercial terms.',
-    ]
-
-    window.open(
-      `https://wa.me/306978255016?text=${encodeURIComponent(
-        lines.join('\n')
-      )}`,
-      '_blank',
-      'noopener,noreferrer'
-    )
-
-    setSubmitted(true)
-    setError('')
-  }
-
-  const activeProductIndex = products.findIndex(
-    (product) => product.key === activeProduct
-  )
-
   return (
-    <main className="site-shell">
+    <main className="site-shell retail-home">
+      {/* =====================================================
+          HEADER
+          ===================================================== */}
+
       <header className="site-header">
         <a
           className="brand"
@@ -564,12 +347,16 @@ export default function Page() {
               : 'main-nav'
           }
         >
-          <button onClick={() => scrollTo('catalog')}>
-            {copy.navCatalog}
+          <button onClick={() => scrollTo('compare')}>
+            {copy.navShop}
           </button>
 
-          <button onClick={() => scrollTo('wholesale')}>
-            {copy.navWholesale}
+          <button onClick={() => scrollTo('accessories')}>
+            {copy.navAccessories}
+          </button>
+
+          <button onClick={() => scrollTo('vyro-standard')}>
+            {copy.navSupport}
           </button>
 
           <Link
@@ -580,9 +367,12 @@ export default function Page() {
             {copy.navCreators}
           </Link>
 
-          <button onClick={() => scrollTo('inquiry')}>
-            {copy.navContact}
-          </button>
+          <Link
+            href="/wholesale"
+            onClick={() => setMobileOpen(false)}
+          >
+            {copy.navWholesale}
+          </Link>
         </nav>
 
         <div className="header-actions">
@@ -600,7 +390,7 @@ export default function Page() {
           <button
             className="menu-toggle"
             onClick={() =>
-              setMobileOpen(!mobileOpen)
+              setMobileOpen((current) => !current)
             }
             aria-label={
               mobileOpen
@@ -619,274 +409,266 @@ export default function Page() {
         </div>
       </header>
 
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <div className="eyebrow">
-            <span className="eyebrow-line" />
-            {copy.eyebrow}
-          </div>
-
-          <h1>
-            {copy.title}
-            <br />
-            <span>{copy.titleAccent}</span>
-          </h1>
-
-          <p>{copy.intro}</p>
-
-          <div className="hero-actions">
-            <button
-              className="button button-primary"
-              onClick={() =>
-                scrollTo('catalog-products')
-              }
-            >
-              {copy.explore}
-              <ArrowRight size={17} />
-            </button>
-
-            <button
-              className="button button-ghost"
-              onClick={() => scrollTo('inquiry')}
-            >
-              {copy.partner}
-            </button>
-          </div>
-
-          <div className="trust-row">
-            <ShieldCheck size={15} />
-            {copy.trust}
-          </div>
-        </div>
-      </section>
-
-      <section className="signal-strip">
-        <div>
-          <span>VYRO / 01</span>
-          <b>
-            <Sparkles size={14} />
-            Curated next-gen inventory
-          </b>
-        </div>
-
-        <div>
-          <span>VYRO / 02</span>
-          <b>
-            <Package size={14} />
-            Trade-ready fulfilment
-          </b>
-        </div>
-
-        <div>
-          <span>VYRO / 03</span>
-          <b>
-            <MessageCircle size={14} />
-            Human support, fast
-          </b>
-        </div>
-      </section>
+      {/* =====================================================
+          PS5 PRO — COMMERCIAL HERO
+          ===================================================== */}
 
       <section
-        className="section catalog-section"
-        id="catalog"
+        className="product-hero product-hero-pro"
+        id="top"
+      >
+        <div className="product-hero-copy">
+          <div className="eyebrow">
+            <span className="eyebrow-line" />
+            {copy.heroLabel}
+          </div>
+
+          <h1>{copy.heroTitle}</h1>
+
+          <p>{copy.heroText}</p>
+
+          <div className="hero-price">
+            <strong>€750</strong>
+            <span>{copy.vat}</span>
+          </div>
+
+          <div className="hero-actions">
+            <Link
+              className="button button-ghost"
+              href="/products/ps5-pro"
+            >
+              {copy.learnMore}
+            </Link>
+
+            <a
+              className="button button-primary"
+              href={stripeLinks.pro}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {copy.buy}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </div>
+
+        <div className="product-hero-visual">
+          <div className="product-hero-glow" />
+
+          <img
+            src="/images/ps5-pro.png"
+            alt="PlayStation 5 Pro"
+            draggable={false}
+          />
+        </div>
+
+        <div className="product-hero-trust">
+          <ShieldCheck size={15} />
+          <span>{copy.heroTrust}</span>
+        </div>
+      </section>
+
+      {/* =====================================================
+          PS5 SLIM DISC — FEATURE CAMPAIGN
+          ===================================================== */}
+
+      <section className="campaign-section">
+        <article className="campaign-card campaign-slim-disc">
+          <div className="campaign-copy">
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.slimLabel}
+            </div>
+
+            <h2>{copy.slimTitle}</h2>
+
+            <p>{copy.slimText}</p>
+
+            <div className="campaign-price">
+              <strong>€549.99</strong>
+              <span>{copy.vat}</span>
+            </div>
+
+            <div className="campaign-actions">
+              <Link
+                className="button button-ghost"
+                href="/products/ps5-slim-disc"
+              >
+                {copy.learnMore}
+              </Link>
+
+              <a
+                className="button button-primary"
+                href={stripeLinks.slimDisc}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {copy.buy}
+              </a>
+            </div>
+          </div>
+
+          <div className="campaign-visual">
+            <img
+              src="/images/ps5-slim-disc.PNG"
+              alt="PlayStation 5 Slim Disc Edition"
+              draggable={false}
+            />
+          </div>
+        </article>
+      </section>
+
+      {/* =====================================================
+          PS5 DIGITAL — FEATURE CAMPAIGN
+          ===================================================== */}
+
+      <section className="campaign-section">
+        <article className="campaign-card campaign-digital">
+          <div className="campaign-copy">
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.digitalLabel}
+            </div>
+
+            <h2>{copy.digitalTitle}</h2>
+
+            <p>{copy.digitalText}</p>
+
+            <div className="campaign-price">
+              <strong>€489.99</strong>
+              <span>{copy.vat}</span>
+            </div>
+
+            <div className="campaign-actions">
+              <Link
+                className="button button-ghost"
+                href="/products/ps5-digital"
+              >
+                {copy.learnMore}
+              </Link>
+
+              <a
+                className="button button-primary"
+                href={stripeLinks.digital}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {copy.buy}
+              </a>
+            </div>
+          </div>
+
+          <div className="campaign-visual">
+            <img
+              src="/images/ps5-digital.PNG"
+              alt="PlayStation 5 Digital Edition"
+              draggable={false}
+            />
+          </div>
+        </article>
+      </section>
+
+      {/* =====================================================
+          PS5 COMPARISON
+          ===================================================== */}
+
+      <section
+        className="section compare-section"
+        id="compare"
       >
         <div className="section-heading">
           <div>
             <div className="eyebrow">
               <span className="eyebrow-line" />
-              {copy.catalogEyebrow}
+              {copy.compareLabel}
             </div>
 
-            <h2>{copy.catalogTitle}</h2>
+            <h2>{copy.compareTitle}</h2>
           </div>
 
-          <p>{copy.catalogText}</p>
+          <p>{copy.compareText}</p>
         </div>
 
-        <div
-          className="urgency-banner"
-          role="status"
-          aria-live="polite"
-        >
-          <span className="urgency-message">
-            {deadlineHasPassed
-              ? copy.urgencyEnded
-              : copy.urgency}
-          </span>
+        <div className="compare-grid">
+          {products.map((product) => {
+            const text = isGreek
+              ? product.el
+              : product.en
 
-          {!deadlineHasPassed && (
-            <div
-              className="urgency-countdown"
-              aria-label="Offer countdown"
-            >
-              <span>
-                {String(countdown.days).padStart(2, '0')}d
-              </span>
-
-              <span>
-                {String(countdown.hours).padStart(2, '0')}h
-              </span>
-
-              <span>
-                {String(countdown.minutes).padStart(2, '0')}m
-              </span>
-
-              <span>
-                {String(countdown.seconds).padStart(2, '0')}s
-              </span>
-            </div>
-          )}
-        </div>
-
-        <div className="product-navigator">
-          <div className="product-navigator-track">
-            {products.map((product) => (
-              <button
-                key={product.key}
-                className={
-                  activeProduct === product.key
-                    ? 'product-nav-item is-active'
-                    : 'product-nav-item'
-                }
-                type="button"
-                onClick={() =>
-                  goToProduct(
-                    products.findIndex(
-                      (item) =>
-                        item.key === product.key
-                    )
-                  )
-                }
-                aria-current={
-                  activeProduct === product.key
-                    ? 'true'
-                    : undefined
-                }
-              >
-                <span className="product-nav-dot" />
-
-                <span>
-                  {isGreek
-                    ? product.greek
-                    : product.name}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div
-          className="product-carousel"
-          id="catalog-products"
-        >
-          <button
-            className="product-carousel-arrow product-carousel-arrow-left"
-            type="button"
-            onClick={() =>
-              goToProduct(activeProductIndex - 1)
-            }
-            disabled={activeProductIndex <= 0}
-            aria-label="Previous product"
-          >
-            <ArrowLeft size={18} />
-          </button>
-
-          <div
-            ref={productTrackRef}
-            className="product-grid"
-          >
-            {products.map((product) => (
+            return (
               <article
-                className={`product-card product-${product.tone}`}
+                className={`compare-card compare-${product.key}`}
                 key={product.key}
               >
-                <div className="product-visual">
+                <div className="compare-visual">
                   <img
-                    className="product-image"
                     src={product.image}
                     alt={product.name}
                     draggable={false}
                   />
                 </div>
 
-                <div className="product-info">
-                  <div>
-                    <h3>
-                      {isGreek
-                        ? product.greek
-                        : product.name}
-                    </h3>
+                <div className="compare-content">
+                  <h3>
+                    {isGreek
+                      ? product.greek
+                      : product.name}
+                  </h3>
 
-                    <p>
-                      {isGreek
-                        ? product.greekNote
-                        : product.note}
-                    </p>
-                  </div>
+                  <p>{text.short}</p>
 
-                  <div className="price">
-                    <small>{copy.exVat}</small>
-                    <strong>{product.price}</strong>
+                  <strong className="compare-price">
+                    {product.price}
+                  </strong>
+
+                  <span className="compare-vat">
+                    {copy.vat}
+                  </span>
+
+                  <div className="compare-actions">
+                    <Link
+                      href={product.learnMore}
+                      className="text-link"
+                    >
+                      {copy.viewModel}
+                      <ArrowRight size={14} />
+                    </Link>
+
+                    <a
+                      href={product.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="button button-primary"
+                    >
+                      {copy.buy}
+                    </a>
                   </div>
                 </div>
-
-                <a
-                  className="product-link"
-                  href={product.link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {copy.buy}
-                  <ArrowRight size={15} />
-                </a>
               </article>
-            ))}
-          </div>
-
-          <button
-            className="product-carousel-arrow product-carousel-arrow-right"
-            type="button"
-            onClick={() =>
-              goToProduct(activeProductIndex + 1)
-            }
-            disabled={
-              activeProductIndex >= products.length - 1
-            }
-            aria-label="Next product"
-          >
-            <ArrowRight size={18} />
-          </button>
-        </div>
-
-        <div className="product-carousel-hint">
-          <span>
-            {activeProductIndex + 1}
-          </span>
-
-          <span className="product-carousel-hint-line" />
-
-          <span>
-            {products.length}
-          </span>
-
-          <small>
-            Swipe to explore
-          </small>
+            )
+          })}
         </div>
       </section>
 
-      <section className="section service-section">
+      {/* =====================================================
+          VYRO STANDARD
+          ===================================================== */}
+
+      <section
+        className="section service-section"
+        id="vyro-standard"
+      >
         <div className="section-heading">
           <div>
             <div className="eyebrow">
               <span className="eyebrow-line" />
-              {copy.serviceEyebrow}
+              {copy.standardLabel}
             </div>
 
-            <h2>{copy.serviceTitle}</h2>
+            <h2>{copy.standardTitle}</h2>
           </div>
 
-          <p>{copy.serviceText}</p>
+          <p>{copy.standardText}</p>
         </div>
 
         <div className="service-grid">
@@ -900,20 +682,20 @@ export default function Page() {
           </article>
 
           <article className="service-card">
-            <Package size={18} />
+            <Check size={18} />
 
             <div>
-              <h3>{copy.deliveryTitle}</h3>
-              <p>{copy.deliveryText}</p>
+              <h3>{copy.vatTitle}</h3>
+              <p>{copy.vatText}</p>
             </div>
           </article>
 
           <article className="service-card">
-            <ArrowRight size={18} />
+            <Package size={18} />
 
             <div>
-              <h3>{copy.trackingTitle}</h3>
-              <p>{copy.trackingText}</p>
+              <h3>{copy.trackedTitle}</h3>
+              <p>{copy.trackedText}</p>
             </div>
           </article>
 
@@ -928,276 +710,163 @@ export default function Page() {
         </div>
       </section>
 
+      {/* =====================================================
+          ACCESSORIES
+          ===================================================== */}
+
       <section
-        className="section wholesale-section"
-        id="wholesale"
+        className="section accessories-section"
+        id="accessories"
       >
         <div className="section-heading">
           <div>
             <div className="eyebrow">
               <span className="eyebrow-line" />
-              {copy.wholesaleEyebrow}
+              {copy.accessoriesLabel}
             </div>
 
-            <h2>{copy.wholesaleTitle}</h2>
+            <h2>{copy.accessoriesTitle}</h2>
           </div>
 
+          <p>{copy.accessoriesText}</p>
+        </div>
+
+        <div className="accessories-grid">
+          {accessories.map((accessory) => {
+            const text = isGreek
+              ? accessory.el
+              : accessory.en
+
+            return (
+              <article
+                className={`accessory-card accessory-${accessory.key}`}
+                key={accessory.key}
+              >
+                <div className="accessory-visual">
+                  <img
+                    src={accessory.image}
+                    alt={accessory.name}
+                    draggable={false}
+                  />
+                </div>
+
+                <div className="accessory-content">
+                  <small>
+                    {isGreek
+                      ? accessory.greek
+                      : accessory.name}
+                  </small>
+
+                  <h3>{text.headline}</h3>
+
+                  <p>{text.description}</p>
+
+                  <div className="accessory-purchase">
+                    <div>
+                      <strong>
+                        {accessory.price}
+                      </strong>
+                      <span>{copy.vat}</span>
+                    </div>
+
+                    <a
+                      className="button button-primary"
+                      href={accessory.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {copy.buy}
+                    </a>
+                  </div>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* =====================================================
+          BRAND
+          ===================================================== */}
+
+      <section className="section brand-section">
+        <div className="brand-manifesto">
+          <div className="eyebrow">
+            <span className="eyebrow-line" />
+            {copy.brandLabel}
+          </div>
+
+          <h2>{copy.brandTitle}</h2>
+
+          <p>{copy.brandText}</p>
+        </div>
+      </section>
+
+      {/* =====================================================
+          WHOLESALE — SMALL RETAIL-SITE ENTRY
+          ===================================================== */}
+
+      <section className="section wholesale-teaser">
+        <div>
+          <h2>{copy.wholesaleTitle}</h2>
           <p>{copy.wholesaleText}</p>
         </div>
 
-        <div className="tier-grid">
-          {tiers.map((tier) => (
-            <button
-              key={tier.name}
-              className={`tier-card ${
-                selectedTier === tier.name
-                  ? 'is-selected'
-                  : ''
-              }`}
-              onClick={() =>
-                setSelectedTier(tier.name)
-              }
-            >
-              <span className="tier-check">
-                {selectedTier === tier.name ? (
-                  <Check size={15} />
-                ) : (
-                  tier.name.slice(0, 1)
-                )}
-              </span>
-
-              <span className="tier-name">
-                {tier.name}
-              </span>
-
-              <strong>{tier.range}</strong>
-
-              <span className="tier-description">
-                {isGreek
-                  ? tier.greek
-                  : tier.desc}
-              </span>
-
-              {selectedTier === tier.name && (
-                <span className="selected-label">
-                  {copy.selected}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-
-        <p className="tier-help">
-          {copy.tierHelp}
-        </p>
-
-        <button
-          className="button button-primary tier-cta"
-          onClick={() => scrollTo('inquiry')}
+        <Link
+          href="/wholesale"
+          className="button button-ghost"
         >
-          {copy.ask}
-          <ArrowRight size={17} />
-        </button>
+          {copy.wholesaleCta}
+          <ArrowRight size={16} />
+        </Link>
       </section>
 
-      <section
-        className="section inquiry-section"
-        id="inquiry"
-      >
-        <div className="inquiry-intro">
-          <div className="eyebrow">
-            <span className="eyebrow-line" />
-            {copy.inquiryEyebrow}
-          </div>
+      {/* =====================================================
+          FOOTER
+          ===================================================== */}
 
-          <h2>{copy.inquiryTitle}</h2>
-
-          <p>{copy.inquiryText}</p>
-
-          <div className="contact-card">
-            <span className="contact-pulse" />
-
-            <div>
-              <small>WhatsApp</small>
-              <strong>+30 697 825 5016</strong>
-            </div>
-          </div>
-        </div>
-
-        <form
-          className="inquiry-form"
-          onSubmit={submitInquiry}
-        >
-          <div className="form-grid">
-            <label>
-              {copy.business}
-              <small> · {copy.businessOptional}</small>
-
-              <input
-                value={form.business}
-                onChange={(event) =>
-                  updateField(
-                    'business',
-                    event.target.value
-                  )
-                }
-                placeholder="VYRO Partners Ltd."
-              />
-            </label>
-
-            <label>
-              {copy.contact}
-              <small> · {copy.required}</small>
-
-              <input
-                required
-                value={form.contact}
-                onChange={(event) =>
-                  updateField(
-                    'contact',
-                    event.target.value
-                  )
-                }
-                placeholder="Alex Morgan"
-              />
-            </label>
-
-            <label>
-              {copy.email}
-              <small> · {copy.required}</small>
-
-              <input
-                required
-                type="email"
-                value={form.email}
-                onChange={(event) =>
-                  updateField(
-                    'email',
-                    event.target.value
-                  )
-                }
-                placeholder="alex@company.com"
-              />
-            </label>
-
-            <label>
-              {copy.phone}
-              <small> · {copy.required}</small>
-
-              <input
-                required
-                type="tel"
-                value={form.phone}
-                onChange={(event) =>
-                  updateField(
-                    'phone',
-                    event.target.value
-                  )
-                }
-                placeholder="+30 210 000 0000"
-              />
-            </label>
-          </div>
-
-          <fieldset>
-            <legend>{copy.quantities}</legend>
-
-            <div className="quantity-grid">
-              {products.map((product) => (
-                <label key={product.key}>
-                  <span>
-                    {product.name.replace(
-                      ' Edition',
-                      ''
-                    )}
-                  </span>
-
-                  <input
-                    type="number"
-                    min="0"
-                    inputMode="numeric"
-                    value={
-                      form[
-                        product.key as keyof FormState
-                      ]
-                    }
-                    onChange={(event) =>
-                      updateField(
-                        product.key as keyof FormState,
-                        event.target.value
-                      )
-                    }
-                  />
-                </label>
-              ))}
-            </div>
-
-            <div className="quantity-total">
-              <span>{copy.min}</span>
-
-              <strong>
-                {copy.total}: {total}
-              </strong>
-            </div>
-          </fieldset>
-
-          <label>
-            {copy.message}
-
-            <textarea
-              value={form.message}
-              onChange={(event) =>
-                updateField(
-                  'message',
-                  event.target.value
-                )
-              }
-              placeholder={copy.messagePlaceholder}
-              rows={4}
-            />
-          </label>
-
-          {error && (
-            <p
-              className="form-error"
-              role="alert"
-            >
-              {error}
-            </p>
-          )}
-
-          {submitted && (
-            <p
-              className="form-success"
-              role="status"
-            >
-              <Check size={16} />
-              {copy.success}
-            </p>
-          )}
-
-          <button
-            className="button button-primary form-submit"
-            type="submit"
+      <footer className="site-footer retail-footer">
+        <div className="footer-brand">
+          <a
+            className="brand"
+            href="#top"
           >
-            {copy.submit}
-            <ArrowRight size={17} />
+            <span className="brand-dot" />
+            VYRO
+          </a>
+
+          <p>{copy.footerText}</p>
+        </div>
+
+        <nav className="footer-links">
+          <button onClick={() => scrollTo('compare')}>
+            PS5
           </button>
-        </form>
-      </section>
 
-      <footer className="site-footer">
-        <a
-          className="brand"
-          href="#top"
-        >
-          <span className="brand-dot" />
-          VYRO
-        </a>
+          <button onClick={() => scrollTo('accessories')}>
+            {copy.navAccessories}
+          </button>
 
-        <p>{copy.footer}</p>
+          <a href="https://wa.me/306978255016">
+            {copy.contact}
+          </a>
 
-        <span>{copy.rights}</span>
+          <Link href="/wholesale">
+            {copy.navWholesale}
+          </Link>
+        </nav>
+
+        <div className="footer-legal">
+          <span>© 2026 VYRO</span>
+
+          <Link href="/terms">
+            {copy.terms}
+          </Link>
+
+          <Link href="/privacy">
+            {copy.privacy}
+          </Link>
+        </div>
       </footer>
     </main>
   )
