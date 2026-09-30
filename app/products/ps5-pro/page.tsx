@@ -18,7 +18,7 @@ import {
 } from 'lucide-react'
 
 const STRIPE_LINK =
-  'https://buy.stripe.com/eVqeV63eU53g7NJ1eHcQU01'
+  'https://buy.stripe.com/8x214g8zefHUfgbe1tcQU0k'
 
 type Language = 'en' | 'el'
 
