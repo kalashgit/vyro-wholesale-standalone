@@ -1,3347 +1,873 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
-
-:root {
-  --bg: #06080c;
-  --surface: #0d1118;
-  --surface-2: #111722;
-  --line: rgba(177, 205, 234, .14);
-  --muted: #8792a3;
-  --text: #f3f7fb;
-  --blue: #2d8cff;
-  --cyan: #69e7ff;
-  --red: #b42318;
-  --red-bright: #d92d20;
-  --radius: 18px;
-  color-scheme: dark;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-button,
-input,
-textarea {
-  font: inherit;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  cursor: pointer;
-}
-
-/* =========================================================
-   SITE SHELL
-   ========================================================= */
-
-.site-shell {
-  overflow: hidden;
-  min-height: 100vh;
-  background:
-    radial-gradient(
-      circle at 80% 4%,
-      rgba(27, 104, 255, .09),
-      transparent 22rem
-    ),
-    var(--bg);
-}
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.site-header {
-  max-width: 1240px;
-  margin: auto;
-  height: 78px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  position: relative;
-  z-index: 5;
-}
-
-.brand {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 22px;
-  letter-spacing: .15em;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.brand-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--blue);
-  box-shadow: 0 0 13px var(--blue);
-}
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 31px;
-  margin-left: auto;
-  margin-right: 28px;
-}
-
-.nav-curated {
-  display: flex;
-  align-items: center;
-  gap: 31px;
-}
-
-.nav-curated-label {
-  display: none;
-}
-
-.main-nav button,
-.main-nav a,
-.language-toggle,
-.menu-toggle {
-  background: none;
-  border: 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .03em;
-  min-height: 44px;
-}
-
-.main-nav a {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.main-nav button:hover,
-.main-nav a:hover,
-.language-toggle:hover {
-  color: var(--text);
-}
-
-.main-nav a[href="/creators"] {
-  color: var(--cyan);
-}
-
-.main-nav a[href="/creators"]:hover {
-  color: white;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.language-toggle {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  color: var(--text);
-}
-
-.menu-toggle {
-  display: none;
-  color: var(--text);
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
-  max-width: 1240px;
-  margin: auto;
-  min-height: 630px;
-  padding: 96px 20px 72px;
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  align-items: center;
-  gap: 40px;
-}
-
-.eyebrow {
-  color: var(--cyan);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-
-.eyebrow-line {
-  display: inline-block;
-  width: 28px;
-  height: 1px;
-  background: var(--cyan);
-  box-shadow: 0 0 9px var(--cyan);
-}
-
-h1,
-h2,
-h3,
-p {
-  margin: 0;
-}
-
-h1 {
-  max-width: 690px;
-  margin-top: 24px;
-  font-size: clamp(48px, 7vw, 90px);
-  line-height: .96;
-  letter-spacing: -.065em;
-  font-weight: 750;
-}
-
-h1 span {
-  color: var(--blue);
-  text-shadow: 0 0 35px rgba(45,140,255,.35);
-}
-
-.hero-copy > p {
-  max-width: 440px;
-  margin-top: 26px;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.55;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 34px;
-}
-
-.button {
-  min-height: 48px;
-  padding: 0 18px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .02em;
-  text-decoration: none;
-  transition: .2s ease;
-}
-
-.button-primary {
-  background: var(--blue);
-  color: white;
-  box-shadow: 0 0 24px rgba(45,140,255,.23);
-}
-
-.button-primary:hover {
-  background: #55a4ff;
-  transform: translateY(-2px);
-}
-
-.button-ghost {
-  color: var(--text);
-  border-color: var(--line);
-  background: rgba(255,255,255,.02);
-}
-
-.button-ghost:hover {
-  border-color: rgba(105,231,255,.65);
-}
-
-.trust-row {
-  margin-top: 42px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  color: #687587;
-  font-size: 11px;
-}
-
-.trust-row svg {
-  color: var(--cyan);
-}
-
-/* =========================================================
-   HERO ORB
-   ========================================================= */
-
-.hero-orb {
-  width: min(420px, 85vw);
-  aspect-ratio: 1;
-  margin: auto;
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-.hero-orb::before {
-  content: '';
-  position: absolute;
-  inset: 16%;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle,
-      rgba(45,140,255,.2),
-      rgba(45,140,255,.04) 54%,
-      transparent 70%
-    );
-  filter: blur(7px);
-}
-
-.orb-ring {
-  position: absolute;
-  border: 1px solid rgba(78, 164, 255, .35);
-  border-radius: 50%;
-  transform: rotate(-23deg);
-}
-
-.ring-one {
-  width: 83%;
-  height: 33%;
-  border-color: rgba(105,231,255,.45);
-  box-shadow: 0 0 24px rgba(45,140,255,.14);
-}
-
-.ring-two {
-  width: 67%;
-  height: 95%;
-  transform: rotate(27deg);
-  border-color: rgba(45,140,255,.3);
-}
-
-.orb-core {
-  width: 48%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1px solid rgba(105,231,255,.7);
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #6ce7ff,
-      #176cff 23%,
-      #071b51 62%,
-      #050a13 70%
-    );
-  box-shadow:
-    inset 0 0 45px rgba(105,231,255,.4),
-    0 0 50px rgba(45,140,255,.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transform: rotate(-12deg);
-}
-
-.orb-core span {
-  font-size: clamp(35px, 5vw, 60px);
-  font-weight: 900;
-  letter-spacing: -.08em;
-}
-
-.orb-core small {
-  color: white;
-  font-size: 9px;
-  letter-spacing: .3em;
-  margin-left: .3em;
-}
-
-.orb-tag {
-  position: absolute;
-  color: var(--cyan);
-  font-size: 9px;
-  letter-spacing: .15em;
-  border: 1px solid rgba(105,231,255,.4);
-  padding: 7px 9px;
-  background: rgba(6,8,12,.7);
-}
-
-.tag-top {
-  top: 18%;
-  right: 6%;
-}
-
-.tag-bottom {
-  bottom: 17%;
-  left: 3%;
-}
-
-/* =========================================================
-   SIGNAL STRIP
-   ========================================================= */
-
-.signal-strip {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  max-width: 1240px;
-  margin: auto;
-  padding: 22px 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.signal-strip div {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.signal-strip span {
-  color: #4d5868;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .1em;
-}
-
-.signal-strip b {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: #a7b3c3;
-  font-weight: 600;
-}
-
-.signal-strip svg {
-  color: var(--blue);
-}
-
-/* =========================================================
-   GENERAL SECTIONS
-   ========================================================= */
-
-.section {
-  max-width: 1240px;
-  margin: auto;
-  padding: 126px 20px;
-}
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 40px;
-  margin-bottom: 42px;
-}
-
-.section-heading h2,
-.inquiry-intro h2 {
-  margin-top: 18px;
-  font-size: clamp(35px, 5vw, 60px);
-  line-height: .98;
-  letter-spacing: -.055em;
-}
-
-.section-heading > p {
-  max-width: 340px;
-  color: var(--muted);
-  line-height: 1.55;
-  font-size: 14px;
-}
-
-/* =========================================================
-   URGENCY
-   ========================================================= */
-
-.urgency-banner {
-  width: 100%;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin: 0 0 32px;
-  padding: 11px 20px;
-  background:
-    linear-gradient(
-      90deg,
-      var(--red),
-      var(--red-bright),
-      var(--red)
-    );
-  color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 8px 30px rgba(180, 35, 24, .14);
-  text-align: center;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-}
-
-.urgency-message {
-  white-space: nowrap;
-}
-
-.urgency-countdown {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .08em;
-}
-
-.urgency-countdown span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 34px;
-  padding: 4px 5px;
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 4px;
-  background: rgba(0,0,0,.12);
-}
-
-/* =========================================================
-   SERVICE STANDARD
-   ========================================================= */
-
-.service-section {
-  border-top: 1px solid var(--line);
-}
-
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.service-card {
-  min-height: 150px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.035),
-      rgba(255,255,255,.012)
-    );
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 30px;
-  transition: .2s ease;
-}
-
-.service-card:hover {
-  border-color: rgba(105,231,255,.35);
-}
-
-.service-card svg {
-  color: var(--cyan);
-}
-
-.service-card h3 {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: -.01em;
-}
-
-.service-card p {
-  margin-top: 7px;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.5;
-  max-width: 190px;
-}
-
-/* =========================================================
-   PRODUCTS
-   ========================================================= */
-
-.product-carousel {
-  position: relative;
-  width: 100%;
-}
-
-.product-grid {
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  width: 100%;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  scroll-snap-type: x mandatory;
-  scroll-snap-stop: always;
-  scroll-behavior: smooth;
-
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-touch-action: pan-x pan-y;
-
-  scrollbar-width: none;
-}
-#catalog-products {
-  scroll-margin-top: 20px;
-}
-.product-grid::-webkit-scrollbar {
-  display: none;
-}
-
-/* =========================================================
-   PRODUCT CARD / SLIDE
-   ========================================================= */
-
-.product-card {
-  position: relative;
-
-  flex: 0 0 100%;
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .45fr);
-
-  min-height: 620px;
-
-  overflow: hidden;
-
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 24px;
-
-  background: #0a0d12;
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.25);
-
-  isolation: isolate;
-}
-
-.product-card:hover {
-  border-color: rgba(255,255,255,.12);
-}
-
-/* =========================================================
-   PRODUCT VISUAL
-   ========================================================= */
-
-.product-visual {
-  position: relative;
-
-  min-height: 620px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-  padding: 44px 60px;
-
-  background: #0a0d12;
-}
-
-/* =========================================================
-   PRODUCT IMAGE
-   ========================================================= */
-
-.product-image {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 520px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  mix-blend-mode: normal;
-
-  filter:
-    contrast(1.01)
-    saturate(.98)
-    brightness(1)
-    drop-shadow(0 35px 55px rgba(0,0,0,.28));
-
-  /*
-   * IMPORTANT:
-   * The image itself never animates or responds to
-   * hover/touch/swipe. Only the carousel moves.
-   */
-  transition: none !important;
-  animation: none !important;
-
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-user-drag: none;
-
-  pointer-events: none;
-  touch-action: none;
-}
-
-.product-image::selection {
-  background: transparent;
-}
-
-/* =========================================================
-   VISUAL SIZE NORMALIZATION
-   ========================================================= */
-
-.product-pro .product-image {
-  transform: scale(1.3);
-}
-
-.product-digital .product-image {
-  transform: scale(.78);
-}
-
-.product-disc .product-image {
-  transform: scale(.72);
-}
-
-.product-slim .product-image {
-  transform: scale(.78);
-}
-
-/*
- * NEVER change the image transform when the card is hovered.
- * The carousel/card is allowed to move; the image stays fixed.
- */
-.product-card:hover .product-image {
-  transform: none;
-}
-
-/*
- * Re-apply each fixed product size on hover.
- */
-.product-card.product-pro:hover .product-image {
-  transform: scale(1.3);
-}
-
-.product-card.product-digital:hover .product-image {
-  transform: scale(.78);
-}
-
-.product-card.product-disc:hover .product-image {
-  transform: scale(.72);
-}
-
-.product-card.product-slim:hover .product-image {
-  transform: scale(.78);
-}
-
-/* =========================================================
-   PRODUCT NAVIGATOR
-   ========================================================= */
-
-.product-navigator {
-  width: 100%;
-  margin-bottom: 18px;
-  overflow: hidden;
-}
-
-.product-navigator-track {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-
-  width: 100%;
-
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.product-navigator-track::-webkit-scrollbar {
-  display: none;
-}
-
-.product-nav-item {
-  flex: 0 0 auto;
-
-  min-height: 34px;
-  padding: 0 11px;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 999px;
-
-  background: rgba(255,255,255,.018);
-
-  color: #657183;
-
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .05em;
-
-  white-space: nowrap;
-
-  transition:
-    color .2s ease,
-    border-color .2s ease,
-    background .2s ease;
-}
-
-.product-nav-item:hover {
-  color: var(--text);
-  border-color: rgba(255,255,255,.16);
-}
-
-.product-nav-item.is-active {
-  color: var(--text);
-  border-color: rgba(45,140,255,.55);
-  background: rgba(45,140,255,.08);
-}
-
-.product-nav-dot {
-  width: 5px;
-  height: 5px;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  background: #465263;
-
-  transition:
-    background .2s ease,
-    box-shadow .2s ease;
-}
-
-.product-nav-item.is-active .product-nav-dot {
-  background: var(--blue);
-  box-shadow: 0 0 8px rgba(45,140,255,.7);
-}
-
-/* =========================================================
-   PRODUCT ARROWS
-   ========================================================= */
-
-.product-carousel-arrow {
-  position: absolute;
-  top: 50%;
-  z-index: 8;
-
-  width: 44px;
-  height: 44px;
-
-  display: grid;
-  place-items: center;
-
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 50%;
-
-  background: rgba(6,8,12,.72);
-  backdrop-filter: blur(10px);
-
-  color: #c8d2df;
-
-  transform: translateY(-50%);
-
-  transition:
-    opacity .2s ease,
-    background .2s ease,
-    border-color .2s ease,
-    color .2s ease;
-}
-
-.product-carousel-arrow:hover:not(:disabled) {
-  background: rgba(255,255,255,.08);
-  border-color: rgba(105,231,255,.38);
-  color: white;
-}
-
-.product-carousel-arrow:disabled {
-  opacity: .22;
-  cursor: default;
-}
-
-.product-carousel-arrow-left {
-  left: 18px;
-}
-
-.product-carousel-arrow-right {
-  right: 18px;
-}
-
-/* =========================================================
-   PRODUCT INFORMATION
-   ========================================================= */
-
-.product-info {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  padding: 60px 60px 60px 20px;
-}
-
-.product-info h3 {
-  margin: 0;
-
-  font-size: clamp(30px, 3vw, 52px);
-  line-height: .98;
-  letter-spacing: -.045em;
-  font-weight: 600;
-
-  color: var(--text);
-}
-
-.product-info p {
-  margin: 18px 0 0;
-
-  max-width: 260px;
-
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.price {
-  text-align: left;
-}
-
-.product-info .price {
-  margin-top: 42px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.product-info .price small {
-  color: var(--muted);
-
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
-.product-info .price strong {
-  color: var(--text);
-
-  font-size: 28px;
-  line-height: 1;
-  letter-spacing: -.025em;
-  font-weight: 600;
-}
-
-/* =========================================================
-   PRODUCT CTA
-   ========================================================= */
-
-.product-link {
-  position: absolute;
-
-  right: 60px;
-  bottom: 52px;
-  z-index: 3;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-
-  padding: 12px 17px;
-
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 999px;
-
-  background: rgba(255,255,255,.035);
-
-  color: var(--text);
-
-  font-size: 12px;
-  font-weight: 600;
-
-  text-decoration: none;
-
-  transition:
-    background .25s ease,
-    border-color .25s ease,
-    transform .25s ease;
-}
-
-.product-link:hover {
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.18);
-  transform: translateY(-2px);
-}
-
-.product-trade-note {
-  display: block;
-  margin: -5px 17px 16px;
-
-  color: var(--muted);
-
-  font-size: 8px;
-  line-height: 1.4;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-/* =========================================================
-   CAROUSEL HINT
-   ========================================================= */
-
-.product-carousel-hint {
-  min-height: 34px;
-
-  margin-top: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  color: #566274;
-
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .08em;
-  font-variant-numeric: tabular-nums;
-}
-
-.product-carousel-hint-line {
-  width: 28px;
-  height: 1px;
-  background: rgba(177,205,234,.18);
-}
-
-.product-carousel-hint small {
-  margin-left: 5px;
-
-  color: #4e5b6c;
-
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-/* =========================================================
-   WHOLESALE
-   ========================================================= */
-
-.wholesale-section {
-  border-top: 1px solid var(--line);
-}
-
-.tier-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.tier-card {
-  min-height: 210px;
-  color: var(--text);
-  text-align: left;
-  padding: 20px;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: var(--surface);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  transition: .2s ease;
-  position: relative;
-}
-
-.tier-card:hover {
-  border-color: rgba(105,231,255,.45);
-}
-
-.tier-card.is-selected {
-  border-color: var(--blue);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(45,140,255,.15),
-      var(--surface)
-    );
-  box-shadow: 0 0 28px rgba(45,140,255,.1);
-}
-
-.tier-check {
-  width: 31px;
-  height: 31px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--cyan);
-  font-size: 12px;
-}
-
-.is-selected .tier-check {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: white;
-}
-
-.tier-name {
-  margin-top: 26px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.tier-card strong {
-  font-size: 34px;
-  letter-spacing: -.06em;
-  margin-top: 2px;
-}
-
-.tier-description {
-  color: #697587;
-  font-size: 11px;
-  line-height: 1.45;
-  max-width: 170px;
-  margin-top: 10px;
-}
-
-.selected-label {
-  position: absolute;
-  top: 22px;
-  right: 18px;
-  color: var(--cyan);
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-}
-
-.tier-help {
-  margin: 18px auto 0;
-  max-width: 620px;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.6;
-  text-align: center;
-}
-
-.tier-cta {
-  margin-top: 25px;
-}
-
-/* =========================================================
-   INQUIRY
-   ========================================================= */
-
-.inquiry-section {
-  border-top: 1px solid var(--line);
-  display: grid;
-  grid-template-columns: .75fr 1.25fr;
-  gap: 90px;
-}
-
-.inquiry-intro p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-  margin-top: 24px;
-  max-width: 300px;
-}
-
-.contact-card {
-  margin-top: 46px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.contact-pulse {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #50e5a2;
-  box-shadow: 0 0 14px #50e5a2;
-}
-
-.contact-card small {
-  display: block;
-  color: #677488;
-  font-size: 10px;
-}
-
-.contact-card strong {
-  display: block;
-  font-size: 13px;
-  margin-top: 3px;
-}
-
-.inquiry-form {
-  display: flex;
-  flex-direction: column;
-  gap: 23px;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 17px;
-}
-
-.inquiry-form label,
-fieldset legend {
-  color: #8995a7;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.inquiry-form label small {
-  color: #566274;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .04em;
-}
-
-.inquiry-form input,
-.inquiry-form textarea {
-  width: 100%;
-  margin-top: 9px;
-  border-radius: 9px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--text);
-  padding: 0 13px;
-  min-height: 47px;
-  outline: none;
-  font-size: 16px;
-}
-
-.inquiry-form textarea {
-  padding-top: 13px;
-  resize: vertical;
-}
-
-.inquiry-form input:focus,
-.inquiry-form textarea:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(45,140,255,.1);
-}
-
-fieldset {
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-
-.quantity-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.quantity-grid label {
-  font-size: 10px;
-}
-
-.quantity-grid input {
-  min-height: 44px;
-  text-align: center;
-}
-
-.quantity-total {
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
-  color: #637082;
-  font-size: 10px;
-}
-
-.quantity-total strong {
-  color: var(--cyan);
-}
-
-.form-error,
-.form-success {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  font-size: 12px;
-  margin: -7px 0 0;
-}
-
-.form-error {
-  color: #ff8f9a;
-}
-
-.form-success {
-  color: #5ee8ad;
-}
-
-.form-submit {
-  align-self: flex-start;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.site-footer {
-  max-width: 1240px;
-  margin: auto;
-  padding: 30px 20px 38px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.site-footer p,
-.site-footer > span {
-  color: #586577;
-  font-size: 10px;
-}
-
-.site-footer p {
-  margin-left: auto;
-}
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-  .hero {
-    grid-template-columns: 1fr;
-    padding-top: 70px;
-  }
-
-  .hero-orb {
-    width: min(340px, 82vw);
-    margin-top: 10px;
-  }
-
-  .tier-grid,
-  .service-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .product-card {
-    grid-template-columns: minmax(0, 1.35fr) minmax(240px, .65fr);
-    min-height: 560px;
-  }
-
-  .product-visual {
-    min-height: 560px;
-  }
-
-  .product-image {
-    height: 470px;
-  }
-
-  .product-info {
-    padding-right: 35px;
-  }
-
-  .product-info h3 {
-    font-size: clamp(30px, 4vw, 44px);
-  }
-
-  .product-link {
-    right: 35px;
-  }
-
-  .inquiry-section {
-    gap: 45px;
-  }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-  .urgency-banner {
-    flex-direction: column;
-    gap: 6px;
-    padding: 10px 14px;
-    min-height: 58px;
-    border-radius: 7px;
-    font-size: 8px;
-    letter-spacing: .1em;
-  }
-
-  .urgency-message {
-    white-space: normal;
-    line-height: 1.4;
-  }
-
-  .urgency-countdown {
-    font-size: 9px;
-  }
-
-  .urgency-countdown span {
-    min-width: 32px;
-  }
-}
-
-@media (max-width: 640px) {
-
-  .site-header {
-    height: 68px;
-  }
-
-  /* MOBILE BURGER MENU */
-
-  .main-nav {
-    display: none;
-    position: absolute;
-    top: 68px;
-    left: 0;
-    right: 0;
-    margin: 0;
-    padding: 22px 20px 24px;
-    background:
-      linear-gradient(
-        180deg,
-        rgba(9,13,20,.99),
-        rgba(6,8,12,.98)
-      );
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 18px 35px rgba(0,0,0,.28);
-  }
-
-  .main-nav.is-open {
-    display: block;
-  }
-
-  .nav-curated {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 2px;
-  }
-
-  .nav-curated-label {
-    display: block;
-    margin-bottom: 8px;
-    padding: 0 2px 10px;
-    border-bottom: 1px solid rgba(177, 205, 234, .09);
-    color: #566274;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: .2em;
-    line-height: 1;
-  }
-
-  .main-nav button,
-  .main-nav a {
-    width: 100%;
-    min-height: 50px;
-    padding: 0 2px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #aeb9c9;
-    text-align: left;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .01em;
-    border-bottom: 1px solid rgba(177, 205, 234, .055);
-  }
-
-  .main-nav button:hover,
-  .main-nav a:hover {
-    color: var(--text);
-  }
-
-  .main-nav a[href="/creators"] {
-    color: var(--cyan);
-  }
-
-  .main-nav a[href="/creators"]::after {
-    content: '↗';
-    color: var(--blue);
-    font-size: 14px;
-    font-weight: 400;
-  }
-
-  .main-nav button:last-child,
-  .main-nav a:last-child {
-    border-bottom: 0;
-  }
-
-  .menu-toggle {
-    display: grid;
-    place-items: center;
-  }
-
-  .hero {
-    min-height: auto;
-    padding: 72px 20px 66px;
-    gap: 55px;
-  }
-
-  .hero-copy > p {
-    font-size: 16px;
-  }
-
-  .hero-actions .button {
-    flex: 1 1 100%;
-  }
-
-  .trust-row {
-    line-height: 1.4;
-    align-items: flex-start;
-  }
-
-  .hero-orb {
-    width: min(310px, 85vw);
-  }
-
-  .signal-strip {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    padding-top: 18px;
-    padding-bottom: 18px;
-  }
-
-  .signal-strip div {
-    justify-content: flex-start;
-  }
-
-  .section {
-    padding: 82px 20px;
-  }
-
-  .section-heading {
-    display: block;
-    margin-bottom: 30px;
-  }
-
-  .section-heading > p {
-    margin-top: 22px;
-  }
-
-  .service-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .service-card {
-    min-height: 155px;
-    padding: 15px;
-  }
-
-  .service-card h3 {
-    font-size: 11px;
-  }
-
-  .service-card p {
-    font-size: 9px;
-  }
-
-  /* =======================================================
-     MOBILE PRODUCT NAVIGATOR
-     ======================================================= */
-
-  .product-navigator {
-    margin-bottom: 12px;
-  }
-
-  .product-navigator-track {
-    gap: 7px;
-    padding-right: 20px;
-    scroll-snap-type: x proximity;
-  }
-
-  .product-nav-item {
-    min-height: 32px;
-    padding: 0 10px;
-    font-size: 8px;
-  }
-
-  /* =======================================================
-     MOBILE PRODUCT CAROUSEL
-     ======================================================= */
-
-  .product-carousel {
-    width: 100%;
-  }
-
-  .product-grid {
-    display: flex;
-    flex-direction: row;
-    gap: 0;
-
-    width: 100%;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scroll-snap-type: x mandatory;
-    scroll-snap-stop: always;
-
-    /*
-     * The USER swipes the carousel.
-     * The image itself does NOT receive the gesture.
-     */
-    touch-action: pan-x;
-
-    overscroll-behavior-x: contain;
-
-    padding: 0;
-
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .product-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .product-card {
-    flex: 0 0 100%;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    min-height: 0;
-
-    border-radius: 20px;
-
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-
-  /* =======================================================
-     MOBILE PRODUCT IMAGE STAGE
-     ======================================================= */
-
-  .product-visual {
-    min-height: 420px;
-    height: 420px;
-
-    flex: 0 0 420px;
-
-    padding: 25px 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #0a0d12;
-
-    /*
-     * Do not allow the image stage to create
-     * pinch/zoom/drag behavior.
-     */
-    touch-action: pan-x;
-  }
-
-  /* =======================================================
-     MOBILE PRODUCT IMAGE
-     *
-     * STATIC.
-     *
-     * The carousel moves.
-     * The image does NOT zoom, shrink, animate,
-     * transition, hover, drag, or react to touch.
-     * ======================================================= */
-
-  .product-image {
-    width: 100%;
-    height: 370px;
-
-    object-fit: contain;
-    object-position: center;
-
-    display: block;
-
-    transition: none !important;
-    animation: none !important;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-user-drag: none;
-
-    pointer-events: none;
-    touch-action: none;
-  }
-
-  /* =======================================================
-     MOBILE PRODUCT SCALE — FIXED
-     ======================================================= */
-
-  .product-pro .product-image {
-    transform: scale(1.3) !important;
-  }
-
-  .product-digital .product-image {
-    transform: scale(.78) !important;
-  }
-
-  .product-disc .product-image {
-    transform: scale(.72) !important;
-  }
-
-  .product-slim .product-image {
-    transform: scale(.78) !important;
-  }
-
-  /*
-   * Explicitly preserve the exact same scale on hover.
-   * No inherit. No automatic browser transform.
-   */
-
-  .product-card:hover .product-image {
-    transition: none !important;
-  }
-
-  .product-card.product-pro:hover .product-image {
-    transform: scale(1.3) !important;
-  }
-
-  .product-card.product-digital:hover .product-image {
-    transform: scale(.78) !important;
-  }
-
-  .product-card.product-disc:hover .product-image {
-    transform: scale(.72) !important;
-  }
-
-  .product-card.product-slim:hover .product-image {
-    transform: scale(.78) !important;
-  }
-
-  /* =======================================================
-     MOBILE PRODUCT INFORMATION
-     ======================================================= */
-
-  .product-info {
-    padding: 28px 24px 86px;
-
-    display: flex;
-
-    min-height: 0;
-  }
-
-  .product-info h3 {
-    font-size: 32px;
-  }
-
-  .product-info p {
-    margin-top: 12px;
-  }
-
-  .product-info .price {
-    margin-top: 24px;
-  }
-
-  .product-info .price strong {
-    font-size: 26px;
-  }
-
-  .product-link {
-    left: 24px;
-    right: 24px;
-    bottom: 22px;
-
-    justify-content: center;
-  }
-
-  /* =======================================================
-     MOBILE ARROWS
-     ======================================================= */
-
-  .product-carousel-arrow {
-    width: 38px;
-    height: 38px;
-
-    background: rgba(6,8,12,.62);
-
-    backdrop-filter: blur(8px);
-  }
-
-  .product-carousel-arrow-left {
-    left: 10px;
-  }
-
-  .product-carousel-arrow-right {
-    right: 10px;
-  }
-
-  /* =======================================================
-     MOBILE CAROUSEL HINT
-     ======================================================= */
-
-  .product-carousel-hint {
-    margin-top: 10px;
-
-    min-height: 28px;
-
-    font-size: 8px;
-  }
-
-  .product-carousel-hint small {
-    font-size: 7px;
-  }
-
-  /* =======================================================
-     WHOLESALE
-     ======================================================= */
-
-  .tier-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .tier-card {
-    min-height: 205px;
-    padding: 15px;
-  }
-
-  .tier-card strong {
-    font-size: 29px;
-  }
-
-  .tier-description {
-    font-size: 10px;
-  }
-
-  .selected-label {
-    top: 17px;
-    right: 13px;
-    font-size: 8px;
-  }
-
-  /* =======================================================
-     INQUIRY
-     ======================================================= */
-
-  .inquiry-section {
-    display: block;
-  }
-
-  .inquiry-intro {
-    margin-bottom: 48px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .quantity-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .site-footer {
-    flex-wrap: wrap;
-  }
-
-  .site-footer p {
-    order: 3;
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .site-footer > span {
-    margin-left: auto;
-  }
-}
-
-/* =========================================================
-   VYRO CREATOR ACCESS
-   Premium private creator storefront
-   ========================================================= */
-
-.creators-page {
-  position: relative;
-  isolation: isolate;
-  overflow-x: hidden;
-  background:
-    radial-gradient(
-      circle at 50% -12%,
-      rgba(45, 140, 255, .13),
-      transparent 34rem
-    ),
-    radial-gradient(
-      circle at 100% 38%,
-      rgba(105, 231, 255, .035),
-      transparent 30rem
-    ),
-    var(--bg);
-}
-
-.creators-page::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.012) 50%,
-      transparent
-    );
-}
-
-/* =========================================================
-   CREATOR ACCESS SCREEN
-   ========================================================= */
-
-.creators-page .creator-access {
-  min-height: calc(100svh - 78px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 20px 100px;
-  text-align: center;
-}
-
-.creators-page .creator-access-inner {
-  width: 100%;
-  max-width: 680px;
-  margin: auto;
-}
-
-.creators-page .creator-access .eyebrow {
-  justify-content: center;
-}
-
-.creators-page .creator-access h1 {
-  max-width: 680px;
-  margin: 25px auto 0;
-  font-size: clamp(48px, 7vw, 82px);
-  line-height: .92;
-  letter-spacing: -.07em;
-}
-
-.creators-page .creator-intro {
-  max-width: 430px;
-  margin: 28px auto 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-.creators-page .creator-lock-card {
-  width: min(440px, 100%);
-  margin: 38px auto 0;
-  padding: 24px;
-  text-align: left;
-  border: 1px solid rgba(177,205,234,.14);
-  border-radius: 20px;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.055),
-      rgba(255,255,255,.012)
-    );
-  box-shadow:
-    0 35px 90px rgba(0,0,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.035);
-  backdrop-filter: blur(18px);
-}
-
-.creators-page .creator-lock-icon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 22px;
-  border: 1px solid rgba(105,231,255,.22);
-  border-radius: 12px;
-  color: var(--cyan);
-  background: rgba(105,231,255,.045);
-}
-
-.creators-page .creator-lock-card label {
-  display: block;
-  color: #aeb9c9;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-}
-
-.creators-page .creator-lock-card input {
-  width: 100%;
-  height: 52px;
-  margin-top: 9px;
-  padding: 0 15px;
-  border: 1px solid rgba(177,205,234,.16);
-  border-radius: 10px;
-  outline: none;
-  background: rgba(0,0,0,.22);
-  color: var(--text);
-  font-size: 14px;
-  letter-spacing: .06em;
-  transition: .2s ease;
-}
-
-.creators-page .creator-lock-card input::placeholder {
-  color: #566274;
-  letter-spacing: 0;
-}
-
-.creators-page .creator-lock-card input:focus {
-  border-color: rgba(45,140,255,.75);
-  box-shadow: 0 0 0 3px rgba(45,140,255,.1);
-}
-
-.creators-page .creator-unlock {
-  width: 100%;
-  margin-top: 12px;
-}
-
-.creators-page .creator-security-note {
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  color: #596679;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.creators-page .creator-security-note svg {
-  color: #5ee8ad;
-}
-
-.creators-page .form-error {
-  margin-top: 9px;
-  font-size: 10px;
-}
-
-.creators-page .creator-back-link {
-  display: inline-block;
-  margin-top: 24px;
-  color: #687587;
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: 700;
-  transition: .2s ease;
-}
-
-.creators-page .creator-back-link:hover {
-  color: var(--text);
-}
-
-/* =========================================================
-   CREATOR WELCOME
-   ========================================================= */
-
-.creators-page .creator-welcome {
-  max-width: 1240px;
-  margin: auto;
-  padding: 84px 20px 48px;
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-.creators-page .creator-welcome h1 {
-  max-width: none;
-  margin-top: 20px;
-  font-size: clamp(44px, 6vw, 78px);
-  line-height: .92;
-  letter-spacing: -.07em;
-}
-
-.creators-page .creator-welcome h1 span {
-  color: var(--blue);
-  text-shadow: 0 0 35px rgba(45,140,255,.25);
-}
-
-.creators-page .creator-welcome p {
-  margin-top: 16px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.creators-page .creator-access-badge {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 12px;
-  border: 1px solid rgba(94,232,173,.2);
-  border-radius: 999px;
-  color: #72e8b3;
-  background: rgba(94,232,173,.04);
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: .11em;
-  white-space: nowrap;
-}
-
-.creators-page .creator-access-badge svg {
-  width: 13px;
-  height: 13px;
-}
-
-/* =========================================================
-   CREATOR SHOWCASE
-   ========================================================= */
-
-.creators-page .creator-showcase {
-  width: 100%;
-  padding: 25px 0 110px;
-}
-
-.creators-page .creator-showcase-top {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 20px 24px;
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 30px;
-}
-
-.creators-page .creator-showcase-top h2 {
-  margin-top: 17px;
-  font-size: clamp(36px, 5vw, 58px);
-  line-height: .95;
-  letter-spacing: -.06em;
-}
-
-.creators-page .creator-showcase-top > div:first-child > p {
-  max-width: 330px;
-  margin-top: 13px;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.55;
-}
-
-.creators-page .creator-showcase-controls {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  flex-shrink: 0;
-}
-
-.creators-page .creator-showcase-count {
-  min-width: 64px;
-  text-align: center;
-  color: #687587;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  font-variant-numeric: tabular-nums;
-}
-
-.creators-page .creator-showcase-arrow {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(177,205,234,.14);
-  border-radius: 50%;
-  background: rgba(255,255,255,.025);
-  color: #b8c5d6;
-  transition: .2s ease;
-}
-
-.creators-page .creator-showcase-arrow:hover {
-  border-color: rgba(105,231,255,.45);
-  color: white;
-  background: rgba(45,140,255,.07);
-}
-
-/* =========================================================
-   CREATOR SHOWCASE TRACK
-   MATCHES MAIN PRODUCT CAROUSEL
-   ========================================================= */
-
-.creators-page .creator-showcase-track {
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  width: 100%;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  scroll-snap-type: x mandatory;
-  scroll-snap-stop: always;
-  scroll-behavior: smooth;
-
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-x pan-y;
-
-  scrollbar-width: none;
-}
-
-.creators-page .creator-showcase-track::-webkit-scrollbar {
-  display: none;
-}
-
-/* =========================================================
-   PRODUCT SLIDE
-   APPLE-STYLE PRODUCT STAGE
-   ========================================================= */
-
-.creators-page .creator-product-slide {
-  position: relative;
-
-  flex: 0 0 100%;
-  width: 100%;
-
-  min-height: min(76svh, 820px);
-
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-
-  overflow: hidden;
-
-  display: grid;
-  grid-template-columns: 1.48fr .52fr;
-
-  border: 1px solid rgba(177,205,234,.075);
-  border-radius: 30px;
-
-  background:
-    radial-gradient(
-      circle at 35% 50%,
-      rgba(45,140,255,.10),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 82% 25%,
-      rgba(105,231,255,.025),
-      transparent 32%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.026),
-      rgba(255,255,255,.004)
-    );
-
-  box-shadow:
-    0 50px 130px rgba(0,0,0,.32),
-    inset 0 1px 0 rgba(255,255,255,.025);
-
-  isolation: isolate;
-}
-
-.creators-page .creator-product-slide::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  opacity: .7;
-  background:
-    linear-gradient(
-      115deg,
-      rgba(255,255,255,.025),
-      transparent 28%,
-      transparent 72%,
-      rgba(255,255,255,.008)
-    );
-}
-
-.creators-page .creator-product-slide::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-  width: 72%;
-  height: 125%;
-  left: -13%;
-  top: -12%;
-  border-radius: 50%;
-  filter: blur(75px);
-  opacity: .28;
-}
-
-/* =========================================================
-   PRODUCT ENVIRONMENTS
-   ========================================================= */
-
-.creators-page .creator-product-slide.product-pro {
-  background:
-    radial-gradient(
-      circle at 34% 48%,
-      rgba(45,140,255,.13),
-      transparent 39%
-    ),
-    radial-gradient(
-      circle at 83% 25%,
-      rgba(45,140,255,.035),
-      transparent 32%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.028),
-      rgba(255,255,255,.004)
-    );
-}
-
-.creators-page .creator-product-slide.product-pro::after {
-  background:
-    radial-gradient(
-      circle,
-      rgba(45,140,255,.22),
-      transparent 67%
-    );
-}
-
-.creators-page .creator-product-slide.product-digital {
-  background:
-    radial-gradient(
-      circle at 34% 48%,
-      rgba(105,231,255,.10),
-      transparent 39%
-    ),
-    radial-gradient(
-      circle at 83% 25%,
-      rgba(45,140,255,.025),
-      transparent 32%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.024),
-      rgba(255,255,255,.004)
-    );
-}
-
-.creators-page .creator-product-slide.product-digital::after {
-  background:
-    radial-gradient(
-      circle,
-      rgba(105,231,255,.17),
-      transparent 67%
-    );
-}
-
-.creators-page .creator-product-slide.product-disc {
-  background:
-    radial-gradient(
-      circle at 34% 48%,
-      rgba(126,101,255,.11),
-      transparent 39%
-    ),
-    radial-gradient(
-      circle at 83% 25%,
-      rgba(105,231,255,.025),
-      transparent 32%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.024),
-      rgba(255,255,255,.004)
-    );
-}
-
-.creators-page .creator-product-slide.product-disc::after {
-  background:
-    radial-gradient(
-      circle,
-      rgba(126,101,255,.17),
-      transparent 67%
-    );
-}
-
-.creators-page .creator-product-slide.product-slimDisc {
-  background:
-    radial-gradient(
-      circle at 34% 48%,
-      rgba(45,140,255,.10),
-      transparent 39%
-    ),
-    radial-gradient(
-      circle at 83% 25%,
-      rgba(105,231,255,.025),
-      transparent 32%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.024),
-      rgba(255,255,255,.004)
-    );
-}
-
-.creators-page .creator-product-slide.product-slimDisc::after {
-  background:
-    radial-gradient(
-      circle,
-      rgba(45,140,255,.17),
-      transparent 67%
-    );
-}
-
-.creators-page .creator-product-slide.product-slimDigital {
-  background:
-    radial-gradient(
-      circle at 34% 48%,
-      rgba(105,231,255,.075),
-      transparent 39%
-    ),
-    radial-gradient(
-      circle at 83% 25%,
-      rgba(45,140,255,.025),
-      transparent 32%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.022),
-      rgba(255,255,255,.004)
-    );
-}
-
-.creators-page .creator-product-slide.product-slimDigital::after {
-  background:
-    radial-gradient(
-      circle,
-      rgba(105,231,255,.14),
-      transparent 67%
-    );
-}
-
-.creators-page .creator-product-slide.product-discDrive {
-  background:
-    radial-gradient(
-      circle at 34% 48%,
-      rgba(105,231,255,.055),
-      transparent 37%
-    ),
-    radial-gradient(
-      circle at 82% 25%,
-      rgba(45,140,255,.025),
-      transparent 31%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.021),
-      rgba(255,255,255,.004)
-    );
-}
-
-.creators-page .creator-product-slide.product-discDrive::after {
-  background:
-    radial-gradient(
-      circle,
-      rgba(105,231,255,.12),
-      transparent 67%
-    );
-}
-
-.creators-page .creator-product-slide.product-controller {
-  background:
-    radial-gradient(
-      circle at 34% 48%,
-      rgba(105,231,255,.065),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 82% 25%,
-      rgba(45,140,255,.025),
-      transparent 31%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.021),
-      rgba(255,255,255,.004)
-    );
-}
-
-.creators-page .creator-product-slide.product-controller::after {
-  background:
-    radial-gradient(
-      circle,
-      rgba(105,231,255,.13),
-      transparent 67%
-    );
-}
-
-/* =========================================================
-   PRODUCT SCENE
-   ========================================================= */
-
-.creators-page .creator-product-scene {
-  position: relative;
-  min-width: 0;
-  min-height: 100%;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.creators-page .creator-product-scene::before {
-  content: '';
-  position: absolute;
-  width: 76%;
-  height: 76%;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle,
-      rgba(45,140,255,.12),
-      rgba(45,140,255,.025) 45%,
-      transparent 72%
-    );
-  filter: blur(28px);
-  pointer-events: none;
-}
-
-.creators-page .creator-product-scene::after {
-  content: '';
-  position: absolute;
-  left: 10%;
-  right: 10%;
-  bottom: 7%;
-  height: 17%;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(0,0,0,.68),
-      rgba(0,0,0,.20) 46%,
-      transparent 73%
-    );
-  filter: blur(18px);
-  pointer-events: none;
-}
-
-.creators-page .creator-product-glow {
-  position: absolute;
-  width: 66%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle,
-      rgba(105,231,255,.075),
-      rgba(45,140,255,.025) 43%,
-      transparent 71%
-    );
-  filter: blur(18px);
-  pointer-events: none;
-  animation: creator-product-breathe 6s ease-in-out infinite;
-}
-
-@keyframes creator-product-breathe {
-  0%,
-  100% {
-    transform: scale(.96);
-    opacity: .68;
-  }
-
-  50% {
-    transform: scale(1.04);
-    opacity: .95;
-  }
-}
-
-.creators-page .creator-product-number {
-  position: absolute;
-  top: 31px;
-  left: 35px;
-  z-index: 5;
-  color: #566274;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  font-variant-numeric: tabular-nums;
-}
-
-/* =========================================================
-   CREATOR PRODUCT IMAGE
-   ========================================================= */
-
-.creators-page .creator-product-image {
-  position: relative;
-  z-index: 2;
-
-  width: 96%;
-  height: 91%;
-  max-height: 700px;
-
-  object-fit: contain;
-  object-position: center;
-
-  display: block;
-
-  mix-blend-mode: normal;
-
-  filter:
-    contrast(1.025)
-    saturate(.97)
-    brightness(1.01)
-    drop-shadow(0 42px 65px rgba(0,0,0,.36))
-    drop-shadow(0 0 20px rgba(45,140,255,.045));
-
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
-  touch-action: none;
-
-  transition: none !important;
-  animation: none !important;
-}
-
-.creators-page .creator-product-slide:hover .creator-product-image {
-  transform: none !important;
-}
-
-/* =========================================================
-   PRODUCT-SPECIFIC IMAGE SCALE
-   ========================================================= */
-
-.creators-page .product-pro .creator-product-image {
-  width: 97%;
-}
-
-.creators-page .product-digital .creator-product-image {
-  width: 95%;
-}
-
-.creators-page .product-slimDisc .creator-product-image {
-  width: 96%;
-}
-
-.creators-page .product-slimDigital .creator-product-image {
-  width: 95%;
-}
-
-.creators-page .product-discDrive .creator-product-image {
-  width: 83%;
-}
-
-.creators-page .product-controller .creator-product-image {
-  width: 92%;
-}
-
-/* =========================================================
-   PRODUCT INFORMATION
-   ========================================================= */
-
-.creators-page .creator-product-details {
-  position: relative;
-  z-index: 3;
-  min-width: 0;
-
-  padding: 55px 48px 55px 10px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-}
-
-.creators-page .creator-product-category {
-  color: var(--cyan);
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: .22em;
-  opacity: .85;
-}
-
-.creators-page .creator-product-details h3 {
-  max-width: 430px;
-  margin-top: 13px;
-
-  font-size: clamp(35px, 3.7vw, 58px);
-  line-height: .92;
-  letter-spacing: -.07em;
-}
-
-.creators-page .creator-product-note {
-  max-width: 315px;
-  margin-top: 15px;
-
-  color: #778394;
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.creators-page .creator-product-purchase {
-  width: 100%;
-  max-width: 360px;
-  margin-top: 32px;
-  padding-top: 19px;
-
-  border-top: 1px solid rgba(177,205,234,.085);
-}
-
-.creators-page .creator-product-price-row {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.creators-page .creator-product-price-label {
-  color: #687587;
-  font-size: 7px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
-.creators-page .creator-product-price {
-  display: block;
-  margin-top: 5px;
-
-  color: var(--text);
-  font-size: 28px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -.05em;
-}
-
-.creators-page .creator-product-old-price {
-  color: #5d6979;
-  font-size: 9px;
-  white-space: nowrap;
-}
-
-.creators-page .creator-product-old-price del {
-  text-decoration-color: rgba(255,255,255,.25);
-}
-
-/* =========================================================
-   PRODUCT CTA
-   ========================================================= */
-
-.creators-page .creator-buy-button {
-  width: 100%;
-  min-height: 48px;
-  margin-top: 16px;
-  padding: 0 17px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-
-  border: 1px solid rgba(45,140,255,.52);
-  border-radius: 9px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(45,140,255,.95),
-      rgba(35,111,220,.95)
-    );
-
-  color: white;
-  text-decoration: none;
-
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .02em;
-
-  box-shadow:
-    0 12px 35px rgba(45,140,255,.12),
-    inset 0 1px 0 rgba(255,255,255,.13);
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease,
-    background .2s ease;
-}
-
-.creators-page .creator-buy-button:hover {
-  transform: translateY(-2px);
-
-  background:
-    linear-gradient(
-      135deg,
-      #55a4ff,
-      #2d8cff
-    );
-
-  box-shadow:
-    0 16px 42px rgba(45,140,255,.20),
-    inset 0 1px 0 rgba(255,255,255,.15);
-}
-
-.creators-page .creator-buy-button svg {
-  flex-shrink: 0;
-}
-
-/* =========================================================
-   SHOWCASE CONTROLS / PROGRESS
-   ========================================================= */
-
-.creators-page .creator-showcase-bottom {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 25px;
-}
-
-.creators-page .creator-showcase-hint {
-  color: #536174;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.creators-page .creator-product-dots {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.creators-page .creator-product-dot {
-  width: 22px;
-  height: 3px;
-  padding: 0;
-  border: 0;
-  border-radius: 99px;
-  background: rgba(177,205,234,.15);
-  transition:
-    width .25s ease,
-    background .25s ease;
-}
-
-.creators-page .creator-product-dot:hover {
-  background: rgba(105,231,255,.45);
-}
-
-.creators-page .creator-product-dot.is-active {
-  width: 38px;
-  background: var(--blue);
-  box-shadow: 0 0 12px rgba(45,140,255,.35);
-}
-
-/* =========================================================
-   CREATOR BENEFITS
-   ========================================================= */
-
-.creators-page .creator-benefits {
-  max-width: 1240px;
-  margin: auto;
-  padding: 85px 20px 90px;
-  border-top: 1px solid var(--line);
-}
-
-.creators-page .creator-benefits .section-heading {
-  margin-bottom: 30px;
-}
-
-.creators-page .creator-benefits .section-heading h2 {
-  font-size: clamp(34px, 4.5vw, 50px);
-}
-
-.creators-page .creator-benefits .section-heading > p {
-  max-width: 360px;
-  font-size: 11px;
-}
-
-.creators-page .creator-benefits .service-grid {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-.creators-page .creator-benefits .service-card {
-  min-height: 125px;
-  padding: 17px;
-  border-radius: 14px;
-  gap: 20px;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.035),
-      rgba(255,255,255,.01)
-    );
-}
-
-.creators-page .creator-benefits .service-card h3 {
-  font-size: 11px;
-}
-
-/* =========================================================
-   CREATOR CONTACT
-   ========================================================= */
-
-.creators-page .creator-contact {
-  max-width: 1240px;
-  margin: auto;
-  padding: 70px 20px 82px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-.creators-page .creator-contact h2 {
-  margin-top: 16px;
-  font-size: clamp(30px, 4vw, 48px);
-  line-height: .98;
-  letter-spacing: -.055em;
-}
-
-.creators-page .creator-contact p {
-  max-width: 430px;
-  margin-top: 13px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-.creators-page .creator-contact .button {
-  flex-shrink: 0;
-}
-
-/* =========================================================
-   CREATOR FOOTER
-   ========================================================= */
-
-.creators-page .site-footer {
-  border-top-color: rgba(177,205,234,.1);
-}
-
-/* =========================================================
-   CREATOR TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-  .creators-page .creator-welcome {
-    align-items: flex-start;
-    flex-direction: column;
-    padding-top: 68px;
-  }
-
-  .creators-page .creator-product-slide {
-    grid-template-columns: 1.35fr .65fr;
-    min-height: 680px;
-  }
-
-  .creators-page .creator-product-image {
-    width: 95%;
-    height: 82%;
-
-    transition: none !important;
-    animation: none !important;
-  }
-
-  .creators-page .product-pro .creator-product-image,
-  .creators-page .product-digital .creator-product-image,
-  .creators-page .product-slimDisc .creator-product-image,
-  .creators-page .product-slimDigital .creator-product-image {
-    width: 96%;
-  }
-
-  .creators-page .product-discDrive .creator-product-image {
-    width: 81%;
-  }
-
-  .creators-page .product-controller .creator-product-image {
-    width: 91%;
-  }
-
-  .creators-page .creator-product-details {
-    padding-right: 30px;
-  }
-
-  .creators-page .creator-product-details h3 {
-    font-size: clamp(32px, 5vw, 48px);
-  }
-
-  .creators-page .creator-benefits .service-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* =========================================================
-   CREATOR MOBILE
-   ========================================================= */
-
-@media (max-width: 640px) {
-
-  /* ACCESS */
-
-  .creators-page .creator-access {
-    min-height: calc(100svh - 68px);
-    padding: 58px 20px 76px;
-  }
-
-  .creators-page .creator-access h1 {
-    margin-top: 20px;
-    font-size: clamp(43px, 12vw, 62px);
-    line-height: .94;
-  }
-
-  .creators-page .creator-intro {
-    margin-top: 21px;
-    font-size: 13px;
-    line-height: 1.55;
-  }
-
-  .creators-page .creator-lock-card {
-    margin-top: 30px;
-    padding: 19px;
-    border-radius: 15px;
-  }
-
-  .creators-page .creator-lock-icon {
-    width: 38px;
-    height: 38px;
-    margin-bottom: 18px;
-  }
-
-  .creators-page .creator-lock-card input {
-    height: 50px;
-  }
-
-  /* WELCOME */
-
-  .creators-page .creator-welcome {
-    padding: 57px 20px 30px;
-    gap: 22px;
-  }
-
-  .creators-page .creator-welcome h1 {
-    margin-top: 17px;
-    font-size: clamp(39px, 11vw, 58px);
-  }
-
-  .creators-page .creator-welcome p {
-    max-width: 300px;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-
-  .creators-page .creator-access-badge {
-    font-size: 8px;
-  }
-
-  /* SHOWCASE */
-
-  .creators-page .creator-showcase {
-    padding-top: 18px;
-    padding-bottom: 70px;
-  }
-
-  .creators-page .creator-showcase-top {
-    display: block;
-    padding: 0 20px 20px;
-  }
-
-  .creators-page .creator-showcase-top h2 {
-    margin-top: 15px;
-    font-size: 39px;
-  }
-
-  .creators-page .creator-showcase-top > div:first-child > p {
-    max-width: 290px;
-    margin-top: 14px;
-    font-size: 10px;
-    line-height: 1.5;
-  }
-
-  .creators-page .creator-showcase-controls {
-    margin-top: 21px;
-  }
-
-  .creators-page .creator-showcase-arrow {
-    width: 38px;
-    height: 38px;
-  }
-
-  /* SAME HORIZONTAL BEHAVIOUR AS MAIN PRODUCTS */
-
-  .creators-page .creator-showcase-track {
-    gap: 0;
-    padding: 12px 0 27px;
-
-    scroll-padding-inline: 0;
-  }
-
-  .creators-page .creator-product-slide {
-    flex: 0 0 100%;
-    width: 100%;
-
-    min-height: 700px;
-
-    display: flex;
-    flex-direction: column;
-
-    border-radius: 20px;
-  }
-
-  .creators-page .creator-product-scene {
-    flex: 1 1 auto;
-    min-height: 445px;
-  }
-
-  .creators-page .creator-product-number {
-    top: 20px;
-    left: 22px;
-    font-size: 8px;
-  }
-
-  .creators-page .creator-product-scene::before {
-    width: 105%;
-    height: 95%;
-  }
-
-  .creators-page .creator-product-scene::after {
-    left: 8%;
-    right: 8%;
-    bottom: 6%;
-    height: 15%;
-    filter: blur(14px);
-  }
-
-  .creators-page .creator-product-glow {
-    width: 82%;
-  }
-
-  .creators-page .creator-product-image {
-    width: 98%;
-    height: 91%;
-    max-height: 435px;
-
-    transition: none !important;
-    animation: none !important;
-    transform: none;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-user-drag: none;
-    pointer-events: none;
-    touch-action: none;
-  }
-
-  .creators-page .product-pro .creator-product-image,
-  .creators-page .product-digital .creator-product-image,
-  .creators-page .product-slimDisc .creator-product-image,
-  .creators-page .product-slimDigital .creator-product-image {
-    width: 98%;
-  }
-
-  .creators-page .product-discDrive .creator-product-image {
-    width: 84%;
-  }
-
-  .creators-page .product-controller .creator-product-image {
-    width: 94%;
-  }
-
-  .creators-page .creator-product-details {
-    flex: 0 0 auto;
-    padding: 20px 21px 22px;
-  }
-
-  .creators-page .creator-product-category {
-    font-size: 8px;
-  }
-
-  .creators-page .creator-product-details h3 {
-    max-width: 310px;
-    margin-top: 9px;
-    font-size: clamp(32px, 10vw, 45px);
-  }
-
-  .creators-page .creator-product-note {
-    max-width: 280px;
-    margin-top: 10px;
-    font-size: 10px;
-    line-height: 1.45;
-  }
-
-  .creators-page .creator-product-purchase {
-    max-width: none;
-    margin-top: 19px;
-    padding-top: 16px;
-  }
-
-  .creators-page .creator-product-price-label {
-    font-size: 7px;
-  }
-
-  .creators-page .creator-product-price {
-    font-size: 25px;
-  }
-
-  .creators-page .creator-product-old-price {
-    font-size: 9px;
-  }
-
-  .creators-page .creator-buy-button {
-    min-height: 48px;
-    margin-top: 13px;
-    border-radius: 9px;
-    font-size: 10px;
-  }
-
-  .creators-page .creator-showcase-bottom {
-    padding: 0 20px;
-  }
-
-  .creators-page .creator-showcase-hint {
-    font-size: 7px;
-  }
-
-  .creators-page .creator-product-dots {
-    gap: 5px;
-  }
-
-  .creators-page .creator-product-dot {
-    width: 15px;
-    height: 3px;
-  }
-
-  .creators-page .creator-product-dot.is-active {
-    width: 25px;
-  }
-
-  .creators-page .creator-benefits {
-    padding: 58px 20px 62px;
-  }
-
-  .creators-page .creator-benefits .section-heading h2 {
-    font-size: 34px;
-  }
-
-  .creators-page .creator-benefits .section-heading > p {
-    margin-top: 17px;
-    font-size: 10px;
-  }
-
-  .creators-page .creator-benefits .service-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .creators-page .creator-benefits .service-card {
-    min-height: 125px;
-    padding: 13px;
-  }
-
-  .creators-page .creator-benefits .service-card h3 {
-    font-size: 10px;
-    line-height: 1.3;
-  }
-
-  .creators-page .creator-contact {
-    padding: 54px 20px 60px;
-    display: block;
-  }
-
-  .creators-page .creator-contact h2 {
-    font-size: 34px;
-  }
-
-  .creators-page .creator-contact p {
-    font-size: 11px;
-  }
-
-  .creators-page .creator-contact .button {
-    width: 100%;
-    margin-top: 25px;
-  }
-}
-
-/* =========================================================
-   SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 390px) {
-
-  .creators-page .creator-product-slide {
-    min-height: 675px;
-  }
-
-  .creators-page .creator-product-scene {
-    min-height: 425px;
-  }
-
-  .creators-page .creator-product-image {
-    max-height: 410px;
-  }
-
-  .creators-page .creator-product-details h3 {
-    font-size: 31px;
-  }
-
-  .creators-page .creator-product-price {
-    font-size: 23px;
-  }
-}
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .product-grid {
-    scroll-behavior: auto;
-  }
-
-  .creators-page .creator-showcase-track {
-    scroll-behavior: auto;
-  }
-
-  .creators-page .creator-product-image,
-  .creators-page .creator-buy-button,
-  .creators-page .creator-showcase-arrow,
-  .creators-page .creator-product-glow {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  .creators-page .creator-product-slide:hover .creator-product-image {
-    transform: none !important;
-  }
+'use client'
+
+import Link from 'next/link'
+import { useState } from 'react'
+import {
+  ArrowRight,
+  Check,
+  Globe2,
+  Menu,
+  MessageCircle,
+  Package,
+  ShieldCheck,
+  X,
+} from 'lucide-react'
+
+const stripeLinks = {
+  pro: 'https://buy.stripe.com/eVqeV63eU53g7NJ1eHcQU01',
+  digital: 'https://buy.stripe.com/28EaEQ02IfHU2tpaPhcQU03',
+  slimDisc: 'https://buy.stripe.com/aFabIU7va0N0d837D5cQU04',
+  slimDigital: 'https://buy.stripe.com/8x2eV69DicvIfgbaPhcQU05',
+  controller: 'https://buy.stripe.com/7sYaEQ7vabrE8RNe1tcQU0g',
+  discDrive: 'https://buy.stripe.com/bJe9AM2aQcvI1plg9BcQU0j',
+}
+
+const products = [
+  {
+    key: 'pro',
+    name: 'PS5 Pro',
+    greek: 'PS5 Pro',
+    price: '€750.00',
+    image: '/images/ps5-pro.png',
+    link: stripeLinks.pro,
+    learnMore: '/products/ps5-pro',
+    en: {
+      short: 'For maximum performance.',
+      headline: 'The most powerful way to play.',
+      description:
+        'Built for players who want more from every game.',
+    },
+    el: {
+      short: 'Για μέγιστες επιδόσεις.',
+      headline: 'Ο πιο ισχυρός τρόπος να παίξετε.',
+      description:
+        'Για παίκτες που θέλουν περισσότερα από κάθε παιχνίδι.',
+    },
+  },
+  {
+    key: 'slimDisc',
+    name: 'PS5 Slim Disc',
+    greek: 'PS5 Slim Disc',
+    price: '€549.99',
+    image: '/images/ps5-slim-disc.PNG',
+    link: stripeLinks.slimDisc,
+    learnMore: '/products/ps5-slim-disc',
+    en: {
+      short: 'For physical and digital games.',
+      headline: 'Your games. Your way.',
+      description:
+        'The complete PS5 experience with an integrated disc drive.',
+    },
+    el: {
+      short: 'Για φυσικά και ψηφιακά παιχνίδια.',
+      headline: 'Τα παιχνίδια σας. Με τον τρόπο σας.',
+      description:
+        'Η ολοκληρωμένη εμπειρία PS5 με ενσωματωμένο disc drive.',
+    },
+  },
+  {
+    key: 'digital',
+    name: 'PS5 Digital Edition',
+    greek: 'PS5 Digital Edition',
+    price: '€489.99',
+    image: '/images/ps5-digital.PNG',
+    link: stripeLinks.digital,
+    learnMore: '/products/ps5-digital',
+    en: {
+      short: 'For an all-digital library.',
+      headline: 'Go all digital.',
+      description:
+        'Everything you need for the PS5 generation. No discs required.',
+    },
+    el: {
+      short: 'Για μια πλήρως ψηφιακή συλλογή.',
+      headline: 'Μπείτε στην ψηφιακή εποχή.',
+      description:
+        'Η εμπειρία της γενιάς PS5, χωρίς την ανάγκη για δίσκους.',
+    },
+  },
+  {
+    key: 'slimDigital',
+    name: 'PS5 Slim Digital',
+    greek: 'PS5 Slim Digital',
+    price: '€490.00',
+    image: '/images/ps5-slim-digital.png',
+    link: stripeLinks.slimDigital,
+    learnMore: '/products/ps5-slim-digital',
+    en: {
+      short: 'Slim. Digital. PS5.',
+      headline: 'Less console. Same generation.',
+      description:
+        'A slim all-digital route into the PlayStation 5 generation.',
+    },
+    el: {
+      short: 'Slim. Digital. PS5.',
+      headline: 'Πιο λεπτό. Ίδια γενιά.',
+      description:
+        'Μια slim, πλήρως ψηφιακή είσοδος στη γενιά PlayStation 5.',
+    },
+  },
+]
+
+const accessories = [
+  {
+    key: 'controller',
+    name: 'DualSense Wireless Controller',
+    greek: 'Ασύρματο χειριστήριο DualSense',
+    price: '€55.99',
+    image: '/images/dual-sense.png',
+    link: stripeLinks.controller,
+    en: {
+      headline: 'Another player? Another controller.',
+      description:
+        'Add another DualSense wireless controller to your setup.',
+    },
+    el: {
+      headline: 'Άλλος ένας παίκτης; Άλλο ένα χειριστήριο.',
+      description:
+        'Προσθέστε ένα ακόμη ασύρματο χειριστήριο DualSense στο setup σας.',
+    },
+  },
+  {
+    key: 'discDrive',
+    name: 'PS5 Disc Drive',
+    greek: 'PS5 Disc Drive',
+    price: '€69.99',
+    image: '/images/ps5-disc-drive.png',
+    link: stripeLinks.discDrive,
+    en: {
+      headline: 'Add the disc experience.',
+      description:
+        'Expand a compatible PS5 digital console with a disc drive.',
+    },
+    el: {
+      headline: 'Προσθέστε την εμπειρία του δίσκου.',
+      description:
+        'Προσθέστε disc drive σε συμβατό ψηφιακό PS5.',
+    },
+  },
+]
+
+type Language = 'en' | 'el'
+
+export default function Page() {
+  const [language, setLanguage] = useState<Language>('en')
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const isGreek = language === 'el'
+
+  const copy = isGreek
+    ? {
+        navShop: 'PS5',
+        navAccessories: 'Αξεσουάρ',
+        navSupport: 'Υποστήριξη',
+        navCreators: 'Creators',
+        navWholesale: 'Χονδρική',
+
+        heroLabel: 'PLAYSTATION 5 PRO',
+        heroTitle: 'Ο πιο ισχυρός τρόπος να παίξετε.',
+        heroText:
+          'PS5 Pro. Για παίκτες που θέλουν περισσότερα από κάθε παιχνίδι.',
+        vat: 'με ΦΠΑ',
+        learnMore: 'Μάθετε περισσότερα',
+        buy: 'Αγορά',
+
+        heroTrust:
+          'Εργοστασιακά σφραγισμένο · Ευρωπαϊκό μοντέλο · Αποστολή με tracking',
+
+        slimLabel: 'PLAYSTATION 5 SLIM DISC',
+        slimTitle: 'Τα παιχνίδια σας. Με τον τρόπο σας.',
+        slimText:
+          'Η ολοκληρωμένη εμπειρία PS5 με ενσωματωμένο disc drive.',
+
+        digitalLabel: 'PLAYSTATION 5 DIGITAL EDITION',
+        digitalTitle: 'Μπείτε στην ψηφιακή εποχή.',
+        digitalText:
+          'Η εμπειρία της γενιάς PS5, χωρίς την ανάγκη για δίσκους.',
+
+        compareLabel: 'ΣΥΓΚΡΙΣΗ',
+        compareTitle: 'Ποιο PS5 είναι για εσάς;',
+        compareText:
+          'Βρείτε το μοντέλο που ταιριάζει στον τρόπο που παίζετε.',
+        viewModel: 'Δείτε το μοντέλο',
+
+        standardLabel: 'ΤΟ ΠΡΟΤΥΠΟ VYRO',
+        standardTitle:
+          'Χωρίς αβεβαιότητα από την παραγγελία έως την παράδοση.',
+        standardText:
+          'Καθαρή τιμολόγηση, παρακολούθηση αποστολής και άμεση υποστήριξη όταν τη χρειάζεστε.',
+
+        sealedTitle: 'Εργοστασιακά σφραγισμένο',
+        sealedText:
+          'Καινούργια προϊόντα, σφραγισμένα από το εργοστάσιο.',
+
+        vatTitle: 'Ο ΦΠΑ περιλαμβάνεται',
+        vatText:
+          'Η εμφανιζόμενη τιμή περιλαμβάνει ΦΠΑ.',
+
+        trackedTitle: 'Αποστολή με tracking',
+        trackedText:
+          'Παρακολούθηση μόλις αποσταλεί η παραγγελία σας.',
+
+        supportTitle: 'Άμεση υποστήριξη',
+        supportText:
+          'Επικοινωνήστε απευθείας με τη VYRO πριν και μετά την αγορά.',
+
+        accessoriesLabel: 'ΟΛΟΚΛΗΡΩΣΤΕ ΤΟ SETUP',
+        accessoriesTitle: 'Περισσότερα από την κονσόλα.',
+        accessoriesText:
+          'Αξεσουάρ για να ολοκληρώσετε την εμπειρία PS5.',
+
+        brandLabel: 'VYRO',
+        brandTitle: 'Gaming for the people.',
+        brandText:
+          'Πιστεύουμε ότι η κορυφαία τεχνολογία πρέπει να είναι πιο προσιτή. Η VYRO φέρνει gaming hardware σε πελάτες σε όλη την Ελλάδα με ξεκάθαρες τιμές, παρακολούθηση αποστολής και άμεση υποστήριξη.',
+
+        wholesaleTitle: 'Αγοράζετε για επιχείρηση;',
+        wholesaleText:
+          'Διατίθεται τιμολόγηση βάσει όγκου για retailers και εμπορικούς συνεργάτες.',
+        wholesaleCta: 'VYRO Wholesale',
+
+        contact: 'Επικοινωνία',
+        delivery: 'Παράδοση',
+        terms: 'Όροι',
+        privacy: 'Απόρρητο',
+        footerText:
+          'PlayStation hardware για πελάτες σε όλη την Ελλάδα.',
+      }
+    : {
+        navShop: 'PS5',
+        navAccessories: 'Accessories',
+        navSupport: 'Support',
+        navCreators: 'Creators',
+        navWholesale: 'Wholesale',
+
+        heroLabel: 'PLAYSTATION 5 PRO',
+        heroTitle: 'The most powerful way to play.',
+        heroText:
+          'PS5 Pro. Built for players who want more from every game.',
+        vat: 'VAT included',
+        learnMore: 'Learn more',
+        buy: 'Buy',
+
+        heroTrust:
+          'Factory sealed · European model · Tracked delivery',
+
+        slimLabel: 'PLAYSTATION 5 SLIM DISC',
+        slimTitle: 'Your games. Your way.',
+        slimText:
+          'The complete PS5 experience with an integrated disc drive.',
+
+        digitalLabel: 'PLAYSTATION 5 DIGITAL EDITION',
+        digitalTitle: 'Go all digital.',
+        digitalText:
+          'Everything you need for the PS5 generation. No discs required.',
+
+        compareLabel: 'COMPARE',
+        compareTitle: 'Which PS5 is right for you?',
+        compareText:
+          'Find the model that fits the way you play.',
+        viewModel: 'View model',
+
+        standardLabel: 'THE VYRO STANDARD',
+        standardTitle:
+          'No uncertainty between order and delivery.',
+        standardText:
+          'Clear pricing, tracked delivery and direct support when you need it.',
+
+        sealedTitle: 'Factory sealed',
+        sealedText:
+          'Brand-new products supplied factory sealed.',
+
+        vatTitle: 'VAT included',
+        vatText:
+          'The displayed price includes VAT.',
+
+        trackedTitle: 'Tracked delivery',
+        trackedText:
+          'Follow your order once it has been dispatched.',
+
+        supportTitle: 'Direct support',
+        supportText:
+          'Speak directly with VYRO before and after your purchase.',
+
+        accessoriesLabel: 'COMPLETE YOUR SETUP',
+        accessoriesTitle: 'More than the console.',
+        accessoriesText:
+          'The essentials to complete your PS5 setup.',
+
+        brandLabel: 'VYRO',
+        brandTitle: 'Gaming for the people.',
+        brandText:
+          'We believe great technology should be easier to access. VYRO brings gaming hardware to customers across Greece with straightforward pricing, tracked fulfilment and direct support.',
+
+        wholesaleTitle: 'Buying for your business?',
+        wholesaleText:
+          'Volume pricing is available for retailers and trade partners.',
+        wholesaleCta: 'VYRO Wholesale',
+
+        contact: 'Contact',
+        delivery: 'Delivery',
+        terms: 'Terms',
+        privacy: 'Privacy',
+        footerText:
+          'PlayStation hardware for customers across Greece.',
+      }
+
+  function scrollTo(id: string) {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+
+    setMobileOpen(false)
+  }
+
+  return (
+    <main className="site-shell retail-home">
+      {/* =====================================================
+          HEADER
+          ===================================================== */}
+
+      <header className="site-header">
+        <a
+          className="brand"
+          href="#top"
+          aria-label="VYRO home"
+        >
+          <span className="brand-dot" />
+          VYRO
+        </a>
+
+        <nav
+          id="main-navigation"
+          className={
+            mobileOpen
+              ? 'main-nav is-open'
+              : 'main-nav'
+          }
+        >
+          <button onClick={() => scrollTo('compare')}>
+            {copy.navShop}
+          </button>
+
+          <button onClick={() => scrollTo('accessories')}>
+            {copy.navAccessories}
+          </button>
+
+          <button onClick={() => scrollTo('vyro-standard')}>
+            {copy.navSupport}
+          </button>
+
+          <Link
+            className="nav-creator-link"
+            href="/Creators"
+            onClick={() => setMobileOpen(false)}
+          >
+            {copy.navCreators}
+          </Link>
+
+          <Link
+            href="/wholesale"
+            onClick={() => setMobileOpen(false)}
+          >
+            {copy.navWholesale}
+          </Link>
+        </nav>
+
+        <div className="header-actions">
+          <button
+            className="language-toggle"
+            onClick={() =>
+              setLanguage(isGreek ? 'en' : 'el')
+            }
+            aria-label="Switch language"
+          >
+            <Globe2 size={15} />
+            <span>{isGreek ? 'EN' : 'ΕΛ'}</span>
+          </button>
+
+          <button
+            className="menu-toggle"
+            onClick={() =>
+              setMobileOpen((current) => !current)
+            }
+            aria-label={
+              mobileOpen
+                ? 'Close menu'
+                : 'Open menu'
+            }
+            aria-expanded={mobileOpen}
+            aria-controls="main-navigation"
+          >
+            {mobileOpen ? (
+              <X size={22} />
+            ) : (
+              <Menu size={22} />
+            )}
+          </button>
+        </div>
+      </header>
+
+      {/* =====================================================
+          PS5 PRO — COMMERCIAL HERO
+          ===================================================== */}
+
+      <section
+        className="product-hero product-hero-pro"
+        id="top"
+      >
+        <div className="product-hero-copy">
+          <div className="eyebrow">
+            <span className="eyebrow-line" />
+            {copy.heroLabel}
+          </div>
+
+          <h1>{copy.heroTitle}</h1>
+
+          <p>{copy.heroText}</p>
+
+          <div className="hero-price">
+            <strong>€750</strong>
+            <span>{copy.vat}</span>
+          </div>
+
+          <div className="hero-actions">
+            <Link
+              className="button button-ghost"
+              href="/products/ps5-pro"
+            >
+              {copy.learnMore}
+            </Link>
+
+            <a
+              className="button button-primary"
+              href={stripeLinks.pro}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {copy.buy}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </div>
+
+        <div className="product-hero-visual">
+          <div className="product-hero-glow" />
+
+          <img
+            src="/images/ps5-pro.png"
+            alt="PlayStation 5 Pro"
+            draggable={false}
+          />
+        </div>
+
+        <div className="product-hero-trust">
+          <ShieldCheck size={15} />
+          <span>{copy.heroTrust}</span>
+        </div>
+      </section>
+
+      {/* =====================================================
+          PS5 SLIM DISC — FEATURE CAMPAIGN
+          ===================================================== */}
+
+      <section className="campaign-section">
+        <article className="campaign-card campaign-slim-disc">
+          <div className="campaign-copy">
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.slimLabel}
+            </div>
+
+            <h2>{copy.slimTitle}</h2>
+
+            <p>{copy.slimText}</p>
+
+            <div className="campaign-price">
+              <strong>€549.99</strong>
+              <span>{copy.vat}</span>
+            </div>
+
+            <div className="campaign-actions">
+              <Link
+                className="button button-ghost"
+                href="/products/ps5-slim-disc"
+              >
+                {copy.learnMore}
+              </Link>
+
+              <a
+                className="button button-primary"
+                href={stripeLinks.slimDisc}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {copy.buy}
+              </a>
+            </div>
+          </div>
+
+          <div className="campaign-visual">
+            <img
+              src="/images/ps5-slim-disc.PNG"
+              alt="PlayStation 5 Slim Disc Edition"
+              draggable={false}
+            />
+          </div>
+        </article>
+      </section>
+
+      {/* =====================================================
+          PS5 DIGITAL — FEATURE CAMPAIGN
+          ===================================================== */}
+
+      <section className="campaign-section">
+        <article className="campaign-card campaign-digital">
+          <div className="campaign-copy">
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.digitalLabel}
+            </div>
+
+            <h2>{copy.digitalTitle}</h2>
+
+            <p>{copy.digitalText}</p>
+
+            <div className="campaign-price">
+              <strong>€489.99</strong>
+              <span>{copy.vat}</span>
+            </div>
+
+            <div className="campaign-actions">
+              <Link
+                className="button button-ghost"
+                href="/products/ps5-digital"
+              >
+                {copy.learnMore}
+              </Link>
+
+              <a
+                className="button button-primary"
+                href={stripeLinks.digital}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {copy.buy}
+              </a>
+            </div>
+          </div>
+
+          <div className="campaign-visual">
+            <img
+              src="/images/ps5-digital.PNG"
+              alt="PlayStation 5 Digital Edition"
+              draggable={false}
+            />
+          </div>
+        </article>
+      </section>
+
+      {/* =====================================================
+          PS5 COMPARISON
+          ===================================================== */}
+
+      <section
+        className="section compare-section"
+        id="compare"
+      >
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.compareLabel}
+            </div>
+
+            <h2>{copy.compareTitle}</h2>
+          </div>
+
+          <p>{copy.compareText}</p>
+        </div>
+
+        <div className="compare-grid">
+          {products.map((product) => {
+            const text = isGreek
+              ? product.el
+              : product.en
+
+            return (
+              <article
+                className={`compare-card compare-${product.key}`}
+                key={product.key}
+              >
+                <div className="compare-visual">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    draggable={false}
+                  />
+                </div>
+
+                <div className="compare-content">
+                  <h3>
+                    {isGreek
+                      ? product.greek
+                      : product.name}
+                  </h3>
+
+                  <p>{text.short}</p>
+
+                  <strong className="compare-price">
+                    {product.price}
+                  </strong>
+
+                  <span className="compare-vat">
+                    {copy.vat}
+                  </span>
+
+                  <div className="compare-actions">
+                    <Link
+                      href={product.learnMore}
+                      className="text-link"
+                    >
+                      {copy.viewModel}
+                      <ArrowRight size={14} />
+                    </Link>
+
+                    <a
+                      href={product.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="button button-primary"
+                    >
+                      {copy.buy}
+                    </a>
+                  </div>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* =====================================================
+          VYRO STANDARD
+          ===================================================== */}
+
+      <section
+        className="section service-section"
+        id="vyro-standard"
+      >
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.standardLabel}
+            </div>
+
+            <h2>{copy.standardTitle}</h2>
+          </div>
+
+          <p>{copy.standardText}</p>
+        </div>
+
+        <div className="service-grid">
+          <article className="service-card">
+            <ShieldCheck size={18} />
+
+            <div>
+              <h3>{copy.sealedTitle}</h3>
+              <p>{copy.sealedText}</p>
+            </div>
+          </article>
+
+          <article className="service-card">
+            <Check size={18} />
+
+            <div>
+              <h3>{copy.vatTitle}</h3>
+              <p>{copy.vatText}</p>
+            </div>
+          </article>
+
+          <article className="service-card">
+            <Package size={18} />
+
+            <div>
+              <h3>{copy.trackedTitle}</h3>
+              <p>{copy.trackedText}</p>
+            </div>
+          </article>
+
+          <article className="service-card">
+            <MessageCircle size={18} />
+
+            <div>
+              <h3>{copy.supportTitle}</h3>
+              <p>{copy.supportText}</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* =====================================================
+          ACCESSORIES
+          ===================================================== */}
+
+      <section
+        className="section accessories-section"
+        id="accessories"
+      >
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" />
+              {copy.accessoriesLabel}
+            </div>
+
+            <h2>{copy.accessoriesTitle}</h2>
+          </div>
+
+          <p>{copy.accessoriesText}</p>
+        </div>
+
+        <div className="accessories-grid">
+          {accessories.map((accessory) => {
+            const text = isGreek
+              ? accessory.el
+              : accessory.en
+
+            return (
+              <article
+                className={`accessory-card accessory-${accessory.key}`}
+                key={accessory.key}
+              >
+                <div className="accessory-visual">
+                  <img
+                    src={accessory.image}
+                    alt={accessory.name}
+                    draggable={false}
+                  />
+                </div>
+
+                <div className="accessory-content">
+                  <small>
+                    {isGreek
+                      ? accessory.greek
+                      : accessory.name}
+                  </small>
+
+                  <h3>{text.headline}</h3>
+
+                  <p>{text.description}</p>
+
+                  <div className="accessory-purchase">
+                    <div>
+                      <strong>
+                        {accessory.price}
+                      </strong>
+                      <span>{copy.vat}</span>
+                    </div>
+
+                    <a
+                      className="button button-primary"
+                      href={accessory.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {copy.buy}
+                    </a>
+                  </div>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* =====================================================
+          BRAND
+          ===================================================== */}
+
+      <section className="section brand-section">
+        <div className="brand-manifesto">
+          <div className="eyebrow">
+            <span className="eyebrow-line" />
+            {copy.brandLabel}
+          </div>
+
+          <h2>{copy.brandTitle}</h2>
+
+          <p>{copy.brandText}</p>
+        </div>
+      </section>
+
+      {/* =====================================================
+          WHOLESALE — SMALL RETAIL-SITE ENTRY
+          ===================================================== */}
+
+      <section className="section wholesale-teaser">
+        <div>
+          <h2>{copy.wholesaleTitle}</h2>
+          <p>{copy.wholesaleText}</p>
+        </div>
+
+        <Link
+          href="/wholesale"
+          className="button button-ghost"
+        >
+          {copy.wholesaleCta}
+          <ArrowRight size={16} />
+        </Link>
+      </section>
+
+      {/* =====================================================
+          FOOTER
+          ===================================================== */}
+
+      <footer className="site-footer retail-footer">
+        <div className="footer-brand">
+          <a
+            className="brand"
+            href="#top"
+          >
+            <span className="brand-dot" />
+            VYRO
+          </a>
+
+          <p>{copy.footerText}</p>
+        </div>
+
+        <nav className="footer-links">
+          <button onClick={() => scrollTo('compare')}>
+            PS5
+          </button>
+
+          <button onClick={() => scrollTo('accessories')}>
+            {copy.navAccessories}
+          </button>
+
+          <a href="https://wa.me/306978255016">
+            {copy.contact}
+          </a>
+
+          <Link href="/wholesale">
+            {copy.navWholesale}
+          </Link>
+        </nav>
+
+        <div className="footer-legal">
+          <span>© 2026 VYRO</span>
+
+          <Link href="/terms">
+            {copy.terms}
+          </Link>
+
+          <Link href="/privacy">
+            {copy.privacy}
+          </Link>
+        </div>
+      </footer>
+    </main>
+  )
 }
