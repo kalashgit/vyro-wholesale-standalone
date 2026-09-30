@@ -157,6 +157,7 @@ export default function HomePage() {
         navShop: 'PS5',
         navAccessories: 'Αξεσουάρ',
         navSupport: 'Υποστήριξη',
+        navWholesale: 'Χονδρική',
         navCreators: 'Creator Access',
 
         heroLabel: 'PLAYSTATION 5 PRO',
@@ -186,7 +187,8 @@ export default function HomePage() {
           'Επιλέξτε την έκδοση που ταιριάζει στον τρόπο που παίζετε.',
 
         standardLabel: 'THE VYRO STANDARD',
-        standardHeadline: 'Χωρίς αβεβαιότητα από την παραγγελία μέχρι την παράδοση.',
+        standardHeadline:
+          'Χωρίς αβεβαιότητα από την παραγγελία μέχρι την παράδοση.',
         standardText:
           'Ξεκάθαρες τιμές, αποστολή με tracking και άμεση υποστήριξη όταν τη χρειάζεστε.',
 
@@ -197,10 +199,12 @@ export default function HomePage() {
         vatText: 'Η τιμή που βλέπετε είναι η τιμή που πληρώνετε.',
 
         trackedTitle: 'Αποστολή με tracking',
-        trackedText: 'Παρακολουθήστε την παραγγελία σας από την αποστολή μέχρι την άφιξη.',
+        trackedText:
+          'Παρακολουθήστε την παραγγελία σας από την αποστολή μέχρι την άφιξη.',
 
         supportTitle: 'Άμεση υποστήριξη',
-        supportText: 'Επικοινωνήστε απευθείας με τη VYRO πριν και μετά την αγορά.',
+        supportText:
+          'Επικοινωνήστε απευθείας με τη VYRO πριν και μετά την αγορά.',
 
         accessoriesLabel: 'COMPLETE YOUR SETUP',
         accessoriesHeadline: 'Περισσότερα από την κονσόλα.',
@@ -228,6 +232,7 @@ export default function HomePage() {
         navShop: 'PS5',
         navAccessories: 'Accessories',
         navSupport: 'Support',
+        navWholesale: 'Wholesale',
         navCreators: 'Creator Access',
 
         heroLabel: 'PLAYSTATION 5 PRO',
@@ -257,7 +262,8 @@ export default function HomePage() {
           'Choose the version that fits the way you play.',
 
         standardLabel: 'THE VYRO STANDARD',
-        standardHeadline: 'No uncertainty between order and delivery.',
+        standardHeadline:
+          'No uncertainty between order and delivery.',
         standardText:
           'Clear pricing, tracked delivery and direct support when you need it.',
 
@@ -271,7 +277,8 @@ export default function HomePage() {
         trackedText: 'Follow your order from dispatch to arrival.',
 
         supportTitle: 'Direct support',
-        supportText: 'Speak directly with VYRO before and after your purchase.',
+        supportText:
+          'Speak directly with VYRO before and after your purchase.',
 
         accessoriesLabel: 'COMPLETE YOUR SETUP',
         accessoriesHeadline: 'More than the console.',
@@ -327,6 +334,14 @@ export default function HomePage() {
           <button onClick={() => scrollTo('standard')}>
             {copy.navSupport}
           </button>
+
+          {/* WHOLESALE — now visible in desktop nav + mobile burger */}
+          <Link
+            href="/wholesale"
+            onClick={() => setMobileOpen(false)}
+          >
+            {copy.navWholesale}
+          </Link>
 
           <Link
             className="nav-creator-link"
