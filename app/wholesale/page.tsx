@@ -129,9 +129,9 @@ export default function WholesalePage() {
         quoteText:
           'Στείλτε μας το μοντέλο και την ποσότητα που εξετάζετε. Θα επιβεβαιώσουμε την τρέχουσα τιμή, τη διαθεσιμότητα και τους όρους παραγγελίας.',
 
-        quoteButton: 'Ζητήστε προσφορά',
+        quoteButton: 'Στείλτε μας στο WhatsApp',
         quoteNote:
-          'Δεν πραγματοποιείται πληρωμή μέσω αυτής της σελίδας.',
+          'Επικοινωνήστε μαζί μας μέσω WhatsApp για τιμές και διαθεσιμότητα.',
 
         footerText: 'Technology retail & wholesale.',
         terms: 'Όροι',
@@ -199,9 +199,9 @@ export default function WholesalePage() {
         quoteText:
           'Send us the model and quantity you are considering. We will confirm current pricing, availability and order terms.',
 
-        quoteButton: 'Request a quote',
+        quoteButton: 'Message us on WhatsApp',
         quoteNote:
-          'No payment is taken through this page.',
+          'Contact us through WhatsApp for pricing and availability.',
 
         footerText: 'Technology retail & wholesale.',
         terms: 'Terms',
@@ -209,6 +209,14 @@ export default function WholesalePage() {
       }
 
   const closeMenu = () => setMenuOpen(false)
+
+  const whatsappMessage = greek
+    ? 'Καλησπέρα, ενδιαφέρομαι για χονδρική VYRO. Θα ήθελα πληροφορίες για τιμές και διαθεσιμότητα.'
+    : "Hello, I'm interested in VYRO wholesale. I'd like information about pricing and availability."
+
+  const whatsappUrl = `https://wa.me/306978255016?text=${encodeURIComponent(
+    whatsappMessage
+  )}`
 
   return (
     <main className="site-shell wholesale-page">
@@ -475,7 +483,7 @@ export default function WholesalePage() {
         </div>
       </section>
 
-      {/* QUOTE */}
+      {/* QUOTE / WHATSAPP */}
 
       <section
         id="quote"
@@ -492,7 +500,9 @@ export default function WholesalePage() {
           <p>{copy.quoteText}</p>
 
           <a
-            href="mailto:YOUR-EMAIL-HERE?subject=VYRO%20Wholesale%20Enquiry"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="button button-primary"
           >
             {copy.quoteButton}
@@ -521,7 +531,7 @@ export default function WholesalePage() {
           </Link>
 
           <Link href="/wholesale">
-            {greek ? 'ΧονΔΡΙΚΗ' : 'WHOLESALE'}
+            {greek ? 'ΧΟΝΔΡΙΚΗ' : 'WHOLESALE'}
           </Link>
 
           <Link href="/creators">
