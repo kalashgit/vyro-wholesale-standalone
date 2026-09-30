@@ -4179,4 +4179,552 @@ p {
   }
 
 }
+/* =========================================================
+   VYRO WHOLESALE
+   ========================================================= */
 
+.wholesale-page {
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(45, 140, 255, 0.11),
+      transparent 34rem
+    ),
+    var(--bg);
+}
+
+/* HERO */
+
+.wholesale-hero {
+  width: min(var(--max-width), 100%);
+  margin: auto;
+  padding: 110px 22px 80px;
+
+  text-align: center;
+}
+
+.wholesale-hero-inner {
+  max-width: 930px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wholesale-hero .eyebrow {
+  justify-content: center;
+}
+
+.wholesale-hero h1 {
+  max-width: 900px;
+  margin-top: 24px;
+
+  font-size: clamp(56px, 7vw, 96px);
+  font-weight: 750;
+  line-height: 0.91;
+  letter-spacing: -0.07em;
+}
+
+.wholesale-hero > div > p {
+  max-width: 650px;
+  margin-top: 28px;
+
+  color: var(--muted);
+
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.wholesale-hero-actions {
+  margin-top: 35px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wholesale-hero-meta {
+  margin-top: 48px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wholesale-hero-meta span {
+  min-height: 38px;
+  padding: 0 15px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.02);
+
+  color: #8290a3;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+.wholesale-hero-meta svg {
+  color: var(--cyan);
+}
+
+
+/* PRICING */
+
+.wholesale-pricing-section {
+  padding-top: 100px;
+}
+
+.wholesale-pricing-heading {
+  max-width: 980px;
+  margin: 0 auto 70px;
+
+  text-align: center;
+}
+
+.wholesale-pricing-heading .eyebrow {
+  justify-content: center;
+}
+
+.wholesale-pricing-heading h2 {
+  margin-top: 24px;
+
+  font-size: clamp(45px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.wholesale-pricing-heading > p {
+  max-width: 750px;
+  margin: 24px auto 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.wholesale-moq {
+  width: fit-content;
+
+  margin: 25px auto 0;
+  padding: 11px 23px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid rgba(105, 231, 255, 0.13);
+  border-radius: 999px;
+
+  background: rgba(45, 140, 255, 0.13);
+
+  color: #62caff;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.wholesale-table-wrap {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid var(--line);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.006)
+    ),
+    #080c14;
+}
+
+.wholesale-table {
+  width: 100%;
+  min-width: 950px;
+
+  border-collapse: collapse;
+}
+
+.wholesale-table th {
+  height: 66px;
+  padding: 0 20px;
+
+  color: #77849a;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+
+  text-align: right;
+  white-space: nowrap;
+}
+
+.wholesale-table th:first-child,
+.wholesale-table td:first-child {
+  text-align: left;
+}
+
+.wholesale-table td {
+  height: 76px;
+  padding: 0 20px;
+
+  border-top: 1px solid var(--line);
+
+  color: #edf2f8;
+
+  font-size: 18px;
+
+  text-align: right;
+  white-space: nowrap;
+}
+
+.wholesale-product-name {
+  min-width: 265px;
+
+  color: white !important;
+
+  font-size: 15px !important;
+  font-weight: 800;
+}
+
+.wholesale-retail-price {
+  color: #68758a !important;
+}
+
+.wholesale-best-price,
+.wholesale-discount {
+  color: #55bfff !important;
+  font-weight: 800;
+}
+
+.wholesale-price-note {
+  margin-top: 16px;
+
+  color: #596679;
+
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+
+/* PROCESS */
+
+.wholesale-process-section {
+  border-top: 1px solid var(--line);
+}
+
+.wholesale-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.wholesale-process-card {
+  min-height: 260px;
+  padding: 30px;
+
+  border: 1px solid var(--line);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.007)
+    );
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.wholesale-process-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(105, 231, 255, 0.27);
+}
+
+.wholesale-process-card > span {
+  color: var(--cyan);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.wholesale-process-card h3 {
+  max-width: 280px;
+
+  margin-top: 85px;
+
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.wholesale-process-card p {
+  max-width: 300px;
+
+  margin-top: 13px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+
+/* TRADE STANDARD */
+
+.wholesale-standard-section {
+  padding-top: 70px;
+}
+
+.wholesale-standard-card {
+  min-height: 420px;
+  padding: 65px;
+
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 80px;
+
+  border: 1px solid var(--line);
+  border-radius: 30px;
+
+  background:
+    radial-gradient(
+      circle at 80% 50%,
+      rgba(45, 140, 255, 0.13),
+      transparent 32%
+    ),
+    #080c13;
+}
+
+.wholesale-standard-card h2 {
+  max-width: 650px;
+  margin-top: 20px;
+
+  font-size: clamp(42px, 5vw, 66px);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+}
+
+.wholesale-standard-card p {
+  max-width: 570px;
+  margin-top: 22px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.wholesale-standard-points {
+  display: flex;
+  flex-direction: column;
+}
+
+.wholesale-standard-points > div {
+  min-height: 65px;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  border-bottom: 1px solid var(--line);
+
+  color: #b8c3d1;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wholesale-standard-points svg {
+  color: var(--cyan);
+}
+
+
+/* QUOTE */
+
+.wholesale-quote-section {
+  padding-top: 70px;
+  padding-bottom: 140px;
+}
+
+.wholesale-quote-card {
+  padding: 90px 50px;
+
+  text-align: center;
+
+  border: 1px solid rgba(45, 140, 255, 0.16);
+  border-radius: 30px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(45, 140, 255, 0.18),
+      transparent 46%
+    ),
+    #080c13;
+}
+
+.wholesale-quote-card .eyebrow {
+  justify-content: center;
+}
+
+.wholesale-quote-card h2 {
+  margin-top: 21px;
+
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+}
+
+.wholesale-quote-card p {
+  max-width: 600px;
+  margin: 22px auto 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.wholesale-quote-card .button {
+  margin-top: 30px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 720px) {
+  .wholesale-hero {
+    padding: 75px 20px 60px;
+  }
+
+  .wholesale-hero h1 {
+    font-size: clamp(48px, 13vw, 65px);
+  }
+
+  .wholesale-hero > div > p {
+    font-size: 13px;
+  }
+
+  .wholesale-hero-actions {
+    width: 100%;
+  }
+
+  .wholesale-hero-actions .button {
+    width: 100%;
+  }
+
+  .wholesale-hero-meta {
+    align-items: stretch;
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+  .wholesale-hero-meta span {
+    justify-content: center;
+  }
+
+  .wholesale-pricing-heading {
+    margin-bottom: 42px;
+  }
+
+  .wholesale-pricing-heading h2 {
+    font-size: 42px;
+  }
+
+  .wholesale-pricing-heading > p {
+    font-size: 12px;
+  }
+
+  .wholesale-moq {
+    width: 100%;
+
+    justify-content: center;
+
+    font-size: 10px;
+  }
+
+  .wholesale-table-wrap {
+    border-radius: 16px;
+  }
+
+  .wholesale-table th {
+    padding: 0 14px;
+  }
+
+  .wholesale-table td {
+    padding: 0 14px;
+
+    font-size: 16px;
+  }
+
+  .wholesale-product-name {
+    min-width: 210px;
+  }
+
+  .wholesale-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wholesale-process-card {
+    min-height: 200px;
+    padding: 25px;
+  }
+
+  .wholesale-process-card h3 {
+    margin-top: 50px;
+  }
+
+  .wholesale-standard-card {
+    padding: 42px 25px;
+
+    grid-template-columns: 1fr;
+    gap: 45px;
+
+    border-radius: 22px;
+  }
+
+  .wholesale-standard-card h2 {
+    font-size: 42px;
+  }
+
+  .wholesale-quote-section {
+    padding-bottom: 90px;
+  }
+
+  .wholesale-quote-card {
+    padding: 65px 24px;
+
+    border-radius: 23px;
+  }
+
+  .wholesale-quote-card h2 {
+    font-size: 47px;
+  }
+
+  .wholesale-quote-card .button {
+    width: 100%;
+  }
+}
