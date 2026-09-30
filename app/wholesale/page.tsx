@@ -1,96 +1,241 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react'
+import Link from 'next/link'
 import {
+  ArrowDown,
   ArrowRight,
   Check,
-  ChevronDown,
   Globe2,
   Menu,
   PackageCheck,
   ShieldCheck,
-  Truck,
   X,
-} from 'lucide-react';
+} from 'lucide-react'
+
+type Language = 'EL' | 'EN'
 
 const products = [
   {
     name: 'PS5 Pro',
-    retail: '€899,99',
     five: '€725',
     ten: '€715',
     twenty: '€705',
     fifty: '€690',
-    discount: '23,3%',
   },
   {
     name: 'PS5 Digital',
-    retail: '€599,99',
     five: '€475',
     ten: '€465',
     twenty: '€455',
     fifty: '€445',
-    discount: '25,8%',
   },
   {
     name: 'PS5 Slim Disc',
-    retail: '€649,99',
     five: '€535',
     ten: '€525',
     twenty: '€515',
     fifty: '€505',
-    discount: '22,3%',
   },
   {
     name: 'PS5 Slim Digital',
-    retail: '€599,99',
     five: '€475',
     ten: '€465',
     twenty: '€455',
     fifty: '€445',
-    discount: '25,8%',
   },
   {
     name: 'PS5 Disc Drive',
-    retail: '€79,99',
     five: '€68',
     ten: '€67',
     twenty: '€65',
     fifty: '€64',
-    discount: '20,0%',
   },
   {
-    name: 'PS5 DualSense Controller',
-    retail: '€74,99',
+    name: 'DualSense Controller',
     five: '€54',
     ten: '€53',
     twenty: '€52',
     fifty: '€51',
-    discount: '32,0%',
   },
-];
+]
 
 export default function WholesalePage() {
-  const [language, setLanguage] = useState<'EL' | 'EN'>('EL');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [language, setLanguage] = useState<Language>('EL')
+  const [menuOpen, setMenuOpen] = useState(false)
 
-  const greek = language === 'EL';
+  const greek = language === 'EL'
+
+  const copy = greek
+    ? {
+        retail: 'ΛΙΑΝΙΚΗ',
+        pricing: 'ΤΙΜΕΣ',
+        process: 'ΔΙΑΔΙΚΑΣΙΑ',
+        contact: 'ΕΠΙΚΟΙΝΩΝΙΑ',
+
+        heroLabel: 'VYRO ΧΟΝΔΡΙΚΗ',
+        heroHeadline: 'Καλύτερη τιμή. Μεγαλύτερος όγκος.',
+        heroText:
+          'PlayStation hardware για καταστήματα, e-commerce επιχειρήσεις και εμπορικούς συνεργάτες.',
+
+        viewPricing: 'Δείτε τιμές',
+        requestQuote: 'Ζητήστε προσφορά',
+
+        moq: 'Ελάχιστη παραγγελία 5 τεμάχια',
+        volumePricing: 'Τιμολόγηση βάσει όγκου',
+        confirmation: 'Επιβεβαίωση πριν την πληρωμή',
+
+        pricingLabel: 'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ',
+        pricingHeadline: 'Η τιμή αλλάζει με την ποσότητα.',
+        pricingText:
+          'Επαγγελματικές τιμές ανά μονάδα, ανάλογα με τον όγκο της παραγγελίας σας.',
+        product: 'ΠΡΟΪΟΝ',
+
+        priceNote:
+          'Οι τιμές υπόκεινται σε διαθεσιμότητα και τελική επιβεβαίωση παραγγελίας.',
+
+        volumeLabel: 'VOLUME',
+        volumeHeadline: 'Χτισμένο για όγκο.',
+        volumeText:
+          'Από την πρώτη εμπορική παραγγελία μέχρι μεγαλύτερες ποσότητες, η τιμολόγηση προσαρμόζεται στον όγκο.',
+        units: 'ΤΕΜΑΧΙΑ',
+
+        processLabel: 'ΠΩΣ ΛΕΙΤΟΥΡΓΕΙ',
+        processHeadline: 'Απλή διαδικασία. Καθαροί όροι.',
+
+        step1Title: 'Στείλτε τι χρειάζεστε',
+        step1Text:
+          'Πείτε μας το προϊόν και την ποσότητα που εξετάζετε.',
+
+        step2Title: 'Επιβεβαιώνουμε την προσφορά',
+        step2Text:
+          'Επιβεβαιώνουμε διαθεσιμότητα, τελική τιμή και όρους παραγγελίας.',
+
+        step3Title: 'Ολοκληρώνουμε την παραγγελία',
+        step3Text:
+          'Μετά την αποδοχή της προσφοράς, προχωράμε σε πληρωμή και εκπλήρωση.',
+
+        tradeLabel: 'VYRO TRADE',
+        tradeHeadline: 'Γνωρίζετε τους όρους πριν προχωρήσετε.',
+        tradeText:
+          'Η τιμή, η ποσότητα, η διαθεσιμότητα και οι όροι της συναλλαγής επιβεβαιώνονται πριν ζητηθεί πληρωμή.',
+
+        tradePoint1: 'Τιμολόγηση βάσει ποσότητας',
+        tradePoint2: 'Επιβεβαίωση διαθεσιμότητας',
+        tradePoint3: 'Όροι πριν την πληρωμή',
+
+        quoteLabel: 'ΕΜΠΟΡΙΚΕΣ ΠΑΡΑΓΓΕΛΙΕΣ',
+        quoteHeadline: 'Τι χρειάζεστε;',
+        quoteText:
+          'Στείλτε μας το μοντέλο και την ποσότητα που εξετάζετε. Θα επιβεβαιώσουμε την τρέχουσα τιμή, τη διαθεσιμότητα και τους όρους παραγγελίας.',
+
+        quoteButton: 'Ζητήστε προσφορά',
+        quoteNote:
+          'Δεν πραγματοποιείται πληρωμή μέσω αυτής της σελίδας.',
+
+        footerText: 'Technology retail & wholesale.',
+        terms: 'Όροι',
+        privacy: 'Απόρρητο',
+      }
+    : {
+        retail: 'RETAIL',
+        pricing: 'PRICING',
+        process: 'PROCESS',
+        contact: 'CONTACT',
+
+        heroLabel: 'VYRO WHOLESALE',
+        heroHeadline: 'Better pricing. Bigger volume.',
+        heroText:
+          'PlayStation hardware for retailers, e-commerce businesses and trade partners.',
+
+        viewPricing: 'View pricing',
+        requestQuote: 'Request a quote',
+
+        moq: '5 unit minimum order',
+        volumePricing: 'Volume-based pricing',
+        confirmation: 'Confirmation before payment',
+
+        pricingLabel: 'WHOLESALE PRICING',
+        pricingHeadline: 'Pricing that scales with quantity.',
+        pricingText:
+          'Professional per-unit pricing based on the volume of your order.',
+        product: 'PRODUCT',
+
+        priceNote:
+          'Pricing is subject to availability and final order confirmation.',
+
+        volumeLabel: 'VOLUME',
+        volumeHeadline: 'Built for volume.',
+        volumeText:
+          'From your first trade order to larger quantities, pricing scales with your requirements.',
+        units: 'UNITS',
+
+        processLabel: 'HOW IT WORKS',
+        processHeadline: 'Simple process. Clear terms.',
+
+        step1Title: 'Send your requirement',
+        step1Text:
+          'Tell us the product and quantity you are considering.',
+
+        step2Title: 'We confirm the quote',
+        step2Text:
+          'We confirm availability, final pricing and order terms.',
+
+        step3Title: 'Complete the order',
+        step3Text:
+          'Once the quote is accepted, we proceed with payment and fulfilment.',
+
+        tradeLabel: 'VYRO TRADE',
+        tradeHeadline: 'Know the terms before you proceed.',
+        tradeText:
+          'Pricing, quantity, availability and transaction terms are confirmed before payment is requested.',
+
+        tradePoint1: 'Quantity-based pricing',
+        tradePoint2: 'Availability confirmation',
+        tradePoint3: 'Terms before payment',
+
+        quoteLabel: 'TRADE ORDERS',
+        quoteHeadline: 'What do you need?',
+        quoteText:
+          'Send us the model and quantity you are considering. We will confirm current pricing, availability and order terms.',
+
+        quoteButton: 'Request a quote',
+        quoteNote:
+          'No payment is taken through this page.',
+
+        footerText: 'Technology retail & wholesale.',
+        terms: 'Terms',
+        privacy: 'Privacy',
+      }
+
+  const closeMenu = () => setMenuOpen(false)
 
   return (
     <main className="site-shell wholesale-page">
       {/* HEADER */}
+
       <header className="site-header">
-        <Link href="/" className="brand">
-          VYRO
+        <Link href="/" className="brand" onClick={closeMenu}>
           <span className="brand-dot" />
+          VYRO
         </Link>
 
-        <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`}>
-          <Link href="/">{greek ? 'ΛΙΑΝΙΚΗ' : 'RETAIL'}</Link>
-          <a href="#pricing">{greek ? 'ΤΙΜΕΣ' : 'PRICING'}</a>
-          <a href="#process">{greek ? 'ΔΙΑΔΙΚΑΣΙΑ' : 'PROCESS'}</a>
-          <a href="#quote">{greek ? 'ΕΠΙΚΟΙΝΩΝΙΑ' : 'CONTACT'}</a>
+        <nav className={menuOpen ? 'main-nav is-open' : 'main-nav'}>
+          <Link href="/" onClick={closeMenu}>
+            {copy.retail}
+          </Link>
+
+          <a href="#pricing" onClick={closeMenu}>
+            {copy.pricing}
+          </a>
+
+          <a href="#process" onClick={closeMenu}>
+            {copy.process}
+          </a>
+
+          <a href="#quote" onClick={closeMenu}>
+            {copy.contact}
+          </a>
         </nav>
 
         <div className="header-actions">
@@ -105,103 +250,87 @@ export default function WholesalePage() {
 
           <button
             className="menu-toggle"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen((open) => !open)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </header>
 
       {/* HERO */}
+
       <section className="wholesale-hero">
+        <div className="wholesale-hero-glow" />
+
         <div className="wholesale-hero-inner">
           <div className="eyebrow">
             <span className="eyebrow-line" />
-            {greek ? 'VYRO ΧΟΝΔΡΙΚΗ' : 'VYRO WHOLESALE'}
+            {copy.heroLabel}
           </div>
 
-          <h1>
-            {greek
-              ? 'PlayStation stock. Έτοιμο για μεταπώληση.'
-              : 'PlayStation stock. Built for resale.'}
-          </h1>
+          <h1>{copy.heroHeadline}</h1>
 
-          <p>
-            {greek
-              ? 'Τιμές όγκου για καταστήματα, e-commerce επιχειρήσεις και εμπορικούς συνεργάτες.'
-              : 'Volume pricing for retailers, e-commerce businesses and trade partners.'}
-          </p>
+          <p>{copy.heroText}</p>
 
           <div className="wholesale-hero-actions">
             <a href="#pricing" className="button button-primary">
-              {greek ? 'Δείτε τιμές χονδρικής' : 'View wholesale pricing'}
-              <ArrowRight size={15} />
+              {copy.viewPricing}
+              <ArrowDown size={15} />
             </a>
 
             <a href="#quote" className="button button-ghost">
-              {greek ? 'Ζητήστε προσφορά' : 'Request a quote'}
+              {copy.requestQuote}
+              <ArrowRight size={15} />
             </a>
           </div>
 
           <div className="wholesale-hero-meta">
             <span>
               <PackageCheck size={15} />
-              MOQ 5
+              {copy.moq}
             </span>
 
             <span>
-              <Truck size={15} />
-              {greek ? 'Παραγγελίες όγκου' : 'Volume orders'}
+              <Check size={15} />
+              {copy.volumePricing}
             </span>
 
             <span>
               <ShieldCheck size={15} />
-              {greek ? 'Άμεση επιβεβαίωση' : 'Direct confirmation'}
+              {copy.confirmation}
             </span>
           </div>
         </div>
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="section wholesale-pricing-section">
+
+      <section
+        id="pricing"
+        className="section wholesale-pricing-section"
+      >
         <div className="wholesale-pricing-heading">
           <div className="eyebrow">
             <span className="eyebrow-line" />
-            {greek ? 'ΤΙΜΕΣ ΧΟΝΔΡΙΚΗΣ' : 'WHOLESALE PRICING'}
+            {copy.pricingLabel}
           </div>
 
-          <h2>
-            {greek
-              ? 'Τιμολόγηση ανά μονάδα βάσει όγκου'
-              : 'Per-unit pricing based on volume'}
-          </h2>
+          <h2>{copy.pricingHeadline}</h2>
 
-          <p>
-            {greek
-              ? 'Η τιμή ανά μονάδα μειώνεται όσο αυξάνεται ο όγκος παραγγελίας. Οι τιμές χονδρικής εμφανίζονται χωρίς ΦΠΑ.'
-              : 'Per-unit pricing decreases as order volume increases. Wholesale prices are shown excluding VAT.'}
-          </p>
-
-          <div className="wholesale-moq">
-            <span>•</span>
-            {greek
-              ? 'Ελάχιστη ποσότητα παραγγελίας — 5 τεμάχια'
-              : 'Minimum order quantity — 5 units'}
-          </div>
+          <p>{copy.pricingText}</p>
         </div>
 
         <div className="wholesale-table-wrap">
           <table className="wholesale-table">
             <thead>
               <tr>
-                <th>{greek ? 'ΠΡΟΪΟΝ' : 'PRODUCT'}</th>
-                <th>{greek ? 'ΤΙΜΗ ΛΙΑΝ.' : 'RRP'}</th>
+                <th>{copy.product}</th>
                 <th>5+</th>
                 <th>10+</th>
                 <th>20+</th>
                 <th>50+</th>
-                <th>{greek ? 'ΕΚΠΤΩΣΗ @50+' : 'DISCOUNT @50+'}</th>
               </tr>
             </thead>
 
@@ -212,20 +341,12 @@ export default function WholesalePage() {
                     {product.name}
                   </td>
 
-                  <td className="wholesale-retail-price">
-                    {product.retail}
-                  </td>
-
                   <td>{product.five}</td>
                   <td>{product.ten}</td>
                   <td>{product.twenty}</td>
 
                   <td className="wholesale-best-price">
                     {product.fifty}
-                  </td>
-
-                  <td className="wholesale-discount">
-                    {product.discount}
                   </td>
                 </tr>
               ))}
@@ -234,187 +355,192 @@ export default function WholesalePage() {
         </div>
 
         <p className="wholesale-price-note">
-          {greek
-            ? 'Οι τιμές και η διαθεσιμότητα επιβεβαιώνονται κατά την υποβολή αιτήματος και ενδέχεται να μεταβάλλονται.'
-            : 'Pricing and availability are confirmed when a quote is requested and may change.'}
+          {copy.priceNote}
         </p>
       </section>
 
-      {/* PROCESS */}
-      <section id="process" className="section wholesale-process-section">
-        <div className="section-heading">
-          <div>
+      {/* VOLUME STATEMENT */}
+
+      <section className="section wholesale-volume-section">
+        <div className="wholesale-volume-card">
+          <div className="wholesale-volume-copy">
             <div className="eyebrow">
               <span className="eyebrow-line" />
-              {greek ? 'ΠΩΣ ΛΕΙΤΟΥΡΓΕΙ' : 'HOW IT WORKS'}
+              {copy.volumeLabel}
             </div>
 
-            <h2>
-              {greek
-                ? 'Από την ποσότητα στην παραγγελία.'
-                : 'From quantity to order.'}
-            </h2>
+            <h2>{copy.volumeHeadline}</h2>
+
+            <p>{copy.volumeText}</p>
           </div>
+
+          <div
+            className="wholesale-volume-numbers"
+            aria-hidden="true"
+          >
+            <div>
+              <strong>5+</strong>
+              <span>{copy.units}</span>
+            </div>
+
+            <div>
+              <strong>20+</strong>
+              <span>{copy.units}</span>
+            </div>
+
+            <div className="is-highlighted">
+              <strong>50+</strong>
+              <span>{copy.units}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+
+      <section
+        id="process"
+        className="section wholesale-process-section"
+      >
+        <div className="wholesale-process-heading">
+          <div className="eyebrow">
+            <span className="eyebrow-line" />
+            {copy.processLabel}
+          </div>
+
+          <h2>{copy.processHeadline}</h2>
         </div>
 
         <div className="wholesale-process-grid">
           <article className="wholesale-process-card">
-            <span>01</span>
-            <h3>
-              {greek
-                ? 'Επιλέξτε προϊόν & ποσότητα'
-                : 'Choose product & quantity'}
-            </h3>
-            <p>
-              {greek
-                ? 'Πείτε μας ποια προϊόντα εξετάζετε και πόσα τεμάχια χρειάζεστε.'
-                : 'Tell us which products you are considering and the quantity required.'}
-            </p>
+            <span className="wholesale-step-number">01</span>
+
+            <div>
+              <h3>{copy.step1Title}</h3>
+              <p>{copy.step1Text}</p>
+            </div>
           </article>
 
           <article className="wholesale-process-card">
-            <span>02</span>
-            <h3>
-              {greek
-                ? 'Επιβεβαίωση προσφοράς'
-                : 'Quote confirmation'}
-            </h3>
-            <p>
-              {greek
-                ? 'Επιβεβαιώνουμε την τρέχουσα τιμή, τη διαθεσιμότητα και τους όρους της παραγγελίας.'
-                : 'We confirm current pricing, availability and order terms.'}
-            </p>
+            <span className="wholesale-step-number">02</span>
+
+            <div>
+              <h3>{copy.step2Title}</h3>
+              <p>{copy.step2Text}</p>
+            </div>
           </article>
 
           <article className="wholesale-process-card">
-            <span>03</span>
-            <h3>
-              {greek
-                ? 'Ολοκλήρωση παραγγελίας'
-                : 'Complete the order'}
-            </h3>
-            <p>
-              {greek
-                ? 'Μετά την αποδοχή της προσφοράς, επιβεβαιώνεται η παραγγελία και η διαδικασία εκπλήρωσης.'
-                : 'Once the quote is accepted, the order and fulfilment process are confirmed.'}
-            </p>
+            <span className="wholesale-step-number">03</span>
+
+            <div>
+              <h3>{copy.step3Title}</h3>
+              <p>{copy.step3Text}</p>
+            </div>
           </article>
         </div>
       </section>
 
-      {/* TRADE INFO */}
+      {/* TRADE STANDARD */}
+
       <section className="section wholesale-standard-section">
         <div className="wholesale-standard-card">
-          <div>
+          <div className="wholesale-standard-copy">
             <div className="eyebrow">
               <span className="eyebrow-line" />
-              VYRO TRADE
+              {copy.tradeLabel}
             </div>
 
-            <h2>
-              {greek
-                ? 'Καθαροί όροι. Καθαρή τιμολόγηση.'
-                : 'Clear terms. Clear pricing.'}
-            </h2>
+            <h2>{copy.tradeHeadline}</h2>
 
-            <p>
-              {greek
-                ? 'Πριν επιβεβαιωθεί οποιαδήποτε παραγγελία, παρέχονται οι διαθέσιμες πληροφορίες προϊόντος, η τελική τιμή, η ποσότητα και οι όροι συναλλαγής.'
-                : 'Before an order is confirmed, available product information, final pricing, quantity and transaction terms are provided.'}
-            </p>
+            <p>{copy.tradeText}</p>
           </div>
 
           <div className="wholesale-standard-points">
             <div>
-              <Check size={16} />
-              <span>
-                {greek ? 'Τιμολόγηση βάσει όγκου' : 'Volume-based pricing'}
-              </span>
+              <Check size={17} />
+              <span>{copy.tradePoint1}</span>
             </div>
 
             <div>
-              <Check size={16} />
-              <span>
-                {greek
-                  ? 'Επιβεβαίωση διαθεσιμότητας'
-                  : 'Availability confirmation'}
-              </span>
+              <Check size={17} />
+              <span>{copy.tradePoint2}</span>
             </div>
 
             <div>
-              <Check size={16} />
-              <span>
-                {greek
-                  ? 'Όροι πριν την παραγγελία'
-                  : 'Terms before ordering'}
-              </span>
+              <Check size={17} />
+              <span>{copy.tradePoint3}</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* QUOTE CTA */}
-      <section id="quote" className="section wholesale-quote-section">
+      {/* QUOTE */}
+
+      <section
+        id="quote"
+        className="section wholesale-quote-section"
+      >
         <div className="wholesale-quote-card">
           <div className="eyebrow">
             <span className="eyebrow-line" />
-            {greek ? 'ΕΜΠΟΡΙΚΗ ΣΥΝΕΡΓΑΣΙΑ' : 'TRADE ENQUIRIES'}
+            {copy.quoteLabel}
           </div>
 
-          <h2>
-            {greek
-              ? 'Τι ποσότητα χρειάζεστε;'
-              : 'What quantity do you need?'}
-          </h2>
+          <h2>{copy.quoteHeadline}</h2>
 
-          <p>
-            {greek
-              ? 'Στείλτε μας το μοντέλο και την ποσότητα που εξετάζετε για να επιβεβαιώσουμε τιμή και διαθεσιμότητα.'
-              : 'Send us the model and quantity you are considering so we can confirm pricing and availability.'}
-          </p>
+          <p>{copy.quoteText}</p>
 
           <a
             href="mailto:YOUR-EMAIL-HERE?subject=VYRO%20Wholesale%20Enquiry"
             className="button button-primary"
           >
-            {greek ? 'Ζητήστε προσφορά' : 'Request a quote'}
+            {copy.quoteButton}
             <ArrowRight size={15} />
           </a>
+
+          <small>{copy.quoteNote}</small>
         </div>
       </section>
 
       {/* FOOTER */}
+
       <footer className="site-footer retail-footer">
         <div className="footer-brand">
           <Link href="/" className="brand">
-            VYRO
             <span className="brand-dot" />
+            VYRO
           </Link>
 
-          <p>
-            {greek
-              ? 'Technology retail & wholesale.'
-              : 'Technology retail & wholesale.'}
-          </p>
+          <p>{copy.footerText}</p>
         </div>
 
         <div className="footer-links">
-          <Link href="/">{greek ? 'Λιανική' : 'Retail'}</Link>
-          <Link href="/wholesale">
-            {greek ? 'Χονδρική' : 'Wholesale'}
+          <Link href="/">
+            {copy.retail}
           </Link>
-          <Link href="/creators">Creators</Link>
+
+          <Link href="/wholesale">
+            {greek ? 'ΧονΔΡΙΚΗ' : 'WHOLESALE'}
+          </Link>
+
+          <Link href="/creators">
+            CREATORS
+          </Link>
         </div>
 
         <div className="footer-legal">
+          <span>© 2026 VYRO</span>
+
           <Link href="/terms">
-            {greek ? 'Όροι' : 'Terms'}
+            {copy.terms}
           </Link>
+
           <Link href="/privacy">
-            {greek ? 'Απόρρητο' : 'Privacy'}
+            {copy.privacy}
           </Link>
         </div>
       </footer>
     </main>
-  );
+  )
 }
