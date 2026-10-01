@@ -1,0 +1,117 @@
+@import './vyro-fonts.css';
+/* Retail-only refinement. */
+.retail-home{--muted:#a6b1be;font-family:'VYRO Sans',Arial,Helvetica,sans-serif;background:#080b10}
+.retail-home .site-header{width:min(var(--max-width),calc(100% - 48px));height:80px;padding:0;position:sticky;top:0;background:rgba(8,11,16,.92);backdrop-filter:blur(16px);border-bottom-color:rgba(204,216,231,.14)}
+.retail-home .main-nav a,.retail-home .main-nav button,.retail-home .language-toggle{color:#b9c4d0;font-size:13px;font-weight:500;letter-spacing:0}
+.retail-home .main-nav a:hover,.retail-home .main-nav button:hover{color:#fff}
+.retail-home .brand{font-size:22px;letter-spacing:.12em}
+.retail-home .brand-dot{box-shadow:none}
+.retail-home .eyebrow{font-size:11px;letter-spacing:.13em}
+.retail-home .eyebrow-line{box-shadow:none;opacity:.7}
+.retail-home .button{min-height:48px;padding:0 22px;border-radius:12px;font-size:14px;font-weight:600;letter-spacing:0;box-shadow:none}
+.retail-home .button-primary{color:#fff;background:#176bd0}
+.retail-home .button-primary:hover{background:#217bea;box-shadow:none}
+.retail-home .button-ghost{color:#e5ecf5;border-color:rgba(205,221,239,.25)}
+.retail-home .button svg{transition:transform .2s ease}
+.retail-home .button:hover svg{transform:translateX(3px)}
+.retail-home .product-hero-pro{width:min(var(--max-width),calc(100% - 48px));min-height:710px;padding:64px 0 24px;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px 48px;scroll-margin-top:90px}
+.retail-home .product-hero-pro::before{display:none}
+.retail-home .product-hero-pro .product-hero-copy h1{max-width:620px;margin-top:22px;font-size:clamp(54px,6vw,84px);font-weight:600;line-height:1.02;letter-spacing:-.045em;text-wrap:balance}
+.retail-home .product-hero-pro .product-hero-copy>p{max-width:410px;margin-top:24px;font-size:18px;line-height:1.65;color:var(--muted)}
+.retail-home .hero-price{margin-top:28px;gap:12px}
+.retail-home .hero-price strong{font-size:30px;font-variant-numeric:tabular-nums}
+.retail-home .hero-price span{font-size:11px;color:#a9b6c6;letter-spacing:.04em}
+.retail-home .hero-actions{margin-top:24px;gap:12px}
+.retail-home .product-hero-trust{min-height:64px;padding:15px 0;color:#a9b6c6;font-size:12px;line-height:1.65;letter-spacing:0}
+.retail-home .product-hero-trust svg{flex-shrink:0}
+.retail-home .vyro-stage{display:grid;place-items:center;width:100%;height:550px;margin:0;position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(195,214,237,.12);border-radius:20px;background:#0d131b}
+.retail-home .vyro-stage::after{display:none}
+.retail-home .vyro-stage>.vyro-stage-background{position:absolute;inset:0;z-index:0;width:100%;max-width:100%;height:100%;object-fit:cover;object-position:66% center;transform:none;filter:none;opacity:.72;pointer-events:none}
+.retail-home .vyro-stage-mark{position:absolute;top:8px;right:14px;z-index:1;color:rgba(218,232,248,.055);font-size:clamp(110px,16vw,210px);font-weight:600;letter-spacing:-.065em;line-height:1;pointer-events:none;user-select:none}
+.retail-home .vyro-stage-light{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at var(--stage-x,50%) var(--stage-y,40%),rgba(192,216,245,.15),transparent 58%);pointer-events:none}
+.retail-home .vyro-product-photo{display:block;width:100%;height:100%;overflow:hidden}
+.retail-home .vyro-stage .vyro-stage-product{position:relative;z-index:2;width:80%;height:84%;max-width:430px;filter:drop-shadow(0 26px 24px rgba(0,0,0,.45));pointer-events:none}
+.retail-home .campaign-section{width:min(var(--max-width),calc(100% - 48px));padding:24px 0}
+.retail-home .campaign-card{min-height:520px;border-radius:20px;background:#0e141c;border-color:rgba(195,214,237,.12);box-shadow:none}
+.retail-home .campaign-digital{background:#111921}
+.retail-home .campaign-copy{padding:48px}
+.retail-home .campaign-copy h2{font-size:clamp(40px,4.6vw,64px);font-weight:600;line-height:1.05;letter-spacing:-.04em;text-wrap:balance}
+.retail-home .campaign-copy>p{font-size:16px;line-height:1.65}
+.retail-home .campaign-price span{font-size:11px;color:#a9b6c6}
+.retail-home .campaign-visual{height:440px;display:grid;place-items:center}
+.retail-home .campaign-visual .vyro-product-photo{width:85%;height:86%;max-width:420px}
+.retail-home .section{width:min(var(--max-width),calc(100% - 48px));padding:92px 0;scroll-margin-top:90px}
+.retail-home .section-heading h2{font-size:clamp(32px,3.7vw,48px);font-weight:600;line-height:1.12;letter-spacing:-.035em;text-wrap:balance}
+.retail-home .section-heading p{font-size:16px;color:var(--muted);line-height:1.65}
+.retail-home .compare-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.retail-home .compare-card{padding:24px 20px;border-radius:16px;transition:border-color .25s ease}
+.retail-home .compare-card:hover{border-color:rgba(105,169,236,.45)}
+.retail-home .compare-visual{height:230px}
+.retail-home .compare-content h3{font-size:18px;line-height:1.35;overflow-wrap:anywhere}
+.retail-home .compare-content>p{min-height:66px;font-size:14px;line-height:1.6;color:var(--muted)}
+.retail-home .compare-price{font-size:26px;font-variant-numeric:tabular-nums}
+.retail-home .compare-vat{font-size:11px;color:#a9b6c6}
+.retail-home .compare-actions{gap:12px;flex-wrap:wrap}
+.retail-home .compare-actions .button{min-height:44px;padding:0 18px;font-size:13px}
+.retail-home .text-link{font-size:13px}
+.retail-home .service-card h3{font-size:17px;line-height:1.4}
+.retail-home .service-card p{font-size:14px;line-height:1.65;color:var(--muted)}
+.retail-home .accessory-visual{height:290px;display:grid;place-items:center}
+.retail-home .accessory-visual .vyro-product-photo{width:84%;height:80%;max-width:380px}
+.retail-home .accessory-content h3{font-size:30px;font-weight:600;line-height:1.15}
+.retail-home .accessory-content>p{font-size:15px;line-height:1.6}
+.retail-home .brand-manifesto h2{font-weight:600;line-height:1.08;letter-spacing:-.04em}
+.retail-home .brand-manifesto p{font-size:17px;line-height:1.75}
+.retail-home .footer-links a,.retail-home .footer-links button,.retail-home .footer-legal{font-size:12px}
+.retail-home a:focus-visible,.retail-home button:focus-visible{outline:2px solid #b4d3fa;outline-offset:5px}
+.retail-home .vyro-skip-link{position:fixed;top:12px;left:16px;z-index:100;padding:12px 18px;background:#edf4fc;color:#08121f;border-radius:8px;font-size:14px;transform:translateY(-200%)}
+.retail-home .vyro-skip-link:focus{transform:translateY(0)}
+@media(max-width:1000px){
+.retail-home .product-hero-pro{grid-template-columns:1fr;gap:24px;padding-top:48px}
+.retail-home .product-hero-pro .product-hero-copy{max-width:650px}
+.retail-home .vyro-stage{height:480px}
+.retail-home .compare-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+.retail-home .main-nav{display:none;position:absolute;left:0;right:0;top:100%;margin:0;padding:18px;background:#0e141c;border:1px solid rgba(195,214,237,.16);border-radius:0 0 14px 14px}
+.retail-home .main-nav.is-open{display:flex;flex-direction:column;align-items:stretch;gap:2px}
+.retail-home .main-nav a,.retail-home .main-nav button{min-height:48px;text-align:left;font-size:15px}
+.retail-home .menu-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+}
+@media(max-width:640px){
+.retail-home .site-header{width:calc(100% - 32px);height:68px}
+.retail-home .product-hero-pro{width:calc(100% - 32px);min-height:auto;padding:36px 0 16px;display:grid;text-align:left;overflow:visible;gap:24px}
+.retail-home .product-hero-pro .product-hero-copy{max-width:none;padding:0;display:block;text-align:left}
+.retail-home .product-hero-pro .eyebrow{justify-content:flex-start}
+.retail-home .product-hero-pro .product-hero-copy h1{max-width:100%;font-size:clamp(40px,11.5vw,56px);line-height:1.04;letter-spacing:-.04em}
+.retail-home .product-hero-pro .product-hero-copy>p{max-width:100%;font-size:16px;line-height:1.6;margin-top:20px}
+.retail-home .product-hero-pro .hero-price{justify-content:flex-start;margin-top:22px}
+.retail-home .product-hero-pro .hero-actions{justify-content:flex-start;flex-wrap:wrap;gap:12px;margin-top:20px}
+.retail-home .product-hero-pro .hero-actions .button{min-height:48px;min-width:0;padding:0 20px}
+.retail-home .vyro-stage{height:390px;border-radius:16px}
+.retail-home .product-hero-pro .product-hero-trust{width:100%;margin:0;padding:16px 0;min-height:auto;font-size:11px;text-align:left;justify-content:flex-start}
+.retail-home .campaign-section{width:calc(100% - 32px);padding:16px 0}
+.retail-home .campaign-card{min-height:auto;grid-template-columns:1fr}
+.retail-home .campaign-copy{padding:32px 24px}
+.retail-home .campaign-copy h2{font-size:42px}
+.retail-home .campaign-copy>p{font-size:15px}
+.retail-home .campaign-actions{flex-wrap:wrap}
+.retail-home .campaign-visual{height:300px}
+.retail-home .section{width:calc(100% - 32px);padding:64px 0}
+.retail-home .section-heading h2{font-size:34px}
+.retail-home .section-heading p{font-size:15px}
+.retail-home .compare-grid{gap:12px}
+.retail-home .compare-card{padding:18px 14px}
+.retail-home .compare-visual{height:170px}
+.retail-home .compare-content h3{font-size:16px}
+.retail-home .compare-content>p{min-height:80px}
+.retail-home .compare-actions .button{width:100%}
+.retail-home .accessory-visual{height:260px}
+.retail-home .accessory-content h3{font-size:27px}
+.retail-home .brand-manifesto p{font-size:16px}
+}
+@media(max-width:360px){.retail-home .compare-grid{grid-template-columns:1fr}.retail-home .compare-content>p{min-height:0}}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.retail-home *,.retail-home *::before,.retail-home *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
