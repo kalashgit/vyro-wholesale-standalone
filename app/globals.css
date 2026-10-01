@@ -5240,5 +5240,220 @@ p {
   }
    
 }
+/* =========================================================
+   VYRO HOMEPAGE — PS5 PRO HERO V2
+   ========================================================= */
+
+.product-hero-visual-pro {
+  overflow: hidden;
+}
+
+.product-hero-art {
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* =========================================================
+   VYRO HOMEPAGE — MOBILE HERO V2
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .product-hero-pro {
+    width: 100%;
+    min-height: auto;
+
+    margin: 0;
+    padding: 38px 0 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+
+    text-align: center;
+  }
+
+  .product-hero-pro::before {
+    width: 520px;
+    height: 520px;
+
+    top: 300px;
+    right: 50%;
+
+    transform: translateX(50%);
+
+    opacity: 0.65;
+  }
+
+  .product-hero-pro .product-hero-copy {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    z-index: 5;
+  }
+
+  .product-hero-pro .eyebrow {
+    justify-content: center;
+  }
+
+  .product-hero-pro .product-hero-copy h1 {
+    max-width: 355px;
+
+    margin-top: 15px;
+
+    font-size: clamp(43px, 12vw, 57px);
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+  }
+
+  .product-hero-pro .product-hero-copy > p {
+    max-width: 310px;
+
+    margin-top: 15px;
+
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .product-hero-pro .hero-price {
+    margin-top: 17px;
+
+    justify-content: center;
+  }
+
+  .product-hero-pro .hero-price strong {
+    font-size: 26px;
+  }
+
+  .product-hero-pro .hero-actions {
+    width: 100%;
+
+    margin-top: 16px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 9px;
+  }
+
+  .product-hero-pro .hero-actions .button {
+    min-width: 120px;
+    min-height: 43px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .product-hero-pro .product-hero-visual-pro {
+    width: 100vw;
+    height: 300px;
+
+    margin-top: -3px;
+
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    overflow: hidden;
+  }
+
+  .product-hero-pro .product-hero-visual-pro::after {
+    display: none;
+  }
+
+  .product-hero-pro .product-hero-art {
+    width: 145vw;
+    max-width: none;
+    height: auto;
+
+    margin-top: 0;
+
+    flex: 0 0 auto;
+
+    object-fit: contain;
+    object-position: center top;
+
+    transform: none;
+
+    filter:
+      contrast(1.03)
+      saturate(1.03)
+      brightness(1.02);
+
+    position: relative;
+    left: 50%;
+
+    translate: -50% 0;
+  }
+
+  .product-hero-pro .product-hero-trust {
+    width: calc(100% - 40px);
+    min-height: 54px;
+
+    margin: 0 20px;
+    padding: 13px 4px;
+
+    position: relative;
+    z-index: 5;
+
+    border-top: 1px solid var(--line);
+
+    font-size: 8px;
+    line-height: 1.5;
+  }
+}
+
+/* =========================================================
+   VYRO HOMEPAGE — VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .product-hero-pro {
+    padding-top: 32px;
+  }
+
+  .product-hero-pro .product-hero-copy h1 {
+    max-width: 330px;
+
+    font-size: 43px;
+  }
+
+  .product-hero-pro .product-hero-copy > p {
+    max-width: 290px;
+
+    margin-top: 14px;
+  }
+
+  .product-hero-pro .hero-price {
+    margin-top: 15px;
+  }
+
+  .product-hero-pro .hero-actions {
+    margin-top: 14px;
+  }
+
+  .product-hero-pro .product-hero-visual-pro {
+    height: 280px;
+
+    margin-top: -2px;
+  }
+
+  .product-hero-pro .product-hero-art {
+    width: 152vw;
+  }
+}
 
 
