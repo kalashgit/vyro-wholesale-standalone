@@ -14,10 +14,8 @@ export function PostHogProvider({ children }: { children: ReactNode }) {
 
     posthog.init(key, {
       api_host: host,
-     capture_pageview: true,
-      session_recording: {
-        enabled: true,
-      },
+      capture_pageview: true,
+      disable_session_recording: false,
     })
   }, [])
 
