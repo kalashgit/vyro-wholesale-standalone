@@ -5240,4 +5240,389 @@ p {
   .wholesale-quote-card h2 {
     font-size: 45px;
   }
+   
 }
+/* =========================================================
+   VYRO MOBILE HOMEPAGE HERO V2
+   Apple-inspired composition
+   KEEP THIS AT THE VERY END OF globals.css
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  /* -------------------------------------------------------
+     HERO CONTAINER
+     ------------------------------------------------------- */
+
+  .product-hero {
+    width: 100%;
+    min-height: auto;
+
+    margin: 0;
+    padding:
+      43px
+      20px
+      18px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    isolation: isolate;
+  }
+
+  /*
+   * Softer background illumination.
+   * The artwork itself now provides most of the visual drama.
+   */
+
+  .product-hero::before {
+    width: 520px;
+    height: 520px;
+
+    top: 285px;
+    right: 50%;
+
+    transform: translateX(50%);
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(45, 140, 255, 0.095),
+        rgba(45, 140, 255, 0.025) 43%,
+        transparent 70%
+      );
+
+    filter: blur(30px);
+  }
+
+  /* -------------------------------------------------------
+     HERO COPY
+     ------------------------------------------------------- */
+
+  .product-hero-copy {
+    width: 100%;
+
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-hero-copy .eyebrow {
+    justify-content: center;
+
+    font-size: 8px;
+    letter-spacing: 0.19em;
+  }
+
+  .product-hero-copy .eyebrow-line {
+    width: 23px;
+  }
+
+  /* -------------------------------------------------------
+     HEADLINE
+     ------------------------------------------------------- */
+
+  .product-hero-copy h1 {
+    width: 100%;
+    max-width: 370px;
+
+    margin-top: 14px;
+
+    font-size: clamp(43px, 12.4vw, 58px);
+    font-weight: 700;
+
+    line-height: 0.94;
+    letter-spacing: -0.062em;
+
+    text-wrap: balance;
+  }
+
+  /* -------------------------------------------------------
+     DESCRIPTION
+     More restrained than previous version.
+     ------------------------------------------------------- */
+
+  .product-hero-copy > p {
+    max-width: 305px;
+
+    margin-top: 16px;
+
+    color: #8995a6;
+
+    font-size: 12px;
+    line-height: 1.48;
+
+    text-wrap: balance;
+  }
+
+  /* -------------------------------------------------------
+     PRICE
+     ------------------------------------------------------- */
+
+  .hero-price {
+    margin-top: 18px;
+
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+
+    gap: 8px;
+  }
+
+  .hero-price strong {
+    font-size: 25px;
+    font-weight: 700;
+
+    letter-spacing: -0.04em;
+  }
+
+  .hero-price span {
+    font-size: 7px;
+    letter-spacing: 0.09em;
+  }
+
+  /* -------------------------------------------------------
+     ACTIONS
+     ------------------------------------------------------- */
+
+  .hero-actions {
+    width: 100%;
+
+    margin-top: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+  }
+
+  .hero-actions .button {
+    min-width: 116px;
+    min-height: 42px;
+
+    padding-left: 17px;
+    padding-right: 17px;
+
+    font-size: 10px;
+  }
+
+  /* -------------------------------------------------------
+     NEW HERO ARTWORK STAGE
+
+     Ps5-proHero.png should live in /public
+
+     JSX:
+     <img
+       src="/Ps5-proHero.png"
+       alt="PlayStation 5 Pro"
+     />
+     ------------------------------------------------------- */
+
+  .product-hero-visual {
+    width: calc(100% + 40px);
+    height: auto;
+
+    min-height: 0;
+
+    position: relative;
+
+    margin:
+      10px
+      -20px
+      0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    isolation: isolate;
+  }
+
+  /*
+   * Kill the old circular glow.
+   * Ps5-proHero already contains its own cinematic lighting.
+   */
+
+  .product-hero-glow {
+    display: none;
+  }
+
+  /*
+   * Remove the artificial floor shadow from the old
+   * isolated-console artwork.
+   */
+
+  .product-hero-visual::after {
+    display: none;
+  }
+
+  /* -------------------------------------------------------
+     HERO IMAGE
+     ------------------------------------------------------- */
+
+  .product-hero-visual img {
+    width: 100%;
+    max-width: none;
+
+    height: auto;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center center;
+
+    transform: none;
+
+    filter:
+      contrast(1.025)
+      saturate(1.02)
+      brightness(1.01);
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+
+    pointer-events: none;
+  }
+
+  /*
+   * Subtle fade between page background and image.
+   * This prevents the artwork from looking like a rectangle
+   * pasted underneath the text.
+   */
+
+  .product-hero-visual::before {
+    content: '';
+
+    position: absolute;
+
+    top: -1px;
+    left: 0;
+    right: 0;
+
+    height: 50px;
+
+    z-index: 3;
+
+    background:
+      linear-gradient(
+        180deg,
+        #05070a 0%,
+        rgba(5, 7, 10, 0.82) 20%,
+        rgba(5, 7, 10, 0.35) 58%,
+        transparent 100%
+      );
+
+    pointer-events: none;
+  }
+
+  /* -------------------------------------------------------
+     TRUST STRIP
+     ------------------------------------------------------- */
+
+  .product-hero-trust {
+    width: 100%;
+
+    min-height: 52px;
+
+    margin-top: 0;
+    padding: 14px 4px;
+
+    border-top: 1px solid var(--line);
+
+    color: #697587;
+
+    font-size: 8px;
+    line-height: 1.45;
+
+    letter-spacing: 0.045em;
+  }
+
+}
+
+
+/* =========================================================
+   VYRO — SMALL PHONE HERO
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  .product-hero {
+    padding-top: 37px;
+  }
+
+  .product-hero-copy h1 {
+    max-width: 345px;
+
+    font-size: 43px;
+    line-height: 0.94;
+  }
+
+  .product-hero-copy > p {
+    max-width: 290px;
+
+    margin-top: 15px;
+
+    font-size: 11px;
+  }
+
+  .hero-price {
+    margin-top: 17px;
+  }
+
+  .hero-price strong {
+    font-size: 24px;
+  }
+
+  .hero-actions {
+    margin-top: 15px;
+  }
+
+  .hero-actions .button {
+    min-width: 112px;
+  }
+
+  .product-hero-visual {
+    margin-top: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   VYRO — LARGE MOBILE HERO
+   iPhone Pro Max / large Android
+   ========================================================= */
+
+@media (min-width: 430px) and (max-width: 640px) {
+
+  .product-hero-copy h1 {
+    max-width: 405px;
+
+    font-size: 55px;
+  }
+
+  .product-hero-copy > p {
+    max-width: 330px;
+
+    font-size: 13px;
+  }
+
+  .product-hero-visual {
+    margin-top: 12px;
+  }
+
+}
+
