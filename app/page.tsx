@@ -1,7 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import ProductStage from '../components/product-stage'
+import ProductPhoto from '../components/product-photo'
 import {
   ArrowRight,
   Check,
@@ -145,6 +147,19 @@ const accessories = [
 export default function HomePage() {
   const [language, setLanguage] = useState<Language>('en')
   const [mobileOpen, setMobileOpen] = useState(false)
+  const menuRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileOpen(false)
+        menuRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [mobileOpen])
 
   const isGreek = language === 'el'
 
@@ -305,7 +320,7 @@ export default function HomePage() {
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
       block: 'start',
     })
 
@@ -313,7 +328,11 @@ export default function HomePage() {
   }
 
   return (
-    <main className="site-shell retail-home">
+    <main className="site-shell retail-home" lang={language}>
+      <link rel="preload" as="image" href={pro.image} fetchPriority="high" />
+      <a className="vyro-skip-link" href="#main-content">
+        {isGreek ? 'Μετάβαση στο περιεχόμενο' : 'Skip to content'}
+      </a>
       {/* HEADER */}
 
       <header className="site-header">
@@ -322,7 +341,7 @@ export default function HomePage() {
           VYRO
         </Link>
 
-        <nav className={mobileOpen ? 'main-nav is-open' : 'main-nav'}>
+        <nav id="retail-navigation" aria-label={isGreek ? 'Κύρια πλοήγηση' : 'Main navigation'} className={mobileOpen ? 'main-nav is-open' : 'main-nav'}>
           <button onClick={() => scrollTo('compare')}>
             {copy.navShop}
           </button>
@@ -345,7 +364,7 @@ export default function HomePage() {
 
           <Link
             className="nav-creator-link"
-            href="/creators"
+            href="/Creators"
             onClick={() => setMobileOpen(false)}
           >
             {copy.navCreators}
@@ -356,7 +375,7 @@ export default function HomePage() {
           <button
             className="language-toggle"
             onClick={() => setLanguage(isGreek ? 'en' : 'el')}
-            aria-label="Change language"
+            aria-label={isGreek ? 'Switch to English' : 'Αλλαγή στα Ελληνικά'}
           >
             <Globe2 size={15} />
             {isGreek ? 'EN' : 'ΕΛ'}
@@ -364,8 +383,11 @@ export default function HomePage() {
 
           <button
             className="menu-toggle"
+            ref={menuRef}
+            aria-expanded={mobileOpen}
+            aria-controls="retail-navigation"
             onClick={() => setMobileOpen((open) => !open)}
-            aria-label="Menu"
+            aria-label={isGreek ? (mobileOpen ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού') : (mobileOpen ? 'Close menu' : 'Open menu')}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -374,7 +396,7 @@ export default function HomePage() {
 
       {/* PS5 PRO HERO */}
 
-      <section className="product-hero product-hero-pro">
+      <section id="main-content" tabIndex={-1} className="product-hero product-hero-pro">
         <div className="product-hero-copy">
           <div className="eyebrow">
             <span className="eyebrow-line" />
@@ -411,15 +433,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="product-hero-visual">
-          <div className="product-hero-glow" />
-
-          <img
-            src={pro.image}
-            alt={pro.name}
-            draggable={false}
-          />
-        </div>
+        <ProductStage src={pro.image} name={pro.name} />
 
         <div className="product-hero-trust">
           <ShieldCheck size={14} />
@@ -465,11 +479,7 @@ export default function HomePage() {
           </div>
 
           <div className="campaign-visual">
-            <img
-              src={slimDisc.image}
-              alt={slimDisc.name}
-              draggable={false}
-            />
+            <ProductPhoto src={slimDisc.image} alt={slimDisc.name} />
           </div>
         </article>
       </section>
@@ -512,11 +522,7 @@ export default function HomePage() {
           </div>
 
           <div className="campaign-visual">
-            <img
-              src={digital.image}
-              alt={digital.name}
-              draggable={false}
-            />
+            <ProductPhoto src={digital.image} alt={digital.name} />
           </div>
         </article>
       </section>
@@ -544,11 +550,7 @@ export default function HomePage() {
               key={product.key}
             >
               <div className="compare-visual">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  draggable={false}
-                />
+                <ProductPhoto src={product.image} alt={product.name} />
               </div>
 
               <div className="compare-content">
@@ -676,11 +678,7 @@ export default function HomePage() {
               key={product.key}
             >
               <div className="accessory-visual">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  draggable={false}
-                />
+                <ProductPhoto src={product.image} alt={product.name} />
               </div>
 
               <div className="accessory-content">
@@ -785,9 +783,9 @@ export default function HomePage() {
             {copy.wholesale}
           </Link>
 
-          <Link href="/contact">
+          <a href="https://wa.me/306978255016" target="_blank" rel="noopener noreferrer">
             {copy.contact}
-          </Link>
+          </a>
         </div>
 
         <div className="footer-legal">
