@@ -175,10 +175,8 @@ export default function HomePage() {
         navWholesale: 'Χονδρική',
         navCreators: 'Creator Access',
 
-        heroLabel: 'PLAYSTATION 5 PRO',
-        heroHeadline: 'Ο πιο ισχυρός τρόπος να παίξετε.',
-        heroText:
-          'PS5 Pro. Σχεδιασμένο για παίκτες που θέλουν περισσότερα από κάθε παιχνίδι.',
+        heroHeadline: 'PlayStation 5 Pro',
+        heroText: 'Ο πιο ισχυρός τρόπος να παίξετε.',
         vat: 'με ΦΠΑ',
         learnMore: 'Μάθετε περισσότερα',
         buy: 'Αγορά',
@@ -250,10 +248,8 @@ export default function HomePage() {
         navWholesale: 'Wholesale',
         navCreators: 'Creator Access',
 
-        heroLabel: 'PLAYSTATION 5 PRO',
-        heroHeadline: 'The most powerful way to play.',
-        heroText:
-          'PS5 Pro. Built for players who want more from every game.',
+        heroHeadline: 'PlayStation 5 Pro',
+        heroText: 'The most powerful way to play.',
         vat: 'VAT included',
         learnMore: 'Learn more',
         buy: 'Buy',
@@ -398,11 +394,6 @@ export default function HomePage() {
 
       <section id="main-content" tabIndex={-1} className="product-hero product-hero-pro">
         <div className="product-hero-copy">
-          <div className="eyebrow">
-            <span className="eyebrow-line" />
-            {copy.heroLabel}
-          </div>
-
           <h1>{copy.heroHeadline}</h1>
 
           <p>{copy.heroText}</p>
