@@ -80,16 +80,19 @@
 }
 @media(max-width:640px){
 .retail-home .site-header{width:calc(100% - 32px);height:68px}
-.retail-home .product-hero-pro{width:calc(100% - 32px);min-height:auto;padding:36px 0 16px;display:grid;text-align:left;overflow:visible;gap:24px}
-.retail-home .product-hero-pro .product-hero-copy{max-width:none;padding:0;display:block;text-align:left}
-.retail-home .product-hero-pro .eyebrow{justify-content:flex-start}
-.retail-home .product-hero-pro .product-hero-copy h1{max-width:100%;font-size:clamp(40px,11.5vw,56px);line-height:1.04;letter-spacing:-.04em}
-.retail-home .product-hero-pro .product-hero-copy>p{max-width:100%;font-size:16px;line-height:1.6;margin-top:20px}
-.retail-home .product-hero-pro .hero-price{justify-content:flex-start;margin-top:22px}
-.retail-home .product-hero-pro .hero-actions{justify-content:flex-start;flex-wrap:wrap;gap:12px;margin-top:20px}
-.retail-home .product-hero-pro .hero-actions .button{min-height:48px;min-width:0;padding:0 20px}
-.retail-home .vyro-stage{height:390px;border-radius:16px}
-.retail-home .product-hero-pro .product-hero-trust{width:100%;margin:0;padding:16px 0;min-height:auto;font-size:11px;text-align:left;justify-content:flex-start}
+.retail-home .product-hero-pro{width:calc(100% - 32px);min-height:auto;margin-inline:auto;padding:24px 0 16px;display:grid;grid-template-rows:auto;text-align:center;overflow:visible;gap:14px}
+.retail-home .product-hero-pro .product-hero-copy{max-width:none;padding:0;display:block;text-align:center}
+.retail-home .product-hero-pro .product-hero-copy h1{max-width:100%;margin:0;font-size:clamp(30px,8.5vw,36px);line-height:1.1;letter-spacing:-.04em}
+.retail-home .product-hero-pro .product-hero-copy>p{max-width:100%;font-size:clamp(16px,4.4vw,18px);line-height:1.4;margin-top:8px}
+.retail-home .product-hero-pro .hero-price{justify-content:center;margin-top:10px;gap:8px}
+.retail-home .product-hero-pro .hero-price strong{font-size:22px}
+.retail-home .product-hero-pro .hero-actions{justify-content:center;flex-wrap:nowrap;gap:8px;margin-top:14px}
+.retail-home .product-hero-pro .hero-actions .button{min-height:44px;min-width:0;padding:0 16px;white-space:nowrap}
+.retail-home .product-hero-pro .hero-actions .button svg{flex-shrink:0}
+/* Leave room for the header and compact copy even while browser controls are visible. */
+.retail-home .product-hero-pro .vyro-stage{height:clamp(180px,calc(100svh - 300px),420px);border-radius:0}
+.retail-home .product-hero-pro .vyro-stage .vyro-stage-product{width:88%;height:100%;max-width:350px}
+.retail-home .product-hero-pro .product-hero-trust{width:100%;margin:0;padding:16px 0;min-height:auto;font-size:11px;text-align:center;justify-content:center}
 .retail-home .campaign-section{width:calc(100% - 32px);padding:16px 0}
 .retail-home .campaign-card{min-height:auto;grid-template-columns:1fr}
 .retail-home .campaign-copy{padding:32px 24px}
