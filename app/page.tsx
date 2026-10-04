@@ -405,21 +405,19 @@ export default function HomePage() {
 
           <div className="hero-actions">
             <Link
-              className="button button-ghost"
+              className="button button-primary"
               href={pro.learnMoreLink}
             >
               {copy.learnMore}
-              <ArrowRight size={15} />
             </Link>
 
             <a
-              className="button button-primary"
+              className="button button-ghost"
               href={pro.buyLink}
               target="_blank"
               rel="noreferrer"
             >
               {copy.buy}
-              <ArrowRight size={15} />
             </a>
           </div>
         </div>
