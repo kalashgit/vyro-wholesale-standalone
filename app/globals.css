@@ -136,18 +136,7 @@ p {
 }
 
 .brand-dot {
-  width: 7px;
-  height: 7px;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  background: var(--blue);
-
-  box-shadow:
-    0 0 7px rgba(45, 140, 255, 0.9),
-    0 0 18px rgba(45, 140, 255, 0.5);
+  display: none;
 }
 
 /* =========================================================
