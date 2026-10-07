@@ -30,7 +30,7 @@ const products = [
   {
     key: 'pro',
     name: 'PS5 Pro',
-    price: '€750',
+    price: '€800',
     image: '/images/ps5-pro.png',
     buyLink: stripeLinks.pro,
     learnMoreLink: '/products/ps5-pro',
