@@ -49,7 +49,7 @@ const products = [
   {
     key: 'slimDisc',
     name: 'PS5 Slim Disc',
-    price: '€549.99',
+    price: '€600',
     image: '/images/ps5-slim-disc.PNG',
     buyLink: stripeLinks.slimDisc,
     learnMoreLink: '/products/ps5-slim-disc',
@@ -68,7 +68,7 @@ const products = [
   {
     key: 'digital',
     name: 'PS5 Digital Edition',
-    price: '€489.99',
+    price: '€500',
     image: '/images/ps5-digital.PNG',
     buyLink: stripeLinks.digital,
     learnMoreLink: '/products/ps5-digital',
@@ -87,7 +87,7 @@ const products = [
   {
     key: 'slimDigital',
     name: 'PS5 Slim Digital',
-    price: '€490',
+    price: '€550',
     image: '/images/ps5-slim-digital.png',
     buyLink: stripeLinks.slimDigital,
     learnMoreLink: '/products/ps5-slim-digital',
